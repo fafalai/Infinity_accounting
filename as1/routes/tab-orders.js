@@ -1,5 +1,6 @@
 var ordersTabWidgetsLoaded = false;
 
+
 function doOrdersTabWidgets()
 {
   var versions = [];
@@ -61,7 +62,7 @@ function doOrdersTabWidgets()
           var data = $('#divOrdersG').datagrid('getData');
           
           data.rows = data.rows.slice(0,2);
-          console.log(data.rows);
+          //console.log(data.rows);
           for(var i=0;i<data.rows.length;i++)
           {
             //console.log(data.rows[i].id);
@@ -421,6 +422,7 @@ function doOrdersTabWidgets()
   (
     {
       idField: 'id',
+      //pagination: true,
       fitColumns: false,
       singleSelect: false,
       rownumbers: true,
@@ -488,6 +490,19 @@ function doOrdersTabWidgets()
       }
     }
   );
+
+  var page = $('#divOrdersG').datagrid('getPager');
+  //console.log(page.onSelectPage);
+  page.pagination({
+    showPageList: false,
+    onSelectPage:function(pageNumber,pageSize){
+      console.log(pageNumber);
+      console.log(pageSize);
+    }
+  });
+  
+  console.log(page.onSelectPage);
+
 
   if (posonly)
   {

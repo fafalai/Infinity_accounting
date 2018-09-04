@@ -1638,11 +1638,11 @@ function doPrimus()
             {
               var url = '/do?no=' + f.orderno + '&fguid=' + fguid;
               //console.log(url);
-              var w = window.open(url, '_blank');
+              //var w = window.open(url, '_blank');
               //console.log(w);
 
-              if (w)
-                w.print();
+              //if (w)
+                //w.print();
             }
           );
         }
