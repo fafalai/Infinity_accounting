@@ -1,0 +1,202 @@
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":40397,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-04T23:23:19.460Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":40397,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-06-04T23:23:19.460Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":40397,"level":30,"as1":true,"msg":"[connect] from: ::1:59923","time":"2018-06-04T23:29:11.221Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":40397,"level":50,"as1":true,"msg":"[worker] Uncaught exception, stack trace: ReferenceError: _ is not defined\n    at /Users/ianwu/WebStormProjects/as1/modules/pos.js:139:9\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/pool.js:82:9\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/node_modules/generic-pool/lib/generic-pool.js:281:11\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/pool.js:56:18\n    at Connection.<anonymous> (/Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/client.js:149:7)\n    at Object.onceWrapper (events.js:255:19)\n    at Connection.emit (events.js:165:20)\n    at Socket.<anonymous> (/Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/connection.js:109:12)\n    at Socket.emit (events.js:160:13)\n    at addChunk (_stream_readable.js:269:12)\n    at readableAddChunk (_stream_readable.js:256:11)\n    at Socket.Readable.push (_stream_readable.js:213:10)\n    at TCP.onread (net.js:602:20)","time":"2018-06-04T23:29:50.131Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":40397,"level":50,"as1":true,"msg":"[worker] Uncaught exception, stack trace: ReferenceError: _ is not defined\n    at /Users/ianwu/WebStormProjects/as1/modules/pos.js:139:9\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/pool.js:82:9\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/node_modules/generic-pool/lib/generic-pool.js:281:11\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/pool.js:56:18\n    at Connection.<anonymous> (/Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/client.js:149:7)\n    at Object.onceWrapper (events.js:255:19)\n    at Connection.emit (events.js:165:20)\n    at Socket.<anonymous> (/Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/connection.js:109:12)\n    at Socket.emit (events.js:160:13)\n    at addChunk (_stream_readable.js:269:12)\n    at readableAddChunk (_stream_readable.js:256:11)\n    at Socket.Readable.push (_stream_readable.js:213:10)\n    at TCP.onread (net.js:602:20)","time":"2018-06-04T23:29:51.136Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":40932,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-04T23:31:06.108Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":40932,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-06-04T23:31:06.109Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":40932,"level":30,"as1":true,"msg":"[connect] from: ::1:60417","time":"2018-06-04T23:31:10.626Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":40932,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-04T23:31:15.007Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":40932,"level":50,"as1":true,"msg":"[worker] Uncaught exception, stack trace: ReferenceError: ___ is not defined\n    at /Users/ianwu/WebStormProjects/as1/modules/pos.js:139:9\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/pool.js:82:9\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/node_modules/generic-pool/lib/generic-pool.js:281:11\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/pool.js:56:18\n    at Connection.<anonymous> (/Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/client.js:149:7)\n    at Object.onceWrapper (events.js:255:19)\n    at Connection.emit (events.js:165:20)\n    at Socket.<anonymous> (/Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/connection.js:109:12)\n    at Socket.emit (events.js:160:13)\n    at addChunk (_stream_readable.js:269:12)\n    at readableAddChunk (_stream_readable.js:256:11)\n    at Socket.Readable.push (_stream_readable.js:213:10)\n    at TCP.onread (net.js:602:20)","time":"2018-06-04T23:31:32.077Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":40932,"level":50,"as1":true,"msg":"[worker] Uncaught exception, stack trace: ReferenceError: ___ is not defined\n    at /Users/ianwu/WebStormProjects/as1/modules/pos.js:139:9\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/pool.js:82:9\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/node_modules/generic-pool/lib/generic-pool.js:281:11\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/pool.js:56:18\n    at Connection.<anonymous> (/Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/client.js:149:7)\n    at Object.onceWrapper (events.js:255:19)\n    at Connection.emit (events.js:165:20)\n    at Socket.<anonymous> (/Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/connection.js:109:12)\n    at Socket.emit (events.js:160:13)\n    at addChunk (_stream_readable.js:269:12)\n    at readableAddChunk (_stream_readable.js:256:11)\n    at Socket.Readable.push (_stream_readable.js:213:10)\n    at TCP.onread (net.js:602:20)","time":"2018-06-04T23:32:25.525Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":40932,"level":50,"as1":true,"msg":"[worker] Uncaught exception, stack trace: ReferenceError: ___ is not defined\n    at /Users/ianwu/WebStormProjects/as1/modules/pos.js:139:9\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/pool.js:82:9\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/node_modules/generic-pool/lib/generic-pool.js:281:11\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/pool.js:56:18\n    at Connection.<anonymous> (/Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/client.js:149:7)\n    at Object.onceWrapper (events.js:255:19)\n    at Connection.emit (events.js:165:20)\n    at Socket.<anonymous> (/Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/connection.js:109:12)\n    at Socket.emit (events.js:160:13)\n    at addChunk (_stream_readable.js:269:12)\n    at readableAddChunk (_stream_readable.js:256:11)\n    at Socket.Readable.push (_stream_readable.js:213:10)\n    at TCP.onread (net.js:602:20)","time":"2018-06-04T23:32:48.185Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41081,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-04T23:33:02.888Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41081,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-06-04T23:33:02.889Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41081,"level":30,"as1":true,"msg":"[connect] from: ::1:61111","time":"2018-06-04T23:33:07.429Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41081,"level":30,"as1":true,"msg":"[connect] from: ::1:63632","time":"2018-06-04T23:44:17.161Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41081,"level":30,"as1":true,"msg":"[connect] from: ::1:64592","time":"2018-06-04T23:48:26.934Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41081,"level":30,"as1":true,"msg":"[connect] from: ::1:52172","time":"2018-06-05T00:15:18.459Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41081,"level":30,"as1":true,"msg":"[connect] from: ::1:53008","time":"2018-06-05T00:21:39.567Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48732,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-05T01:25:59.047Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48732,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-06-05T01:25:59.048Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48732,"level":30,"as1":true,"msg":"[connect] from: ::1:53680","time":"2018-06-05T01:26:02.178Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48732,"level":30,"as1":true,"msg":"[connect] from: ::1:54201","time":"2018-06-05T01:28:46.019Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":49013,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-05T01:29:55.035Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":49013,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-06-05T01:29:55.036Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":49013,"level":30,"as1":true,"msg":"[connect] from: ::1:54545","time":"2018-06-05T01:30:01.307Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":49013,"level":50,"posgetproduct":true,"msg":"[posgetproduct] General exception... column pc1.exgst does not exist","time":"2018-06-05T01:30:05.908Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":49050,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-05T01:30:21.551Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":49050,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-06-05T01:30:21.552Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":49050,"level":30,"as1":true,"msg":"[connect] from: ::1:54708","time":"2018-06-05T01:30:27.006Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":49050,"level":30,"as1":true,"msg":"[connect] from: ::1:54998","time":"2018-06-05T01:31:29.383Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":49050,"level":30,"as1":true,"msg":"[connect] from: ::1:55191","time":"2018-06-05T01:31:59.038Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":49050,"level":30,"as1":true,"msg":"[connect] from: ::1:55438","time":"2018-06-05T01:32:44.847Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":49050,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-05T01:32:48.012Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-05T03:02:34.609Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-06-05T03:02:34.609Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:57582","time":"2018-06-05T03:02:41.289Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:57558","time":"2018-06-05T03:02:41.452Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:58147","time":"2018-06-05T03:05:11.588Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:61139","time":"2018-06-05T03:18:20.649Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:61922","time":"2018-06-05T03:21:49.279Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:62350","time":"2018-06-05T03:23:12.256Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:63507","time":"2018-06-05T03:29:27.351Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:65291","time":"2018-06-05T03:37:12.445Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:49185","time":"2018-06-05T03:38:45.008Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:50719","time":"2018-06-05T03:46:13.329Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:50864","time":"2018-06-05T03:46:48.892Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:50970","time":"2018-06-05T03:47:21.305Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:51045","time":"2018-06-05T03:47:38.388Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:50095","time":"2018-06-05T08:18:51.192Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:50466","time":"2018-06-05T08:20:27.413Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:51113","time":"2018-06-05T08:22:32.233Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:51336","time":"2018-06-05T08:23:07.801Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:51964","time":"2018-06-05T08:25:18.829Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:52946","time":"2018-06-05T08:30:09.640Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:53917","time":"2018-06-05T13:01:13.106Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:63540","time":"2018-06-05T16:09:48.220Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:53284","time":"2018-06-05T18:09:49.050Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":50282,"level":30,"as1":true,"msg":"[connect] from: ::1:60335","time":"2018-06-05T20:27:14.526Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":34596,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-05T23:43:57.750Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":34596,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-05T23:43:57.751Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":34596,"level":30,"as1":true,"msg":"[connect] from: ::1:60711","time":"2018-06-05T23:44:23.431Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":34596,"level":30,"as1":true,"msg":"[connect] from: ::1:60731","time":"2018-06-05T23:44:26.454Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":34596,"level":30,"as1":true,"msg":"[connect] from: ::1:61848","time":"2018-06-05T23:49:39.072Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":34596,"level":30,"as1":true,"msg":"[connect] from: ::1:63035","time":"2018-06-05T23:58:46.145Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":34596,"level":30,"as1":true,"msg":"[connect] from: ::1:63503","time":"2018-06-06T00:00:34.391Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47570,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-06T02:52:58.861Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47570,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-06T02:52:58.862Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47570,"level":30,"as1":true,"msg":"[connect] from: ::1:58936","time":"2018-06-06T02:53:04.175Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47570,"level":30,"as1":true,"msg":"[connect] from: ::1:59416","time":"2018-06-06T02:54:50.787Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47570,"level":30,"as1":true,"msg":"[connect] from: ::1:59690","time":"2018-06-06T02:55:42.513Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48203,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-06T03:02:50.550Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48203,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-06T03:02:50.550Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48203,"level":30,"as1":true,"msg":"[connect] from: ::1:61574","time":"2018-06-06T03:02:56.971Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-06T03:04:00.815Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-06T03:04:00.816Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:61981","time":"2018-06-06T03:04:03.816Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:62841","time":"2018-06-06T03:07:21.895Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:63092","time":"2018-06-06T03:08:12.787Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:63369","time":"2018-06-06T03:09:07.473Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:50074","time":"2018-06-06T03:25:40.234Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:52570","time":"2018-06-06T03:35:16.523Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-06T03:35:19.609Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:56539","time":"2018-06-06T04:01:20.660Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-06T04:01:23.594Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:57294","time":"2018-06-06T04:04:40.935Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-06T04:04:43.846Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:58153","time":"2018-06-06T04:07:32.702Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-06T04:07:35.560Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:58854","time":"2018-06-06T04:09:49.729Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-06T04:09:52.559Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:59496","time":"2018-06-06T04:12:20.941Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:61946","time":"2018-06-06T04:31:03.428Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-06T04:31:06.702Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:62611","time":"2018-06-06T04:33:45.474Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:62729","time":"2018-06-06T04:34:07.760Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:62891","time":"2018-06-06T04:34:32.516Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:63049","time":"2018-06-06T04:34:54.920Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:63212","time":"2018-06-06T04:35:19.992Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-06T04:35:22.863Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:64049","time":"2018-06-06T04:39:33.206Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-06T04:39:42.042Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:49161","time":"2018-06-06T04:46:42.945Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:51783","time":"2018-06-06T05:10:41.112Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":48290,"level":30,"as1":true,"msg":"[connect] from: ::1:51809","time":"2018-06-06T05:10:45.966Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":56977,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-06T05:11:29.401Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":56977,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-06T05:11:29.402Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":56977,"level":30,"as1":true,"msg":"[connect] from: ::1:52056","time":"2018-06-06T05:11:44.221Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":56977,"level":30,"as1":true,"msg":"[connect] from: ::1:52068","time":"2018-06-06T05:11:52.521Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":56977,"level":30,"as1":true,"msg":"[connect] from: ::1:52210","time":"2018-06-06T05:12:52.264Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":56977,"level":30,"as1":true,"msg":"[connect] from: ::1:57514","time":"2018-06-06T06:01:15.287Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-06T23:01:02.023Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-06T23:01:02.024Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:53746","time":"2018-06-06T23:01:33.576Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:55232","time":"2018-06-07T23:47:11.571Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-07T23:47:15.486Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:55262","time":"2018-06-07T23:48:00.799Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:55356","time":"2018-06-07T23:50:11.377Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:55469","time":"2018-06-07T23:54:14.362Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-07T23:54:18.462Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:55529","time":"2018-06-07T23:55:18.535Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-07T23:55:21.252Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:55575","time":"2018-06-07T23:56:37.048Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":50,"loginuser":true,"msg":"[login] General exception... Unable to get user auth details...","time":"2018-06-07T23:56:39.997Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":50,"loginuser":true,"msg":"[login] General exception... Unable to get user auth details...","time":"2018-06-07T23:56:41.651Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:55623","time":"2018-06-07T23:57:59.026Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-07T23:58:03.035Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:55805","time":"2018-06-08T00:01:57.620Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:55850","time":"2018-06-08T00:03:59.673Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-08T00:04:03.151Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:55892","time":"2018-06-08T00:04:51.984Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:55927","time":"2018-06-08T00:06:11.784Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-08T00:06:15.697Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:56115","time":"2018-06-08T00:16:23.424Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:56185","time":"2018-06-08T00:18:24.323Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:56339","time":"2018-06-08T00:25:31.003Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":50,"as1":true,"msg":"[worker] Uncaught exception, stack trace: TypeError: Cannot read property 'substring' of null\n    at /Users/ianwu/WebStormProjects/as1/modules/pos.js:141:20\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/pool.js:82:9\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/node_modules/generic-pool/lib/generic-pool.js:281:11\n    at /Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/pool.js:56:18\n    at Connection.<anonymous> (/Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/client.js:149:7)\n    at Object.onceWrapper (events.js:255:19)\n    at Connection.emit (events.js:165:20)\n    at Socket.<anonymous> (/Users/ianwu/WebStormProjects/as1/node_modules/pg/lib/connection.js:109:12)\n    at Socket.emit (events.js:160:13)\n    at addChunk (_stream_readable.js:269:12)\n    at readableAddChunk (_stream_readable.js:256:11)\n    at Socket.Readable.push (_stream_readable.js:213:10)\n    at TCP.onread (net.js:602:20)","time":"2018-06-08T00:26:49.755Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:56410","time":"2018-06-08T00:28:09.057Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-08T00:28:12.083Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:56484","time":"2018-06-08T00:29:40.810Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-08T00:29:44.709Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:56540","time":"2018-06-08T00:32:24.809Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:56574","time":"2018-06-08T00:33:55.861Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":30,"as1":true,"msg":"[connect] from: ::1:59490","time":"2018-06-08T03:16:26.769Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":94964,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-08T03:16:33.835Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41365,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-08T03:19:40.085Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41365,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-08T03:19:40.086Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41365,"level":30,"as1":true,"msg":"[connect] from: ::1:59574","time":"2018-06-08T03:19:46.830Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41365,"level":30,"as1":true,"msg":"[connect] from: ::1:59622","time":"2018-06-08T03:21:24.225Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41365,"level":30,"as1":true,"msg":"[connect] from: ::1:59659","time":"2018-06-08T03:22:37.623Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41365,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-08T03:22:40.347Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41365,"level":30,"as1":true,"msg":"[connect] from: ::1:59683","time":"2018-06-08T03:23:07.127Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41629,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-08T03:23:47.378Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41629,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-08T03:23:47.379Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41629,"level":30,"as1":true,"msg":"[connect] from: ::1:59717","time":"2018-06-08T03:23:55.092Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41698,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-08T03:24:45.696Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41698,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-08T03:24:45.696Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41698,"level":30,"as1":true,"msg":"[connect] from: ::1:59744","time":"2018-06-08T03:24:50.066Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41749,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-08T03:25:43.620Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41749,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-08T03:25:43.621Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41749,"level":30,"as1":true,"msg":"[connect] from: ::1:59791","time":"2018-06-08T03:25:54.147Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41749,"level":30,"as1":true,"msg":"[connect] from: ::1:59851","time":"2018-06-08T03:29:38.423Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41749,"level":30,"as1":true,"msg":"[connect] from: ::1:59887","time":"2018-06-08T03:31:16.789Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":41749,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-08T03:31:19.302Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":42259,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-08T03:33:04.761Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":42259,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-08T03:33:04.762Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":42259,"level":30,"as1":true,"msg":"[connect] from: ::1:59923","time":"2018-06-08T03:33:09.123Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":42259,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-08T03:35:15.261Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":42259,"level":30,"as1":true,"msg":"[connect] from: ::1:60563","time":"2018-06-08T04:12:45.688Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":42259,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-08T04:12:48.120Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":42259,"level":30,"as1":true,"msg":"[connect] from: ::1:61051","time":"2018-06-08T04:52:38.223Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47667,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-08T04:53:50.390Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47667,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-08T04:53:50.392Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47667,"level":30,"as1":true,"msg":"[connect] from: ::1:61097","time":"2018-06-08T04:53:51.791Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47667,"level":30,"as1":true,"msg":"[connect] from: ::1:61117","time":"2018-06-08T04:53:55.527Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47825,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-08T04:56:25.162Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47825,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-08T04:56:25.163Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47825,"level":30,"as1":true,"msg":"[connect] from: ::1:61182","time":"2018-06-08T04:56:28.117Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47825,"level":30,"as1":true,"msg":"[connect] from: ::1:61236","time":"2018-06-08T04:59:14.177Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47825,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-08T04:59:16.747Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47825,"level":30,"as1":true,"msg":"[connect] from: ::1:61339","time":"2018-06-08T05:05:05.285Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47825,"level":30,"as1":true,"msg":"[connect] from: ::1:51761","time":"2018-06-08T06:59:26.452Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":47825,"level":30,"as1":true,"msg":"[connect] from: ::1:54111","time":"2018-06-08T07:16:08.529Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":62348,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-08T08:28:09.229Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":62348,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-08T08:28:09.230Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":62348,"level":30,"as1":true,"msg":"[connect] from: ::1:59539","time":"2018-06-08T08:28:19.111Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90170,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-08T15:24:07.775Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90170,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-08T15:24:07.775Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90170,"level":30,"as1":true,"msg":"[connect] from: ::1:61989","time":"2018-06-08T15:24:14.327Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90170,"level":30,"as1":true,"msg":"[connect] from: ::1:62152","time":"2018-06-08T15:25:31.349Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90170,"level":50,"poscreditsale":true,"msg":"[poscreditsale] General exception... doNewCashOrder is not defined","time":"2018-06-08T15:25:54.426Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90362,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-08T15:26:48.155Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90362,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-08T15:26:48.155Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90362,"level":30,"as1":true,"msg":"[connect] from: ::1:62411","time":"2018-06-08T15:26:52.834Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90362,"level":50,"poscreditsale":true,"msg":"[poscreditsale] General exception... doNewPOOrder is not defined","time":"2018-06-08T15:27:37.986Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90475,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-08T15:28:22.344Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90475,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-08T15:28:22.344Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90475,"level":30,"as1":true,"msg":"[connect] from: ::1:62875","time":"2018-06-08T15:28:29.140Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90475,"level":50,"poscreditsale":true,"msg":"[poscreditsale] General exception... doPayment is not defined","time":"2018-06-08T15:28:46.084Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90539,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-06-08T15:29:11.513Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90539,"level":30,"as1":true,"msg":"[env] non-windows platform...","time":"2018-06-08T15:29:11.514Z","v":0}
+{"name":"as1","hostname":"Ians-MacBook-Pro.local","pid":90539,"level":30,"as1":true,"msg":"[connect] from: ::1:63102","time":"2018-06-08T15:29:18.237Z","v":0}

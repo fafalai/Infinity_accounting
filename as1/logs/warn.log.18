@@ -1,0 +1,4 @@
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":81027,"level":50,"initconnectioncache":true,"msg":"Unable to acquire db connection...","time":"2018-04-19T02:59:00.480Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":81027,"level":50,"initialisecustomerconfigcache":true,"msg":"Unable to acquire db connection...","time":"2018-04-19T02:59:00.481Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":81027,"level":50,"logoutuser":true,"msg":"Unable to acquire db connection...","time":"2018-04-19T02:59:24.702Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":81027,"level":50,"loginuser":true,"msg":"Unable to acquire db connection...","time":"2018-04-19T02:59:39.074Z","v":0}

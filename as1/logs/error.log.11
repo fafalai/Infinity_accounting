@@ -1,0 +1,18 @@
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":48978,"level":50,"initconnectioncache":true,"msg":"Unable to acquire db connection...","time":"2018-06-13T00:59:56.257Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":48978,"level":50,"initialisecustomerconfigcache":true,"msg":"Unable to acquire db connection...","time":"2018-06-13T00:59:56.259Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":1168,"level":50,"initconnectioncache":true,"msg":"Unable to acquire db connection...","time":"2018-06-13T02:29:04.531Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":1168,"level":50,"initialisecustomerconfigcache":true,"msg":"Unable to acquire db connection...","time":"2018-06-13T02:29:04.533Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":1168,"level":50,"loginuser":true,"msg":"Unable to acquire db connection...","time":"2018-06-13T02:29:29.717Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":1650,"level":50,"initconnectioncache":true,"msg":"Unable to init connections cache","time":"2018-06-13T02:31:43.683Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":1650,"level":50,"initialisecustomerconfigcache":true,"msg":"General exception... relation \"config\" does not exist","time":"2018-06-13T02:31:43.684Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":1650,"level":50,"loginuser":true,"msg":"[login] General exception... relation \"users\" does not exist","time":"2018-06-13T02:31:56.540Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":1650,"level":50,"loginuser":true,"msg":"[login] General exception... relation \"users\" does not exist","time":"2018-06-13T02:31:59.539Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":1650,"level":50,"loginuser":true,"msg":"[login] General exception... relation \"users\" does not exist","time":"2018-06-13T02:32:01.033Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":1650,"level":50,"loginuser":true,"msg":"[login] General exception... relation \"users\" does not exist","time":"2018-06-13T02:32:14.400Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":1650,"level":50,"loginuser":true,"msg":"[login] General exception... relation \"users\" does not exist","time":"2018-06-13T02:32:16.460Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":1650,"level":50,"loginuser":true,"msg":"[login] General exception... relation \"users\" does not exist","time":"2018-06-13T02:32:26.537Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":62029,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-14T03:19:09.877Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":62029,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-14T03:19:11.706Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":70097,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-14T04:13:00.710Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":76930,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-14T04:23:39.906Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":92545,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-14T05:54:13.901Z","v":0}

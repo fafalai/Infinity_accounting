@@ -1,0 +1,3 @@
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":94024,"level":50,"loginuser":true,"msg":"[login] General exception... Unable to get user auth details...","time":"2018-06-20T05:59:33.941Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":94024,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-20T05:59:38.689Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":40090,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-06-20T06:17:41.829Z","v":0}

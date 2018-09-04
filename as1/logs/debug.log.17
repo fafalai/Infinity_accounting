@@ -1,0 +1,157 @@
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":82945,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-23T14:43:21.012Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":82945,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-23T14:43:21.012Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":82945,"level":30,"as1":true,"msg":"[connect] from: ::1:55398","time":"2018-04-23T14:44:09.387Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":82945,"level":30,"as1":true,"msg":"[connect] from: ::1:56799","time":"2018-04-23T15:56:58.232Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":82945,"level":30,"as1":true,"msg":"[connect] from: ::1:56865","time":"2018-04-23T15:59:24.322Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":82945,"level":30,"as1":true,"msg":"[connect] from: ::1:56939","time":"2018-04-23T16:01:53.376Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":89269,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-23T16:02:18.908Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":89269,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-23T16:02:18.909Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":89269,"level":30,"as1":true,"msg":"[connect] from: ::1:56990","time":"2018-04-23T16:02:44.143Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":89269,"level":30,"as1":true,"msg":"[connect] from: ::1:57170","time":"2018-04-23T16:06:47.902Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":89858,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-23T16:09:56.758Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":89858,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-23T16:09:56.758Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":89858,"level":30,"as1":true,"msg":"[connect] from: ::1:57258","time":"2018-04-23T16:10:40.755Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":90637,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-23T16:20:05.770Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":90637,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-23T16:20:05.771Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":90637,"level":30,"as1":true,"msg":"[connect] from: ::1:57439","time":"2018-04-23T16:20:31.885Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":90637,"level":30,"as1":true,"msg":"[connect] from: ::1:57521","time":"2018-04-23T16:23:03.299Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":90637,"level":30,"as1":true,"msg":"[connect] from: ::1:57601","time":"2018-04-23T16:26:04.490Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-23T16:30:32.626Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-23T16:30:32.626Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[connect] from: ::1:57711","time":"2018-04-23T16:31:00.019Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[connect] from: ::1:57727","time":"2018-04-23T16:31:32.348Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[connect] from: ::1:57792","time":"2018-04-23T16:33:15.801Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[connect] from: ::1:57883","time":"2018-04-23T16:37:07.128Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[connect] from: ::1:57938","time":"2018-04-23T16:38:34.161Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[connect] from: ::1:58243","time":"2018-04-23T16:52:17.781Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[connect] from: ::1:58284","time":"2018-04-23T16:53:22.926Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[connect] from: ::1:58322","time":"2018-04-23T16:54:15.457Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[connect] from: ::1:58381","time":"2018-04-23T16:56:10.492Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[connect] from: ::1:58425","time":"2018-04-23T16:57:14.984Z","v":0}
+{"name":"as1","hostname":"192-168-1-77.tpgi.com.au","pid":91478,"level":30,"as1":true,"msg":"[connect] from: ::1:58488","time":"2018-04-23T16:59:47.061Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":42223,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-24T03:13:19.964Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":42223,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-24T03:13:19.964Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":42223,"level":30,"as1":true,"msg":"[connect] from: ::1:53012","time":"2018-04-24T03:13:33.173Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":42223,"level":30,"as1":true,"msg":"[connect] from: ::1:53105","time":"2018-04-24T03:25:10.651Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":42223,"level":30,"as1":true,"msg":"[connect] from: ::1:53153","time":"2018-04-24T03:27:52.401Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":42223,"level":30,"as1":true,"msg":"[connect] from: ::1:53179","time":"2018-04-24T03:28:54.068Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":42223,"level":50,"saveorderdetail":true,"msg":"[saveorderdetail] General exception... current transaction is aborted, commands ignored until end of transaction block","time":"2018-04-24T03:29:17.386Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":42223,"level":50,"saveorderdetail":true,"msg":"[saveorderdetail] General exception... current transaction is aborted, commands ignored until end of transaction block","time":"2018-04-24T03:29:37.250Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":45433,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-24T03:33:35.596Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":45433,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-24T03:33:35.597Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":45433,"level":30,"as1":true,"msg":"[connect] from: ::1:54265","time":"2018-04-24T03:33:48.632Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":45433,"level":50,"saveorderdetail":true,"msg":"[saveorderdetail] General exception... current transaction is aborted, commands ignored until end of transaction block","time":"2018-04-24T03:34:22.282Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":45433,"level":50,"saveorderdetail":true,"msg":"[saveorderdetail] General exception... current transaction is aborted, commands ignored until end of transaction block","time":"2018-04-24T03:35:46.899Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":45433,"level":30,"as1":true,"msg":"[connect] from: ::1:54888","time":"2018-04-24T03:35:54.517Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":46752,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-24T03:44:01.186Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":46752,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-24T03:44:01.186Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":46752,"level":30,"as1":true,"msg":"[connect] from: ::1:57350","time":"2018-04-24T03:44:13.716Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":46752,"level":30,"as1":true,"msg":"[connect] from: ::1:57603","time":"2018-04-24T03:45:01.040Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":46752,"level":30,"as1":true,"msg":"[connect] from: ::1:57868","time":"2018-04-24T03:49:16.041Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":46752,"level":30,"as1":true,"msg":"[connect] from: ::1:57951","time":"2018-04-24T03:55:23.775Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":46752,"level":30,"as1":true,"msg":"[connect] from: ::1:58002","time":"2018-04-24T03:59:18.206Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-24T04:00:01.878Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-24T04:00:01.879Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[connect] from: ::1:58039","time":"2018-04-24T04:00:22.284Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[connect] from: ::1:58050","time":"2018-04-24T04:00:33.554Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[connect] from: ::1:58094","time":"2018-04-24T04:02:12.643Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[connect] from: ::1:58150","time":"2018-04-24T04:04:32.617Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[connect] from: ::1:58183","time":"2018-04-24T04:05:33.505Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[connect] from: ::1:58262","time":"2018-04-24T04:14:08.520Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[connect] from: ::1:58303","time":"2018-04-24T04:16:28.630Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[connect] from: ::1:58382","time":"2018-04-24T04:21:06.912Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[connect] from: ::1:58433","time":"2018-04-24T04:22:55.966Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[connect] from: ::1:58485","time":"2018-04-24T04:26:31.616Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":49368,"level":30,"as1":true,"msg":"[connect] from: ::1:58543","time":"2018-04-24T04:32:43.293Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-24T04:34:52.773Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-24T04:34:52.774Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:58607","time":"2018-04-24T04:35:04.617Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:58695","time":"2018-04-24T04:41:38.947Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:58762","time":"2018-04-24T04:45:32.761Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:58828","time":"2018-04-24T04:50:08.961Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:58876","time":"2018-04-24T04:53:21.915Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:58953","time":"2018-04-24T04:57:50.591Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:58991","time":"2018-04-24T04:59:34.197Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:59072","time":"2018-04-24T05:05:25.592Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:59128","time":"2018-04-24T05:08:24.382Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:59170","time":"2018-04-24T05:10:26.280Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:59207","time":"2018-04-24T05:11:44.572Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:59289","time":"2018-04-24T05:14:36.568Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":56181,"level":30,"as1":true,"msg":"[connect] from: ::1:59349","time":"2018-04-24T05:17:06.234Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":65258,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-24T05:17:47.126Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":65258,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-24T05:17:47.127Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":65258,"level":30,"as1":true,"msg":"[connect] from: ::1:59393","time":"2018-04-24T05:18:00.348Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":65258,"level":30,"as1":true,"msg":"[connect] from: ::1:59453","time":"2018-04-24T05:20:06.457Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":65258,"level":30,"as1":true,"msg":"[connect] from: ::1:59532","time":"2018-04-24T05:24:07.583Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":65258,"level":30,"as1":true,"msg":"[connect] from: ::1:59568","time":"2018-04-24T05:25:13.361Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":65258,"level":30,"as1":true,"msg":"[connect] from: ::1:59606","time":"2018-04-24T05:26:58.195Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":65258,"level":30,"as1":true,"msg":"[connect] from: ::1:59657","time":"2018-04-24T05:29:29.548Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":65258,"level":30,"as1":true,"msg":"[connect] from: ::1:59897","time":"2018-04-24T06:06:19.652Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":65258,"level":30,"as1":true,"msg":"[connect] from: ::1:59931","time":"2018-04-24T06:08:03.644Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":72839,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-24T06:09:02.602Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":72839,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-24T06:09:02.602Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":72839,"level":30,"as1":true,"msg":"[connect] from: ::1:59980","time":"2018-04-24T06:09:13.833Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":72839,"level":30,"as1":true,"msg":"[connect] from: ::1:60021","time":"2018-04-24T06:10:45.415Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":72839,"level":30,"as1":true,"msg":"[connect] from: ::1:60083","time":"2018-04-24T06:14:03.077Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":72839,"level":30,"as1":true,"msg":"[connect] from: ::1:60139","time":"2018-04-24T06:16:36.756Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":72839,"level":30,"as1":true,"msg":"[connect] from: ::1:60195","time":"2018-04-24T06:19:24.088Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":72839,"level":30,"as1":true,"msg":"[connect] from: ::1:60240","time":"2018-04-24T06:20:51.535Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":72839,"level":30,"as1":true,"msg":"[connect] from: ::1:60289","time":"2018-04-24T06:22:21.320Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":37276,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-26T01:31:25.787Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":37276,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-26T01:31:25.788Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":37276,"level":30,"as1":true,"msg":"[connect] from: ::1:63599","time":"2018-04-26T01:31:38.031Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":37276,"level":30,"as1":true,"msg":"[connect] from: ::1:63885","time":"2018-04-26T01:38:14.539Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-26T02:44:47.353Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-26T02:44:47.354Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:50159","time":"2018-04-26T02:44:55.525Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:51224","time":"2018-04-26T02:48:31.641Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:51970","time":"2018-04-26T02:50:59.005Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:53205","time":"2018-04-26T02:53:24.860Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:54488","time":"2018-04-26T02:55:48.160Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:58628","time":"2018-04-26T03:03:35.774Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:61064","time":"2018-04-26T03:08:09.368Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:61537","time":"2018-04-26T03:09:00.747Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:62581","time":"2018-04-26T03:10:56.399Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:54358","time":"2018-04-26T03:26:21.992Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:54674","time":"2018-04-26T03:26:54.508Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:27:07.223Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:27:16.659Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:27:25.522Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:27:38.530Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:27:43.115Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:01.953Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:07.585Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:12.667Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:17.282Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:24.049Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:30.752Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:48.842Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:58.377Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:29:04.921Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:29:08.441Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:29:20.192Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:29:22.372Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:29:29.404Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:57214","time":"2018-04-26T03:31:40.265Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:60028","time":"2018-04-26T03:36:58.844Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:50555","time":"2018-04-26T03:49:58.228Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:53475","time":"2018-04-26T03:55:28.697Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:54747","time":"2018-04-26T03:57:50.393Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:55628","time":"2018-04-26T03:59:27.829Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:56648","time":"2018-04-26T04:01:20.702Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:58417","time":"2018-04-26T04:04:17.441Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:60019","time":"2018-04-26T04:07:05.146Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:61532","time":"2018-04-26T04:09:54.533Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:62617","time":"2018-04-26T04:11:56.037Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:63363","time":"2018-04-26T04:13:17.038Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:64492","time":"2018-04-26T04:15:23.808Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:64919","time":"2018-04-26T04:16:09.725Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:65018","time":"2018-04-26T04:16:20.440Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:49260","time":"2018-04-26T04:17:28.743Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:49743","time":"2018-04-26T04:18:20.973Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":30,"as1":true,"msg":"[connect] from: ::1:51497","time":"2018-04-26T04:21:34.439Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":66886,"level":30,"as1":true,"msg":"[oxr] not enabled...","time":"2018-04-26T04:38:59.471Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":66886,"level":30,"as1":true,"msg":"[env] windows platform...","time":"2018-04-26T04:38:59.472Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":66886,"level":30,"as1":true,"msg":"[connect] from: ::1:60829","time":"2018-04-26T04:39:09.615Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":66886,"level":30,"as1":true,"msg":"[connect] from: ::1:64005","time":"2018-04-26T04:45:01.655Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":66886,"level":30,"as1":true,"msg":"[connect] from: ::1:64185","time":"2018-04-26T04:45:21.104Z","v":0}

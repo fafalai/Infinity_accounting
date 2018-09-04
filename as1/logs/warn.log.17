@@ -1,0 +1,22 @@
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":42223,"level":50,"saveorderdetail":true,"msg":"[saveorderdetail] General exception... current transaction is aborted, commands ignored until end of transaction block","time":"2018-04-24T03:29:17.386Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":42223,"level":50,"saveorderdetail":true,"msg":"[saveorderdetail] General exception... current transaction is aborted, commands ignored until end of transaction block","time":"2018-04-24T03:29:37.250Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":45433,"level":50,"saveorderdetail":true,"msg":"[saveorderdetail] General exception... current transaction is aborted, commands ignored until end of transaction block","time":"2018-04-24T03:34:22.282Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":45433,"level":50,"saveorderdetail":true,"msg":"[saveorderdetail] General exception... current transaction is aborted, commands ignored until end of transaction block","time":"2018-04-24T03:35:46.899Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:27:07.223Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:27:16.659Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:27:25.522Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:27:38.530Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:27:43.115Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:01.953Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:07.585Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:12.667Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:17.282Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:24.049Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:30.752Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:48.842Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:28:58.377Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:29:04.921Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:29:08.441Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:29:20.192Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:29:22.372Z","v":0}
+{"name":"as1","hostname":"Mitchams-iMac.local","pid":47622,"level":50,"loginuser":true,"msg":"[login] General exception... Invalid login...","time":"2018-04-26T03:29:29.404Z","v":0}
