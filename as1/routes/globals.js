@@ -2581,6 +2581,10 @@ function removeDuplicates( arr, prop ) {
       obj[arr[i][prop]] = arr[i];
       //console.log(obj[arr[i][prop]]);
     }
+    else
+    {
+      //console.log(obj[arr[i][prop]]);
+    }
   }
   var newArr = [];
   //console.log(obj);
