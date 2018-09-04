@@ -782,6 +782,7 @@ function doNextEmpNo(tx, world)
 
 function doNextJobSheetNo(tx, world)
 {
+  global.ConsoleLog("do next job sheet no");
   var promise = new global.rsvp.Promise
   (
     function(resolve, reject)

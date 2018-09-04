@@ -4156,8 +4156,8 @@ function ListProducts(world)
           function(err, result)
           {
             done();
-            global.ConsoleLog('clause:');
-            global.ConsoleLog(clause);
+            // global.ConsoleLog('clause:');
+            // global.ConsoleLog(clause);
 
             if (!err)
             {

@@ -619,6 +619,7 @@ function doDlgOrderNew(orderid)
 
   function doOrderSaved(ev, args)
   {
+    console.log("do order saved");
     $('#dlgOrderNew').dialog('close');
   }
 

@@ -668,6 +668,7 @@ function newOrderAttachment(args, callback)
 
 function doNewOrderClient(tx, world)
 {
+  global.ConsoleLog("do new order client");
   var promise = new global.rsvp.Promise
   (
     function(resolve, reject)
@@ -724,6 +725,8 @@ function doNewOrderClient(tx, world)
           if (!err)
           {
             var orderid = result.rows[0].id;
+            global.ConsoleLog("order id");
+            global.ConsoleLog(orderid);
 
             tx.query
             (
@@ -737,6 +740,8 @@ function doNewOrderClient(tx, world)
                 if (!err)
                 {
                   var o = result.rows[0];
+                  global.ConsoleLog(o);
+                  global.ConsoleLog(world.products.length);
 
                   if (!__.isNull(world.products) && (world.products.length > 0))
                   {
@@ -764,6 +769,7 @@ function doNewOrderClient(tx, world)
                                 // If this is a built product, we need to create a jobsheet for it...
                                 if (!__.isNull(od.buildtemplateheaderid))
                                 {
+                                  global.ConsoleLog("this is a built product, we need to create a jobsheet for it");
                                   global.modconfig.doNextJobSheetNo(tx, world).then
                                   (
                                     function(result)
@@ -1152,6 +1158,17 @@ function doDuplicateOrder(tx, world)
 
 function doNewOrderDetail(tx, custid, userid, orderid, version, productid, qty, price, discount, expressfee)
 {
+  global.ConsoleLog("do new order detail");
+  global.ConsoleLog('custid ' + custid);
+  global.ConsoleLog('userid ' + userid);
+  global.ConsoleLog('orderid ' + orderid);
+  global.ConsoleLog('version ' + version);
+  global.ConsoleLog('productid ' + productid);
+  global.ConsoleLog('qty ' + qty);
+  global.ConsoleLog('price ' + price);
+  global.ConsoleLog('discount ' + discount);
+  global.ConsoleLog('expressfee ' + expressfee);
+
   var promise = new global.rsvp.Promise
   (
     function(resolve, reject)
@@ -1188,6 +1205,7 @@ function doNewOrderDetail(tx, custid, userid, orderid, version, productid, qty, 
                 if (!err)
                 {
                   var d = result.rows[0];
+                  global.ConsoleLog(d);
 
                   resolve
                   (
@@ -1201,12 +1219,20 @@ function doNewOrderDetail(tx, custid, userid, orderid, version, productid, qty, 
                   );
                 }
                 else
+                {
+                  global.ConsoleLog("reject " + global.text_unableneworderdetail);
                   reject({message: global.text_unableneworderdetail});
+                }
+                  
               }
             );
           }
           else
+          {
+            global.ConsoleLog(err);
             reject(err);
+          }
+            
         }
       );
     }
@@ -1952,6 +1978,7 @@ function LoadOrder(world)
 function NewOrderClient(world)
 {
   var msg = '[' + world.eventname + '] ';
+  global.ConsoleLog(world.eventname);
   //
   global.pg.connect
   (
