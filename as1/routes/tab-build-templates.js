@@ -306,6 +306,7 @@ function doBuildTemplatesTabWidgets()
       striped: true,
       toolbar: '#tbBuildTemplates',
       showFooter: true,
+      pagination: true,
       // loader: function(param, success, error)
       // {
       //   success({total: cache_buildtemplates.length, rows: cache_buildtemplates});
@@ -403,5 +404,8 @@ function doBuildTemplatesTabWidgets()
       }
     }
   );
+
+
+
 }
 

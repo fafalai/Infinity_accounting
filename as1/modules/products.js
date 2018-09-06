@@ -1494,9 +1494,14 @@ function doSaveProductPricing(tx, world)
   (
     function(resolve, reject)
     {
+      // global.ConsoleLog("world.datefrom");
+      // global.ConsoleLog(world.datefrom);
+      // global.ConsoleLog(typeof world.datefrom);
+      // global.ConsoleLog(__.sanitiseAsDate(world.datefrom));
+      // global.ConsoleLog(typeof __.sanitiseAsDate(world.datefrom));
       tx.query
       (
-        'update pricing set clients_id=$1,minqty=$2,maxqty=$3,price=$4,price1=$5,price2=$6,price3=$7,price4=$8,price5=$9,datemodified=now(),usersmodified_id=$10 where customers_id=$11 and id=$12 and dateexpired is null',
+        "update pricing set clients_id=$1,minqty=$2,maxqty=$3,price=$4,price1=$5,price2=$6,price3=$7,price4=$8,price5=$9,datemodified=now(),usersmodified_id=$10,datefrom = TO_TIMESTAMP($13,'YYYY-MM-DD HH24:MI:SS')::timestamp without time zone,dateto=TO_TIMESTAMP($14,'YYYY-MM-DD HH24:MI:SS')::timestamp without time zone where customers_id=$11 and id=$12 and dateexpired is null",
         [
           __.sanitiseAsBigInt(world.clientid),
           __.sanitiseAsPrice(world.minqty, 4),
@@ -1509,7 +1514,9 @@ function doSaveProductPricing(tx, world)
           __.sanitiseAsPrice(world.price5, 4),
           world.cn.userid,
           world.cn.custid,
-          __.sanitiseAsBigInt(world.priceid)
+          __.sanitiseAsBigInt(world.priceid),
+          __.sanitiseAsDate(world.datefrom),
+          __.sanitiseAsDate(world.dateto)
         ],
         function(err, result)
         {
@@ -1532,7 +1539,11 @@ function doSaveProductPricing(tx, world)
             );
           }
           else
+          {
+            global.ConsoleLog(err);
             reject(err);
+          }
+            
         }
       );
     }

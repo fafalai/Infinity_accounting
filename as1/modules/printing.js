@@ -955,14 +955,14 @@ function doGenOrder(tx, custid, header, details, templatename, uname)
             var filename;
             if(__.isNull(header.invoiceno))
             {
-              global.ConsoleLog("generate order excel");
+              //global.ConsoleLog("generate order excel");
               foldername = global.path.join(__dirname, global.config.folders.orders + custid);
               no = header.orderno;
               filename = global.config.defaults.defaultPrefixOrderFilename + no + global.config.defaults.defaultXLExtension;
             }
             else
             {
-              global.ConsoleLog("generate invoice excel");
+              //global.ConsoleLog("generate invoice excel");
               foldername = global.path.join(__dirname, global.config.folders.invoices + custid);
               no = header.invoiceno;
               filename = global.config.defaults.defaultPrefixInvoiceFilename + no + global.config.defaults.defaultXLExtension;
@@ -973,7 +973,7 @@ function doGenOrder(tx, custid, header, details, templatename, uname)
             // var filename = global.config.defaults.defaultPrefixOrderFilename + no + global.config.defaults.defaultXLExtension;
             //global.ConsoleLog("file name" + filename);
 
-            var workbook1 = new global.exceljs.Workbook();
+            //var workbook1 = new global.exceljs.Workbook();
             // var count = 0;
             //global.ConsoleLog(foldername + '/test1.xlsx');
             // global.ConsoleLog(fileExists('/test1.xlsx'));
@@ -994,12 +994,12 @@ function doGenOrder(tx, custid, header, details, templatename, uname)
             // });
 
             // var workbook2 = new global.exceljs.Workbook();
-             var ws1 = workbook1.addWorksheet("Testing 1");
-              ws1.addRow(["Address","Place"]);
-              ws1.addRow(["Population", "count"]);
-              ws1.addRow(["gen", "animal", "plants"]);
-              ws1.addRow(["Date", "1111-11-11 11:11:11"]);
-              ws1.addRow();
+            //  var ws1 = workbook1.addWorksheet("Testing 1");
+            //   ws1.addRow(["Address","Place"]);
+            //   ws1.addRow(["Population", "count"]);
+            //   ws1.addRow(["gen", "animal", "plants"]);
+            //   ws1.addRow(["Date", "1111-11-11 11:11:11"]);
+            //   ws1.addRow();
             // var ws2 = workbook2.addWorksheet("Testing 2");
               // ws2.addRow(["Address","Place"]);
               // ws2.addRow(["Population", "count"]);
@@ -1017,7 +1017,7 @@ function doGenOrder(tx, custid, header, details, templatename, uname)
               function(r)
               {
                 //global.ConsoleLog(r);
-                list.push([r.price,r.gst,r.qty,r.discount,r.expressfee]);
+                //list.push([r.price,r.gst,r.qty,r.discount,r.expressfee]);
                 var p = __.toBigNum(r.price);
                 var g = __.toBigNum(r.gst);
                 var q = __.toBigNum(r.qty);
@@ -1096,9 +1096,10 @@ function doGenOrder(tx, custid, header, details, templatename, uname)
             //ws2.addRow(list);
            
 
-            global.ConsoleLog(products);
+            //global.ConsoleLog(products);
 
             // console.log(products);
+
             var values =
             {
               orderinvoiceno: __.sanitiseAsString(header.invoiceno),
@@ -1149,21 +1150,24 @@ function doGenOrder(tx, custid, header, details, templatename, uname)
               product: products
             };
 
+            list = Object.values(values);
+            list = list.slice(0,list.length-1);
+            // for(var i =0;i<list.length;i++)
+            // {
+            //   if(__.isNull(list[i]))
+            //   {
+            //     list[i] =""
+            //   }
+            // }
+            //global.ConsoleLog(list);
             template.substitute(sheetno, values);
             blob = template.generate();
-            var workbook2 = new global.exceljs.Workbook();
-            workbook2.xlsx.readFile(foldername + '/test1.xlsx')
-              .then(function() {
-                  var worksheet = workbook2.getWorksheet(3);
-                  global.ConsoleLog(list);
-                  worksheet.addRow(['price','gst','qty','discount','expressfee'])
-                  worksheet.addRows(list);
-                  worksheet.addRows(products);
-                  // var row = worksheet.getRow(5);
-                  // row.getCell(1).value = 5; // A5's value set to 5
-                  //worksheet.commit();
-                  return workbook2.xlsx.writeFile(foldername + '/test1.xlsx');
-              });
+            
+              // resolve({orderno: header.orderno, invoiceno: header.invoiceno, basename: filename, fullpath: foldername + '/' + filename});
+              // workbook1.xlsx.writeFile(foldername + '/test2.xlsx' ).then(function(){
+              //   //global.ConsoleLog(foldername + '/' + filename);
+              //   resolve({orderno: header.orderno, invoiceno: header.invoiceno, basename: filename, fullpath: foldername + '/' + filename});
+              // });
 
             ensureFolderExists
             (
@@ -1173,24 +1177,50 @@ function doGenOrder(tx, custid, header, details, templatename, uname)
               {
                 if (!err)
                 {
-                  fs.writeFile
-                  (
-                    foldername + '/' + filename,
-                    blob,
-                    'binary',
-                    function(err)
-                    {
-                      if (!err)
-                        // var path = foldername + '/' + filename;
-                        workbook1.xlsx.writeFile(foldername + '/test2.xlsx' ).then(function(){
-                          global.ConsoleLog(foldername + '/' + filename);
-                          resolve({orderno: header.orderno, invoiceno: header.invoiceno, basename: filename, fullpath: foldername + '/' + filename});
-                        });
-                        //resolve({orderno: header.orderno, invoiceno: header.invoiceno, basename: filename, fullpath: foldername + '/' + filename});
-                      else
-                        reject(err);
-                    }
-                  );
+                  var workbook2 = new global.exceljs.Workbook();
+                  workbook2.xlsx.readFile(foldername + '/test1.xlsx')
+                    .then(function() {
+                        var worksheet = workbook2.getWorksheet(1);
+                         worksheet.views = [{state:'normal'}];
+                         worksheet.pageSetup.orientation = 'landscape';
+                         worksheet.pageSetup.fitToPage = true;
+                         worksheet.pageSetup.pageOrder = 'overThenDown';
+                        // worksheet.pageSetup.printTitlesRow = '1:5';
+                        global.ConsoleLog(list);
+                        //worksheet.addRow(['price','gst','qty','discount','expressfee'])
+                        worksheet.addRow(list);
+                        ws.getCell('D1').alignment = { wrapText: true };
+                        //worksheet.addRows(products);
+                        // var row = worksheet.getRow(5);
+                        // row.getCell(1).value = 5; // A5's value set to 5
+                        //worksheet.commit();
+                        
+                        //return workbook2.xlsx.writeFile(foldername + '/test1.xlsx');
+                    }).then(function(){
+                      return workbook2.xlsx.writeFile(foldername + '/test1.xlsx');
+                    }).then(function(){
+                      resolve({orderno: header.orderno, invoiceno: header.invoiceno, basename: filename, fullpath: foldername + '/' + filename});
+                    })
+                    ;
+
+                  // fs.writeFile
+                  // (
+                  //   foldername + '/' + filename,
+                  //   blob,
+                  //   'binary',
+                  //   function(err)
+                  //   {
+                  //     if (!err)
+                  //       // var path = foldername + '/' + filename;
+                  //       workbook1.xlsx.writeFile(foldername + '/test2.xlsx' ).then(function(){
+                  //         //global.ConsoleLog(foldername + '/' + filename);
+                  //         resolve({orderno: header.orderno, invoiceno: header.invoiceno, basename: filename, fullpath: foldername + '/' + filename});
+                  //       });
+                  //       //resolve({orderno: header.orderno, invoiceno: header.invoiceno, basename: filename, fullpath: foldername + '/' + filename});
+                  //     else
+                  //       reject(err);
+                  //   }
+                  // );
                 }
                 else
                   reject(err);
@@ -1383,7 +1413,7 @@ function PrintOrders(world)
                 
                 function(orderid)
                 {
-                  global.ConsoleLog(orderid);
+                  //global.ConsoleLog(orderid);
                   calls.push
                   (
                     function(callback)
@@ -1460,8 +1490,8 @@ function PrintOrders(world)
                         if (!err)
                         {
                           done();
-                          // global.ConsoleLog('event name');
-                          // global.ConsoleLog(world.eventname);
+                          global.ConsoleLog('event name');
+                          global.ConsoleLog(world.eventname);
                           world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, rs: results, pdata: world.pdata});
                         }
                       }

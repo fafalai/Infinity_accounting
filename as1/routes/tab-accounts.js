@@ -122,6 +122,7 @@ function doAccountsTabWidgets()
   (
     {
       idField: 'id',
+      pagination: true,
       treeField: 'name',
       lines: true,
       collapsible: true,
@@ -185,4 +186,16 @@ function doAccountsTabWidgets()
       }
     }
   );
+
+
+
+  var page = $('#divAccountsTG').treegrid('getPager');
+  //console.log(page.onSelectPage);
+  page.pagination({
+    showPageList: false,
+    onSelectPage:function(pageNumber,pageSize){
+      console.log(pageNumber);
+      console.log(pageSize);
+    }
+  });
 }

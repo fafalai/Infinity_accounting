@@ -5705,7 +5705,7 @@ function main()
         {
           try
           {
-            makeWorld(spark, 'saveproductpricing', data, '*priceid', '*productid', '*price', 'clientid', 'minqty', 'maxqty', 'price1', 'price2', 'price3', 'price4', 'price5').then
+            makeWorld(spark, 'saveproductpricing', data, '*priceid', '*productid', '*price', 'clientid', 'minqty', 'maxqty', 'price1', 'price2', 'price3', 'price4', 'price5','datefrom','dateto').then
             (
               function(world)
               {
