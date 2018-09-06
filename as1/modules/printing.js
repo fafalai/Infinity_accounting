@@ -1189,6 +1189,7 @@ function doGenOrder(tx, custid, header, details, templatename, uname)
                         global.ConsoleLog(list);
                         //worksheet.addRow(['price','gst','qty','discount','expressfee'])
                         worksheet.addRow(list);
+                        ws.getCell('D1').alignment = { wrapText: true };
                         //worksheet.addRows(products);
                         // var row = worksheet.getRow(5);
                         // row.getCell(1).value = 5; // A5's value set to 5

@@ -229,6 +229,7 @@ function doDlgProductNew(productcategoryid, productid)
     (
       function(p)
       {
+        //console.log(p);
         data.push
         (
           {
@@ -237,8 +238,8 @@ function doDlgProductNew(productcategoryid, productid)
             minqty: p.minqty,
             maxqty: p.maxqty,
             price: p.price,
-            datefrom:p.datefrom,
-            dateto:p.dateto,
+            datefrom:doNiceDateNoTime(p.datefrom),
+            dateto:doNiceDateNoTime(p.dateto),
             date: doNiceDateModifiedOrCreated(p.datemodified, p.datecreated),
             by: doNiceModifiedBy(p.datemodified, p.usermodified, p.usercreated)
           }
@@ -319,7 +320,38 @@ function doDlgProductNew(productcategoryid, productid)
       editingIndex,
       function(row)
       {
-        doServerDataMessage('saveproductpricing', {priceid: row.id, productid: productid, clientid: row.clientid, minqty: row.minqty, maxqty: row.maxqty, price: row.price, price1: row.price1, price2: row.price2, price3: row.price3, price4: row.price4, price5: row.price5}, {type: 'refresh'});
+        var datefrom,dateto;
+       console.log("dateto: " + row.dateto);
+       console.log(moment(row.datefrom).isValid());
+       
+        if (moment(row.datefrom).isValid()) 
+        {
+          datefrom = moment(row.datefrom,"YYYY-MM-DD HH:MM:SS" ).format('YYYY-MM-DD 00:00:00');
+          console.log(datefrom);
+        }
+        else
+        {
+          console.log("no date from");
+          datefrom = null;
+          console.log(datefrom);
+        }
+        
+        if(moment(row.dateto).isValid())
+        {
+          dateto = moment(row.dateto,"YYYY-MM-DD HH:MM:SS" ).format('YYYY-MM-DD 23:59:59');
+          console.log(dateto);
+        }
+        else
+        {
+          console.log("no date to");
+          dateto = null;
+          console.log(dateto);
+        }
+        
+        // console.log(moment(row.dateto).isValid());
+
+        // console.log(dateto);
+        doServerDataMessage('saveproductpricing', {priceid: row.id, productid: productid, clientid: row.clientid, minqty: row.minqty, maxqty: row.maxqty, price: row.price, price1: row.price1, price2: row.price2, price3: row.price3, price4: row.price4, price5: row.price5,datefrom:datefrom,dateto:dateto}, {type: 'refresh'});
       }
     );
 
@@ -398,7 +430,7 @@ function doDlgProductNew(productcategoryid, productid)
   $('#divEvents').on('pricingpopup', doPricingEventsHandler);
   //New
   $('#divEvents').on('productpricingupdated', doUpdatePrice);
-
+  // console.log(dateboxParserObj);
 
   $('#dlgProductNew').dialog
   (
@@ -693,12 +725,12 @@ function doDlgProductNew(productcategoryid, productid)
             columns:
             [
               [
-                {title: 'Client',    field: 'clientid', width: 200, align: 'left',  resizable: true, editor: {type: 'combobox',  options: {panelWidth: 300, valueField: 'id', textField: 'name', data: cache_clients, onSelect: function(record) {console.log(record);}}}, formatter: function(value, row) {return doGetStringFromIdInObjArray(cache_clients, value);}},
+                {title: 'Client',    field: 'clientid', width: 200, align: 'left',  resizable: true, editor: {type: 'combobox',  options: {panelWidth: 300, valueField: 'id', textField: 'name', data: cache_clients, onSelect: function(record,row,index) {console.log(record);console.log(row);console.log(index)}}}, formatter: function(value, row) {return doGetStringFromIdInObjArray(cache_clients, value);}},
                 {title: 'Min Qty',   field: 'minqty',   width: 100, align: 'right', resizable: true, editor: {type: 'numberbox', options: {groupSeparator: ',', precision: 0}}, formatter: function(value, row, index) {return _.niceformatqty(value);}, align: 'right'},
                 {title: 'Max Qty',   field: 'maxqty',   width: 100, align: 'right', resizable: true, editor: {type: 'numberbox', options: {groupSeparator: ',', precision: 0}}, formatter: function(value, row, index) {return _.niceformatqty(value);}, align: 'right'},
                 {title: 'Price',     field: 'price',    width: 100, align: 'right', resizable: true, editor: {type: 'numberbox', options: {groupSeparator: ',', precision: 2}}, formatter: function(value, row, index) {return _.niceformatnumber(value);}, align: 'right'},
-                {title: 'Date From', field: 'datefrom', width: 150, align: 'right', resizable: true, editor: {type: 'datebox'}, formatter: function(value, row, index) {return _.nicejsdatetodisplay(value);}, align: 'right'},
-                {title: 'Date To',   field: 'dateto',   width: 150, align: 'right', resizable: true, editor: {type: 'datebox'}, formatter: function(value, row, index) {return _.nicejsdatetodisplay(value);}, align: 'right'},
+                {title: 'Date From', field: 'datefrom', width: 160, align: 'right', resizable: true, editor: {type: 'datebox'},  align: 'right'},
+                {title: 'Date To',   field: 'dateto',   width: 160, align: 'right', resizable: true, editor: {type: 'datebox'},  align: 'right',keyHandler:{}},
                 {title: 'Modified',  field: 'date',     width: 150, align: 'right', resizable: true, align: 'right'},
                 {title: 'By',        field: 'by',       width: 200, align: 'left',  resizable: true}
               ]
@@ -709,10 +741,10 @@ function doDlgProductNew(productcategoryid, productid)
             },
             onDblClickCell: function(index, field, value)
             {
-              console.log("double click a product price cell");
-              console.log(index);
-              console.log(field);
-              console.log(value);
+              // console.log("double click a product price cell");
+              // console.log(index);
+              // console.log(field);
+              // console.log(value);
               doGridStartEdit
               (
                 'divNewProductPricesG',
@@ -960,4 +992,31 @@ function doDlgProductNew(productcategoryid, productid)
       ]
     }
   ).dialog('center').dialog('open');
+
+
+  $.fn.datebox.defaults.formatter = function(date){
+    //console.log(date);
+    return _.nicedatetodisplay(date);
+  }
+
+  $.fn.datebox.defaults.parser = function(date){
+    console.log(date);
+    if (_.isUndefined(date) || _.isBlank(date))
+    {
+      //console.log(new Date());
+      return new Date();
+    }
+    else
+    {
+      var dt = moment(date,"YYYY-MM-DD").format('YYYY-MM-DD HH:mm:ss');
+      // console.log(dt);
+      // console.log(moment(dt));
+      // console.log(moment(dt).toDate());
+      // console.log(moment(dt).isValid());
+
+      return moment(dt).isValid() ? moment(dt).toDate() : new Date();
+    }
+      
+  }
+
 }

@@ -926,6 +926,10 @@ function doDlgOrderNew(orderid)
   $('#divEvents').on('orderattachmentspopup', doAttachmentEventsHandler);
   $('#divEvents').on('orderstatuspopup', doStatusEventsHandler);
 
+
+
+ 
+
   $('#dlgOrderNew').dialog
   (
     {
@@ -1128,7 +1132,14 @@ function doDlgOrderNew(orderid)
             }
           }
         );
-
+        // $('#dtNewOrderStartDate').datebox(
+        //   {
+        //     formatter: function(value, row, index) {return _.nicejsdatetodisplay(value);},
+        //     parser:function(value,row,index){return moment(value,"MM/DD/YYYY" ).format('YYYY-MM-DD')},
+        //     onSelect:function(value){console.log("dtNewOrderStartDate: "+ value)}
+        //   }
+        // );
+        //console.log(dateboxParserObj);
         $('#dtNewOrderStartDate').datebox(dateboxParserObj);
         $('#dtNewOrderEndDate').datebox(dateboxParserObj);
 

@@ -380,17 +380,21 @@ var dateboxParserObj =
 {
   onSelect: function(dt)
   {
+    console.log("select");
   },
   formatter: function(dt)
   {
+    console.log(dt);
+    //dt = dt.toLocaleDateString();
     return _.nicedatetodisplay(dt);
   },
   parser: function(d)
   {
+    console.log(d);
     if (_.isUndefined(d) || _.isBlank(d))
       return new Date();
 
-    var dt = moment(d);
+    var dt = moment(d).format('YYYY-MM-DD HH:mm:ss');
 
     return dt.isValid() ? dt.toDate() : new Date();
   }
@@ -958,7 +962,7 @@ _.mixin
       if (_.isUndefined(d) || _.isNull(d) || _.isBlank(d) || (d == 'Invalid date'))
         return '';
 
-      return new moment(d, 'YYYY-MM-DD hh:mm:ss').format('YYYY-MM-DD');
+      return new moment(d).format('YYYY-MM-DD');
     }
   }
 );
