@@ -1,3 +1,5 @@
+var selectedRowIndex;
+
 function doDlgProductPricing(product)
 {
   var editingIndex = null;
@@ -86,9 +88,51 @@ function doDlgProductPricing(product)
       editingIndex,
       function(row)
       {
-        doServerDataMessage('saveproductpricing', {priceid: row.id, productid: product.id, clientid: row.clientid, minqty: row.minqty, maxqty: row.maxqty, price: row.price, price1: row.price1, price2: row.price2, price3: row.price3, price4: row.price4, price5: row.price5}, {type: 'refresh'});
+        var datefrom,dateto;
+       //console.log("dateto: " + row.dateto);
+       //console.log(moment(row.datefrom).isValid());
+       
+        if (moment(row.datefrom).isValid()) 
+        {
+          datefrom = moment(row.datefrom,"YYYY-MM-DD HH:MM:SS" ).format('YYYY-MM-DD 00:00:00');
+          //console.log(datefrom);
+        }
+        else
+        {
+          //console.log("no date from");
+          datefrom = null;
+          //console.log(datefrom);
+        }
+        
+        if(moment(row.dateto).isValid())
+        {
+          dateto = moment(row.dateto,"YYYY-MM-DD HH:MM:SS" ).format('YYYY-MM-DD 23:59:59');
+          //console.log(dateto);
+        }
+        else
+        {
+          //console.log("no date to");
+          dateto = null;
+          //console.log(dateto);
+        }
+        
+        // console.log(moment(row.dateto).isValid());
+
+        // console.log(dateto);
+        doServerDataMessage('saveproductpricing', {priceid: row.id, productid: product.id, clientid: row.clientid, minqty: row.minqty, maxqty: row.maxqty, price: row.price, price1: row.price1, price2: row.price2, price3: row.price3, price4: row.price4, price5: row.price5,datefrom:datefrom,dateto:dateto}, {type: 'refresh'});
       }
     );
+
+    // editingIndex = null;
+    // doGridEndEditGetRow
+    // (
+    //   'divProductPricesG',
+    //   editingIndex,
+    //   function(row)
+    //   {
+    //     doServerDataMessage('saveproductpricing', {priceid: row.id, productid: product.id, clientid: row.clientid, minqty: row.minqty, maxqty: row.maxqty, price: row.price, price1: row.price1, price2: row.price2, price3: row.price3, price4: row.price4, price5: row.price5}, {type: 'refresh'});
+    //   }
+    // );
 
     editingIndex = null;
   }
@@ -198,8 +242,8 @@ function doDlgProductPricing(product)
   function doLoad(ev, args)
   {
     var data = [];
-    console.log(args.data.rs);
-    console.log(args.pdata);
+    // console.log(args.data.rs);
+    // console.log(args.pdata);
 
     args.data.rs.forEach
     (
@@ -213,6 +257,8 @@ function doDlgProductPricing(product)
             minqty: p.minqty,
             maxqty: p.maxqty,
             price: p.price,
+            datefrom:doNiceDateNoTime(p.datefrom),
+            dateto:doNiceDateNoTime(p.dateto),
             price1: p.price1,
             price2: p.price2,
             price3: p.price3,
@@ -224,12 +270,13 @@ function doDlgProductPricing(product)
         );
       }
     );
+    // console.log(data);
 
     $('#divProductPricesG').datagrid('loadData', data);
 
     if (!_.isUndefined(args.pdata.priceid) && !_.isNull(args.pdata.priceid))
     {
-      console.log(args.pdata.priceid);
+      //console.log(args.pdata.priceid);
       $('#divProductPricesG').datagrid('selectRecord', args.pdata.priceid);
     }
       
@@ -266,6 +313,34 @@ function doDlgProductPricing(product)
                 {title: 'Min Qty',  rowspan: 2, field: 'minqty',   width: 100, align: 'right', resizable: true, editor: {type: 'numberbox', options: {groupSeparator: ',', precision: 0}}, formatter: function(value, row, index) {return _.niceformatqty(value);}, align: 'right'},
                 {title: 'Max Qty',  rowspan: 2, field: 'maxqty',   width: 100, align: 'right', resizable: true, editor: {type: 'numberbox', options: {groupSeparator: ',', precision: 0}}, formatter: function(value, row, index) {return _.niceformatqty(value);}, align: 'right'},
                 {title: 'Price',    rowspan: 2, field: 'price',    width: 100, align: 'right', resizable: true, editor: {type: 'numberbox', options: {groupSeparator: ',', precision: 2}}, formatter: function(value, row, index) {return _.niceformatnumber(value);}, align: 'right'},
+                {title: 'Date From',rowspan: 2, field: 'datefrom', width: 160, align: 'right', resizable: true, 
+                  editor: 
+                  {
+                    type: 'datebox',   
+                    options: 
+                    {
+                      onSelect:function(date)
+                      {
+                        var selectedDate = date;
+                        // console.log("selected date: " + selectedDate);
+                        // console.log(selectedRowIndex)
+                        var ed = $('#divProductPricesG').datagrid('getEditor', {index: selectedRowIndex, field: 'dateto'});
+                        //console.log(ed);
+                        $(ed.target).datebox('calendar').calendar({
+                          validator:function(date)
+                          {
+                            if( moment(date).isSameOrAfter(selectedDate))
+                            {
+                              return true;
+                            }
+                          }
+                        });
+                      }
+                    }
+                  },  
+                  align: 'right'
+                },
+                {title: 'Date To',  rowspan: 2, field: 'dateto',   width: 160, align: 'right', resizable: true, editor: {type: 'datebox'},  align: 'right'},
                 {title: 'Level',    colspan: 5},
                 {title: 'Modified', rowspan: 2, field: 'date',     width: 150, align: 'right', resizable: true, align: 'right'},
                 {title: 'By',       rowspan: 2, field: 'by',       width: 200, align: 'left',  resizable: true}
@@ -300,8 +375,10 @@ function doDlgProductPricing(product)
                     'divProductPricesG',
                     editingIndex,
                     field,
-                    function(ed)
+                    function(eds)
                     {
+                       //console.log("selected row index is: " + editingIndex);
+                       selectedRowIndex = editingIndex;
                     }
                   );
                 }
@@ -324,5 +401,32 @@ function doDlgProductPricing(product)
       ]
     }
   ).dialog('center').dialog('open');
+
+
+  $.fn.datebox.defaults.formatter = function(date){
+    //console.log(date);
+    return _.nicedatetodisplay(date);
+  }
+
+  $.fn.datebox.defaults.parser = function(date){
+    // console.log('parser');
+    // console.log(date);
+    if (_.isUndefined(date) || _.isBlank(date))
+    {
+      //console.log(new Date());
+      return new Date();
+    }
+    else
+    {
+      var dt = moment(date,"YYYY-MM-DD").format('YYYY-MM-DD HH:mm:ss');
+      // console.log(dt);
+      // console.log(moment(dt));
+      // console.log(moment(dt).toDate());
+      // console.log(moment(dt).isValid());
+
+      return moment(dt).isValid() ? moment(dt).toDate() : new Date();
+    }
+      
+  }
 }
 

@@ -7739,6 +7739,8 @@ function GetPrice(world)
           'p1.clients_id clientid,' +
           'p1.price,' +
           'p1.gst,' +
+          'p1.datefrom,' +
+          'p1.dateto,' + 
           'p2.costprice,' +
           'p2.costgst,' +
           'p2.price1,' +
@@ -7771,11 +7773,21 @@ function GetPrice(world)
           'from ' +
           'products p2 left join pricing p1 on (p2.id=p1.products_id)' +
           'where ' +
-          'p2.customers_id=$1 ' +
+          '(p2.customers_id=$1 ' +
           'and ' +
           'p2.id=$2 ' +
           'and ' +
-          'p1.dateexpired is null ' +
+          ' p1.dateto > (NOW() :: TIMESTAMP)' + 
+          'and ' +
+          'p1.dateexpired is null )' +
+          'OR ' + 
+          '(p1.customers_id=$1 ' + 
+          'and ' +
+          'p2.id=$2 ' + 
+          'and ' +
+          'p1.dateto is null ' + 
+          'and ' +
+          'p1.dateexpired is null )' + 
           'order by ' +
           'p1.clients_id desc,' +
           'p1.minqty,' +
@@ -7801,6 +7813,7 @@ function GetPrice(world)
             else
             {
               msg += global.text_generalexception + ' ' + err.message;
+              global.ConsoleLog(msg);
               global.log.error({getprice: true}, msg);
               world.spark.emit(global.eventerror, {rc: global.errcode_fatal, msg: msg, pdata: world.pdata});
             }
