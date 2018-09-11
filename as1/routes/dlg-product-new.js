@@ -1,3 +1,4 @@
+var selectedRowIndex;
 function doDlgProductNew(productcategoryid, productid)
 {
   var isnew = _.isUndefined(productid) || _.isNull(productid);
@@ -725,12 +726,38 @@ function doDlgProductNew(productcategoryid, productid)
             columns:
             [
               [
-                {title: 'Client',    field: 'clientid', width: 200, align: 'left',  resizable: true, editor: {type: 'combobox',  options: {panelWidth: 300, valueField: 'id', textField: 'name', data: cache_clients, onSelect: function(record,row,index) {console.log(record);console.log(row);console.log(index)}}}, formatter: function(value, row) {return doGetStringFromIdInObjArray(cache_clients, value);}},
+                {title: 'Client',    field: 'clientid', width: 200, align: 'left',  resizable: true, editor: {type: 'combobox',  options: {panelWidth: 300, valueField: 'id', textField: 'name', data: cache_clients, onSelect: function(record,row,index) {console.log(record)}}}, formatter: function(value, row) {return doGetStringFromIdInObjArray(cache_clients, value);}},
                 {title: 'Min Qty',   field: 'minqty',   width: 100, align: 'right', resizable: true, editor: {type: 'numberbox', options: {groupSeparator: ',', precision: 0}}, formatter: function(value, row, index) {return _.niceformatqty(value);}, align: 'right'},
                 {title: 'Max Qty',   field: 'maxqty',   width: 100, align: 'right', resizable: true, editor: {type: 'numberbox', options: {groupSeparator: ',', precision: 0}}, formatter: function(value, row, index) {return _.niceformatqty(value);}, align: 'right'},
                 {title: 'Price',     field: 'price',    width: 100, align: 'right', resizable: true, editor: {type: 'numberbox', options: {groupSeparator: ',', precision: 2}}, formatter: function(value, row, index) {return _.niceformatnumber(value);}, align: 'right'},
-                {title: 'Date From', field: 'datefrom', width: 160, align: 'right', resizable: true, editor: {type: 'datebox'},  align: 'right'},
-                {title: 'Date To',   field: 'dateto',   width: 160, align: 'right', resizable: true, editor: {type: 'datebox'},  align: 'right',keyHandler:{}},
+                {title: 'Date From', field: 'datefrom', width: 160, align: 'right', resizable: true, 
+                 editor: 
+                {
+                  type: 'datebox',   
+                  options: 
+                  {
+                    onSelect:function(date)
+                    {
+                      var selectedDate = date;
+                      // console.log("selected date: " + selectedDate);
+                      // console.log(selectedRowIndex)
+                      var ed = $('#divNewProductPricesG').datagrid('getEditor', {index: selectedRowIndex, field: 'dateto'});
+                      //console.log(ed);
+                      $(ed.target).datebox('calendar').calendar({
+                        validator:function(date)
+                        {
+                          if( moment(date).isSameOrAfter(selectedDate))
+                          {
+                            return true;
+                          }
+                        }
+                      });
+                      }
+                    }
+                  },  
+                  align: 'right'
+                },
+                {title: 'Date To',   field: 'dateto',   width: 160, align: 'right', resizable: true, editor: {type: 'datebox'},  align: 'right'},
                 {title: 'Modified',  field: 'date',     width: 150, align: 'right', resizable: true, align: 'right'},
                 {title: 'By',        field: 'by',       width: 200, align: 'left',  resizable: true}
               ]
@@ -744,7 +771,7 @@ function doDlgProductNew(productcategoryid, productid)
               // console.log("double click a product price cell");
               // console.log(index);
               // console.log(field);
-              // console.log(value);
+              //console.log(value);
               doGridStartEdit
               (
                 'divNewProductPricesG',
@@ -752,8 +779,9 @@ function doDlgProductNew(productcategoryid, productid)
                 function(row, index)
                 {
                   editingIndex = index;
-                  console.log(editingIndex);
-                  console.log(['date', 'by'].indexOf(field));
+                  // console.log(field);
+                  // console.log(editingIndex);
+                  // console.log(['date', 'by'].indexOf(field));
 
                   if (['date', 'by'].indexOf(field) != -1)
                   {
@@ -767,13 +795,18 @@ function doDlgProductNew(productcategoryid, productid)
                     'divNewProductPricesG',
                     editingIndex,
                     field,
-                    function(ed)
+                    function(eds)
                     {
+                      selectedRowIndex = editingIndex; 
                     }
                   );
                 }
               );
             }
+            // onBeginEdit: function(index,row){
+            //   var eds = $('#divNewProductPricesG').datagrid('getEditor', {index:index});
+            //   console.log(eds);
+            // }
           }
         );
 
@@ -995,7 +1028,7 @@ function doDlgProductNew(productcategoryid, productid)
 
 
   $.fn.datebox.defaults.formatter = function(date){
-    //console.log(date);
+    console.log(date);
     return _.nicedatetodisplay(date);
   }
 
