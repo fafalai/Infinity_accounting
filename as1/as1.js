@@ -41,6 +41,7 @@ global.path = require('path');
 global.xlwriter = require('xlsx-template');
 global.xlreader = require('node-xlsx');
 global.exceljs = require('exceljs');
+global.exceljs.config.setValue('promise', require('bluebird'));
 global.oxr = require('open-exchange-rates');
 global.fx = require('money');
 global.diceware = require('diceware-password-generator');
@@ -904,9 +905,9 @@ global.ConsoleLog = function(txt)
 
 global.fileExists = function(f)
 {
-  global.ConsoleLog("file exists function");
-  global.ConsoleLog(global.config.env.localfs);
-  global.ConsoleLog(global.config.env.localfs + f);
+  // global.ConsoleLog("file exists function");
+  // global.ConsoleLog(global.config.env.localfs);
+  // global.ConsoleLog(global.config.env.localfs + f);
   // if (global.fs.existsSync(global.config.env.localfs + f))
   //   return true;
   // return false;
@@ -3459,7 +3460,7 @@ function main()
         {
           try
           {
-            makeWorld(spark, 'saveclient', data, '*parentid', '*name', 'code', 'email1', 'url1', 'phone1', 'fax1', 'contact1', 'address1', 'address2', 'address3', 'address4', 'city', 'state', 'postcode', 'country', 'contact2', 'shiptoaddress1', 'shiptoaddress2', 'shiptoaddress3', 'shiptoaddress4', 'shiptocity', 'shiptostate', 'shiptopostcode', 'shiptocountry', 'bankname', 'bankbsb', 'bankaccountno', 'bankaccountname', 'dayscredit', 'linelimit', 'orderlimit', 'creditlimit', 'invoicetemplateid', 'ordertemplateid', 'quotetemplateid', 'labeltemplateid', 'isactive', 'issupplier', 'isclient', 'acn', 'abn', 'hscode', 'custcode1', 'custcode2').then
+            makeWorld(spark, 'saveclient', data, '*parentid', '*name', 'code', 'email1', 'url1', 'phone1', 'fax1', 'contact1', 'address1', 'address2', 'address3', 'address4', 'city', 'state', 'postcode', 'country', 'contact2', 'shiptoaddress1', 'shiptoaddress2', 'shiptoaddress3', 'shiptoaddress4', 'shiptocity', 'shiptostate', 'shiptopostcode', 'shiptocountry', 'bankname', 'bankbsb', 'bankaccountno', 'bankaccountname', 'dayscredit', 'linelimit', 'orderlimit', 'creditlimit', 'invoicetemplateid', 'ordertemplateid', 'quotetemplateid', 'labeltemplateid', 'isactive', 'issupplier', 'isclient', 'acn', 'abn', 'hscode', 'custcode1', 'custcode2','pricelevel').then
             (
               function(world)
               {
@@ -3488,7 +3489,7 @@ function main()
         {
           try
           {
-            makeWorld(spark, 'saveclient', data, '*clientid', '*parentid', '*name', 'code', 'email1', 'url1', 'phone1', 'fax1', 'contact1', 'address1', 'address2', 'address3', 'address4', 'city', 'state', 'postcode', 'country', 'contact2', 'shiptoaddress1', 'shiptoaddress2', 'shiptoaddress3', 'shiptoaddress4', 'shiptocity', 'shiptostate', 'shiptopostcode', 'shiptocountry', 'bankname', 'bankbsb', 'bankaccountno', 'bankaccountname', 'dayscredit', 'linelimit', 'orderlimit', 'creditlimit', 'invoicetemplateid', 'ordertemplateid', 'quotetemplateid', 'labeltemplateid', 'isactive', 'issupplier', 'isclient', 'acn', 'abn', 'hscode', 'custcode1', 'custcode2').then
+            makeWorld(spark, 'saveclient', data, '*clientid', '*parentid', '*name', 'code', 'email1', 'url1', 'phone1', 'fax1', 'contact1', 'address1', 'address2', 'address3', 'address4', 'city', 'state', 'postcode', 'country', 'contact2', 'shiptoaddress1', 'shiptoaddress2', 'shiptoaddress3', 'shiptoaddress4', 'shiptocity', 'shiptostate', 'shiptopostcode', 'shiptocountry', 'bankname', 'bankbsb', 'bankaccountno', 'bankaccountname', 'dayscredit', 'linelimit', 'orderlimit', 'creditlimit', 'invoicetemplateid', 'ordertemplateid', 'quotetemplateid', 'labeltemplateid', 'isactive', 'issupplier', 'isclient', 'acn', 'abn', 'hscode', 'custcode1', 'custcode2','pricelevel').then
             (
               function(world)
               {
@@ -5384,7 +5385,7 @@ function main()
         {
           try
           {
-            makeWorld(spark, 'saveproduct', data, '*name', '*productid', '*code', '*name', 'altcode', 'barcode', 'costprice', 'uom', 'uomsize', 'clientid', 'isactive', 'buytaxcodeid', 'selltaxcodeid', 'costofgoodsaccountid', 'incomeaccountid', 'assetaccountid', 'buildtemplateid', 'minqty', 'warnqty', 'width', 'length', 'height', 'weight', 'price1', 'price2', 'price3', 'price4', 'price5', 'price6', 'price7', 'price8', 'price9', 'price10', 'price11', 'price12', 'atttrib1', 'attrib2', 'attrib3', 'attrib4', 'attrib5', 'productaliasid', 'location1id', 'location2id').then
+            makeWorld(spark, 'saveproduct', data, '*name', '*productid', '*code', '*name', 'altcode', 'barcode', 'costprice', 'uom', 'uomsize', 'clientid', 'isactive', 'buytaxcodeid', 'selltaxcodeid', 'costofgoodsaccountid', 'incomeaccountid', 'assetaccountid', 'buildtemplateid', 'minqty', 'warnqty', 'width', 'length', 'height', 'weight', 'price1', 'price2', 'price3', 'price4', 'price5', 'price6', 'price7', 'price8', 'price9', 'price10', 'price11', 'price12', 'price13', 'price14','price15', 'atttrib1', 'attrib2', 'attrib3', 'attrib4', 'attrib5', 'productaliasid', 'location1id', 'location2id','discountcodeid','listcodeid').then
             (
               function(world)
               {

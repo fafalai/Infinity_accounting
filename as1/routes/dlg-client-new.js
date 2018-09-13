@@ -374,6 +374,8 @@ function doDlgClientNew(parentid, clientid)
 
         $('#btnClientNewAdd').linkbutton('enable');
         $('#dlgClientNew').dialog('setTitle', 'Modify ' + client.name);
+
+        $('#cbNewClientPriceLevel').combobox('setValue',client.pricelevel);
       }
     }
 
@@ -848,6 +850,9 @@ function doDlgClientNew(parentid, clientid)
             var custcode1 = $('#fldNewClientCustom1').textbox('getValue');
             var custcode2 = $('#fldNewClientCustom2').textbox('getValue');
 
+            var pricelevel = $('#cbNewClientPriceLevel').combobox('getValue');
+            console.log(pricelevel);
+
             if (!_.isBlank(name))
             {
               if (isnew)
@@ -907,7 +912,9 @@ function doDlgClientNew(parentid, clientid)
                     abn: abn,
                     hscode: hscode,
                     custcode1: custcode1,
-                    custcode2: custcode2
+                    custcode2: custcode2,
+                    
+                    pricelevel:pricelevel
                   },
                   {type: 'refresh'}
                 );
@@ -970,7 +977,9 @@ function doDlgClientNew(parentid, clientid)
                     abn: abn,
                     hscode: hscode,
                     custcode1: custcode1,
-                    custcode2: custcode2
+                    custcode2: custcode2,
+
+                    pricelevel:pricelevel
                   },
                   {type: 'refresh'}
                 );

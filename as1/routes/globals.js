@@ -1920,6 +1920,7 @@ function doGridStartEdit(gridname, index, callback)
   console.log(gridname);
   console.log(index);
   var grid = '#' + gridname;
+  console.log(grid);
 
   if (_.isNull(index))
   {
@@ -1945,15 +1946,19 @@ function doGridGetEditor(gridname, index, fieldname, callback)
   console.log("do grid get editor");
   console.log(fieldname);
   var grid = '#' + gridname;
+  console.log(grid);
+  console.log(index);
+  console.log(fieldname);
   var ed = $(grid).datagrid('getEditor', {index: index, field: fieldname});
-  console.log(ed);
+  var eds = $(grid).datagrid('getEditors', index);
+  //console.log(eds);
 
   if (!_.isNull(ed))
   {
     $(ed.target).focus();
 
     if (!_.isUndefined(callback) && !_.isNull(callback))
-      callback(ed);
+      callback(eds);
   }
 }
 
