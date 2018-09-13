@@ -60,8 +60,9 @@ function doOrdersTabWidgets()
           console.log('Print all listed orders');
           var rowids = [];
           var data = $('#divOrdersG').datagrid('getData');
+          console.log(data.rows.length);
           
-          data.rows = data.rows.slice(0,2);
+          // data.rows = data.rows.slice(0,20);
           //console.log(data.rows);
           for(var i=0;i<data.rows.length;i++)
           {
@@ -69,7 +70,7 @@ function doOrdersTabWidgets()
             rowids.push(data.rows[i].id);
           }
           
-          console.log(rowids);
+          //console.log(rowids);
           doServerDataMessage('printorders', {orders: rowids}, {type: 'refresh'});
         }
         else if (result === false)

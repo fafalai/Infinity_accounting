@@ -500,21 +500,26 @@ function doSaveProduct(tx, world)
         'price10=$33,' +
         'price11=$34,' +
         'price12=$35,' +
-        'attrib1=$36,' +
-        'attrib2=$37,' +
-        'attrib3=$38,' +
-        'attrib4=$39,' +
-        'attrib5=$40,' +
-        'barcode=$41,' +
-        'productsalias_id=$42,' +
-        'locations1_id=$43,' +
-        'locations2_id=$44,' +
+        'price13=$36,' +
+        'price14=$37,' +
+        'price15=$38,' +
+        'attrib1=$39,' +
+        'attrib2=$40,' +
+        'attrib3=$41,' +
+        'attrib4=$42,' +
+        'attrib5=$43,' +
+        'barcode=$44,' +
+        'productsalias_id=$45,' +
+        'locations1_id=$46,' +
+        'locations2_id=$47,' +
+        'discountcode_id=$48,' +
+        'listcode_id=$49,' +
         'datemodified=now(),' +
-        'usersmodified_id=$45 ' +
+        'usersmodified_id=$50 ' +
         'where ' +
-        'customers_id=$46 ' +
+        'customers_id=$51 ' +
         'and ' +
-        'id=$47 ' +
+        'id=$52 ' +
         'and ' +
         'dateexpired is null',
         [
@@ -557,23 +562,29 @@ function doSaveProduct(tx, world)
           __.sanitiseAsPrice(world.price9, 4),
           __.sanitiseAsPrice(world.price10, 4),
           __.sanitiseAsPrice(world.price11, 4),
-          __.sanitiseAsPrice(world.price12, 4),
+          __.sanitiseAsPrice(world.price12, 4),//35
+          __.sanitiseAsPrice(world.price13, 4),//36
+          __.sanitiseAsPrice(world.price14, 4),//37
+          __.sanitiseAsPrice(world.price15, 4),//38
           //
-          __.sanitiseAsString(world.attrib1, 50),
-          __.sanitiseAsString(world.attrib2, 50),
-          __.sanitiseAsString(world.attrib3, 50),
-          __.sanitiseAsString(world.attrib4, 50),
-          __.sanitiseAsString(world.attrib5, 50),
+          __.sanitiseAsString(world.attrib1, 50), //39
+          __.sanitiseAsString(world.attrib2, 50), //40
+          __.sanitiseAsString(world.attrib3, 50), //41
+          __.sanitiseAsString(world.attrib4, 50), //42
+          __.sanitiseAsString(world.attrib5, 50), //43
           //
-          __.sanitiseAsString(world.barcode, 50),
+          __.sanitiseAsString(world.barcode, 50), //44
           //
-          __.sanitiseAsBigInt(world.productaliasid),
-          __.sanitiseAsBigInt(world.location1id),
-          __.sanitiseAsBigInt(world.location2id),
+          __.sanitiseAsBigInt(world.productaliasid), //45
+          __.sanitiseAsBigInt(world.location1id), //46
+          __.sanitiseAsBigInt(world.location2id), //47
           //
-          world.cn.userid,
-          world.cn.custid,
-          world.productid
+          __.sanitiseAsBigInt(world.discountcodeid), //48
+          __.sanitiseAsBigInt(world.listcodeid), //49
+          //
+          world.cn.userid, //50
+          world.cn.custid, //51
+          world.productid //52
         ],
         function(err, result)
         {
@@ -4397,11 +4408,16 @@ function LoadProduct(world)
           'p1.price10,' +
           'p1.price11,' +
           'p1.price12,' +
+          'p1.price13,' +
+          'p1.price14,' +
+          'p1.price15,' +
           'p1.attrib1,' +
           'p1.attrib2,' +
           'p1.attrib3,' +
           'p1.attrib4,' +
           'p1.attrib5,' +
+          'p1.discountcode_id,' +
+          'p1.listcode_id,' +
           'p1.datecreated,' +
           'p1.datemodified,' +
           'pc1.code productcategorycode,' +

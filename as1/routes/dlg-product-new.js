@@ -1,4 +1,64 @@
+var discountcodelist = [
+  {
+    id:1,
+    short_name: 'UMD',
+    level_1:0.0000,
+    level_2:0.0500,
+    level_3:0.1000,
+    level_4:0.1500,
+    level_5:0.2000,
+    level_6:0.2500,
+    level_7:0.3000,
+    level_8:0.3500,
+    level_9:0.4000,
+    level_10:0.4500,
+    level_11:0.5000,
+    level_12:0.5500,
+    level_13:0.6000,
+    level_14:0.6500,
+    level_15:0.7500,
+  },
+  {
+    id:2,
+    short_name: 'PS',
+    level_1:0.0000,
+    level_2:0.0300,
+    level_3:0.0700,
+    level_4:0.1300,
+    level_5:0.2000,
+    level_6:0.2900,
+    level_7:0.3300,
+    level_8:0.3700,
+    level_9:0.4500,
+    level_10:0.4900,
+    level_11:0.5300,
+    level_12:0.5800,
+    level_13:0.6200,
+    level_14:0.6400,
+    level_15:0.7900,
+  }
+];
+var listpricecodes = [
+  {
+    id:1,
+    short_name: 'A',
+    parameter:'2.0000',
+  },
+  {
+    id:2,
+    short_name: 'B',
+    parameter:'2.2000',
+  },
+  {
+    id:3,
+    short_name: 'C',
+    parameter:'2.8000',
+  }
+]
+
 var selectedRowIndex;
+var selectedDiscountCodeIndex;
+var selectedListPriceCodeIndex;
 function doDlgProductNew(productcategoryid, productid)
 {
   var isnew = _.isUndefined(productid) || _.isNull(productid);
@@ -58,6 +118,9 @@ function doDlgProductNew(productcategoryid, productid)
       $('#fldNewProductAttrib3').textbox('clear');
       $('#fldNewProductAttrib4').textbox('clear');
       $('#fldNewProductAttrib5').textbox('clear');
+
+      $('#cbNewProductDiscountCode').combobox('clear');
+        $('#cbNewProductListPriceCode').combobox('clear');
     }
     else
     {
@@ -91,7 +154,7 @@ function doDlgProductNew(productcategoryid, productid)
         $('#fldNewProductHeight').numberbox('setValue', _.niceformatqty(product.height));
         $('#fldNewProductWeight').numberbox('setValue', _.niceformatqty(product.weight));
 
-        $('#fldNewProductPrice1').numberbox('setValue', _.niceformatqty(product.price1));
+        $('#fldNewProductPrice1').numberbox('initValue', _.niceformatqty(product.price1));
         $('#fldNewProductPrice2').numberbox('setValue', _.niceformatqty(product.price2));
         $('#fldNewProductPrice3').numberbox('setValue', _.niceformatqty(product.price3));
         $('#fldNewProductPrice4').numberbox('setValue', _.niceformatqty(product.price4));
@@ -112,6 +175,9 @@ function doDlgProductNew(productcategoryid, productid)
         $('#fldNewProductAttrib3').textbox('setValue', product.attrib3);
         $('#fldNewProductAttrib4').textbox('setValue', product.attrib4);
         $('#fldNewProductAttrib5').textbox('setValue', product.attrib5);
+
+        $('#cbNewProductDiscountCode').combobox('setValue',product.discountcode_id);
+        $('#cbNewProductListPriceCode').combobox('setValue',product.listcode_id);
 
         if (!_.isBlank(product.barcode))
         {
@@ -413,6 +479,15 @@ function doDlgProductNew(productcategoryid, productid)
     doServerDataMessage('listproductpricing', {productid: product.id}, {type: 'refresh', productid: product.id, priceid: args.data.priceid});
   }
 
+  function doGetDiscountCode(discount)
+  {
+    return discount.id == selectedDiscountCodeIndex;
+  }
+  function doGetListCode(listprice)
+  {
+    return listprice.id == selectedListPriceCodeIndex
+  }
+
   $('#divEvents').on('checkproductcode', doCheckCode);
   $('#divEvents').on('newproduct', doSaved);
   $('#divEvents').on('updateproduct', doSaved);
@@ -618,6 +693,122 @@ function doDlgProductNew(productcategoryid, productid)
           }
         );
 
+        $('#cbNewProductDiscountCode').combobox
+        (
+          {
+            valueField:'id',
+            textField:'short_name',
+            data:discountcodelist,
+            icons:[{
+              iconCls:'icon-cancel',
+              handler:function(e){
+                $(e.data.target).combobox('clear');
+                var price1 = $('#fldNewProductPrice1').numberbox('getValue');
+                if(!_.isUndefined(price1) && !_.isBlank(price1) && price1 != 0.0000)
+                {
+                  $('#fldNewProductPrice1').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice2').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice3').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice4').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice5').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice6').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice7').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice8').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice9').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice10').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice11').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice12').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice13').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice14').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice15').numberbox('setValue',0.0000);
+                }
+              }
+            }],
+            onSelect(record){
+              //console.log(record);
+              selectedDiscountCodeIndex = record.id;
+              
+              var price1 = $('#fldNewProductPrice1').numberbox('getValue');
+              console.log(price1);
+              if(!_.isUndefined(price1) && !_.isBlank(price1))
+              {
+                var price2 = price1 * (1-record.level_2);
+                var price3 = price1 * (1-record.level_3);
+                var price4 = price1 * (1-record.level_4);
+                var price5 = price1 * (1-record.level_5);
+                var price6 = price1 * (1-record.level_6);
+                var price7 = price1 * (1-record.level_7);
+                var price8 = price1 * (1-record.level_8);
+                var price9 = price1 * (1-record.level_9);
+                var price10 = price1 * (1-record.level_10);
+                var price11 = price1 * (1-record.level_11);
+                var price12 = price1 * (1-record.level_12);
+                var price13= price1 * (1-record.level_13);
+                var price14 = price1 * (1-record.level_14);
+                var price15 = price1 * (1-record.level_15);
+                $('#fldNewProductPrice2').numberbox('setValue',price2);
+                $('#fldNewProductPrice3').numberbox('setValue',price3);
+                $('#fldNewProductPrice4').numberbox('setValue',price4);
+                $('#fldNewProductPrice5').numberbox('setValue',price5);
+                $('#fldNewProductPrice6').numberbox('setValue',price6);
+                $('#fldNewProductPrice7').numberbox('setValue',price7);
+                $('#fldNewProductPrice8').numberbox('setValue',price8);
+                $('#fldNewProductPrice9').numberbox('setValue',price9);
+                $('#fldNewProductPrice10').numberbox('setValue',price10);
+                $('#fldNewProductPrice11').numberbox('setValue',price11);
+                $('#fldNewProductPrice12').numberbox('setValue',price12);
+                $('#fldNewProductPrice13').numberbox('setValue',price13);
+                $('#fldNewProductPrice14').numberbox('setValue',price14);
+                $('#fldNewProductPrice15').numberbox('setValue',price15);
+              }
+            }
+          }
+        );
+        $('#cbNewProductListPriceCode').combobox
+        (
+          {
+            valueField:'id',
+            textField:'short_name',
+            data:listpricecodes,
+            icons:[{
+              iconCls:'icon-cancel',
+              handler:function(e){
+                $(e.data.target).combobox('clear');
+                var price1 = $('#fldNewProductPrice1').numberbox('getValue');
+                if(!_.isUndefined(price1) && !_.isBlank(price1) && price1 != 0.0000)
+                {
+                  $('#fldNewProductPrice1').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice2').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice3').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice4').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice5').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice6').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice7').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice8').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice9').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice10').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice11').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice12').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice13').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice14').numberbox('setValue',0.0000);
+                  $('#fldNewProductPrice15').numberbox('setValue',0.0000);
+                }
+              }
+            }],
+            onSelect(record){
+              selectedListPriceCodeIndex = record.id;
+              var costprice = $('#fldNewProductCostPrice').numberbox('getValue');
+              console.log('cost price ' + costprice);
+              if(!_.isUndefined(costprice) && !_.isBlank(costprice) && costprice != 0.0000)
+              {
+                $('#fldNewProductPrice1').numberbox('setValue',costprice * record.parameter);
+              }
+            }
+          },
+          
+
+        );
+
         $('#cbNewProductSellTaxCode').combobox
         (
           {
@@ -690,6 +881,114 @@ function doDlgProductNew(productcategoryid, productid)
             data: cache_locations
           }
         );
+
+       
+        $('#fldNewProductPrice1').numberbox
+        (
+          $.extend
+          (
+            // numberboxParseObj,
+            {
+              parser: function(e)
+              {
+                return _.evil(e);
+              },
+              formatter: function(e)
+              {
+                return _.niceformatnumber(e, 4, false);
+              },
+              filter: function(e)
+              {
+                if ('01234567890.*-+/()'.indexOf(e.key) != -1)
+                  return true;
+            
+                return false;
+              }
+            },
+            {
+              onChange: function(newValue, oldValue)
+              {
+                console.log("fldNewProductPrice1 numberbox onchange event");
+                console.log("new value: " + newValue);
+                console.log("old value: " + oldValue);
+                // var productid = $('#cbProductSelectProducts').combobox('getValue');
+                var discountid = $('#cbNewProductDiscountCode').combobox('getValue');
+                var discount = discountcodelist.find(doGetDiscountCode);
+                console.log(discount);
+
+                if(typeof newValue === 'undefined')
+                {
+                  console.log("newValue is undefined,don't fire events");
+                  $('#fldProductSelectQty').numberbox('initValue', 0.0000);
+                }
+                else
+                {
+                  if (!_.isBlank(discountid))
+                  {
+                    console.log("newValue is defined and discountid is not blank, level price 1 number box fire event to calculate the rest of the levels");
+                    var price2 = newValue * (1-discount.level_2);
+                    var price3 = newValue * (1-discount.level_3);
+                    var price4 = newValue * (1-discount.level_4);
+                    var price5 = newValue * (1-discount.level_5);
+                    var price6 = newValue * (1-discount.level_6);
+                    var price7 = newValue * (1-discount.level_7);
+                    var price8 = newValue * (1-discount.level_8);
+                    var price9 = newValue * (1-discount.level_9);
+                    var price10 = newValue * (1-discount.level_10);
+                    var price11 = newValue * (1-discount.level_11);
+                    var price12 = newValue * (1-discount.level_12);
+                    var price13= newValue * (1-discount.level_13);
+                    var price14 = newValue * (1-discount.level_14);
+                    var price15 = newValue * (1-discount.level_15);
+                    $('#fldNewProductPrice2').numberbox('setValue',price2);
+                    $('#fldNewProductPrice3').numberbox('setValue',price3);
+                    $('#fldNewProductPrice4').numberbox('setValue',price4);
+                    $('#fldNewProductPrice5').numberbox('setValue',price5);
+                    $('#fldNewProductPrice6').numberbox('setValue',price6);
+                    $('#fldNewProductPrice7').numberbox('setValue',price7);
+                    $('#fldNewProductPrice8').numberbox('setValue',price8);
+                    $('#fldNewProductPrice9').numberbox('setValue',price9);
+                    $('#fldNewProductPrice10').numberbox('setValue',price10);
+                    $('#fldNewProductPrice11').numberbox('setValue',price11);
+                    $('#fldNewProductPrice12').numberbox('setValue',price12);
+                    $('#fldNewProductPrice13').numberbox('setValue',price13);
+                    $('#fldNewProductPrice14').numberbox('setValue',price14);
+                    $('#fldNewProductPrice15').numberbox('setValue',price15);
+                  }
+                }
+  
+                
+            }
+            }
+          )
+        );
+
+        $('#fldNewProductCostPrice').numberbox
+        (
+          $.extend
+          (
+            numberboxParseObj,
+            {
+              onChange:function(newValue,oldValue)
+              {
+                console.log("new value: " + newValue);
+                console.log("old value: " + oldValue);
+                var listpricecodeid = $('#cbNewProductListPriceCode').combobox('getValue');
+                console.log(listpricecode);
+                if(!_.isBlank(listpricecodeid))
+                {
+                  // console.log(listpricecodeid);
+                  var listpricecode = listpricecodes.find(doGetListCode);
+                  console.log(listpricecode);
+                  $('#fldNewProductPrice1').numberbox('setValue',newValue * listpricecode.parameter);
+
+                }
+              }
+            }
+          )
+        );
+
+
 
         $('#divNewProductSupplierCodeG').datagrid
         (
@@ -892,6 +1191,11 @@ function doDlgProductNew(productcategoryid, productid)
               var attrib4= $('#fldNewProductAttrib4').textbox('getValue');
               var attrib5 = $('#fldNewProductAttrib5').textbox('getValue');
 
+              var discountcode = $('#cbNewProductDiscountCode').combobox('getValue');
+              console.log(discountcode);
+              var listpricecode = $('#cbNewProductListPriceCode').combobox('getValue');
+              console.log(listpricecode);
+
               if (isnew)
               {
                 doServerDataMessage
@@ -942,7 +1246,9 @@ function doDlgProductNew(productcategoryid, productid)
                     attrib2: attrib2,
                     attrib3: attrib3,
                     attrib4: attrib4,
-                    attrib5: attrib5
+                    attrib5: attrib5,
+                    discountcodeid:discountcode,
+                    listcodeid:listpricecode
                   },
                   {type: 'refresh'}
                 );
@@ -998,7 +1304,9 @@ function doDlgProductNew(productcategoryid, productid)
                     attrib2: attrib2,
                     attrib3: attrib3,
                     attrib4: attrib4,
-                    attrib5: attrib5
+                    attrib5: attrib5,
+                    discountcodeid:discountcode,
+                    listcodeid:listpricecode
                   },
                   {type: 'refresh'}
                 );
