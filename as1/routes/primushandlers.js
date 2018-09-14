@@ -884,6 +884,7 @@ function doPrimus()
                 text: name,
                 isactive: c.isactive,
                 issupplier: c.issupplier,
+                // pricelevel:c.pricelevel,
                 date: doNiceDateModifiedOrCreated(c.datemodified, c.datecreated),
                 by: doNiceModifiedBy(c.datemodified, c.usermodified, c.usercreated),
                 children: []
@@ -2020,6 +2021,7 @@ function doPrimus()
                   attrib5: doNiceString(p.attrib5),
                   isactive: p.isactive,
                   clientid: doNiceId(p.clientid),
+                  discountcodeid: doNiceId(p.discountcodeid),
                   productaliasid: doNiceId(p.productaliasid),
                   date: doNiceDateModifiedOrCreated(p.datemodified, p.datecreated),
                   by: doNiceModifiedBy(p.datemodified, p.usermodified, p.usercreated)

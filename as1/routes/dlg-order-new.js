@@ -1,3 +1,4 @@
+var selectedClientPriceLevel = 0;
 var selectedOrderIdAttachmentId = null;
 
 function doDlgOrderNew(orderid)
@@ -466,6 +467,7 @@ function doDlgOrderNew(orderid)
     doDlgProductSelect
     (
       clientid,
+      selectedClientPriceLevel,
       true,
       false,
       function(productid, productname, qty, price, isrepeat)
@@ -661,6 +663,15 @@ function doDlgOrderNew(orderid)
 
   function doLoadClient(ev, args)
   {
+    if(!_.isNull(args.data.client.pricelevel))
+    {
+      selectedClientPriceLevel = args.data.client.pricelevel
+    }
+    else
+    {
+      selectedClientPriceLevel = 0;
+    }
+    console.log("price level: " + selectedClientPriceLevel);
     switch (args.pdata.type)
     {
       case 'refresh':

@@ -6669,7 +6669,7 @@ function main()
         {
           try
           {
-            makeWorld(spark, 'getprice', data, '*productid', 'clientid', 'qty').then
+            makeWorld(spark, 'getprice', data, '*productid', 'clientid', 'qty','pricelevel','discountcode').then
             (
               function(world)
               {

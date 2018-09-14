@@ -2,8 +2,10 @@
 // Internal functions
 function selectPrice(world, prices)
 {
-  //global.ConsoleLog("selectPrice");
+  global.ConsoleLog("selectPrice");
   //global.ConsoleLog(prices);
+  global.ConsoleLog("the product discount code is: " + world.discountcode);
+  global.ConsoleLog("the client price level is " + world.pricelevel);
   var result =
   {
     price: 0.0,
@@ -27,90 +29,28 @@ function selectPrice(world, prices)
   });
   global.ConsoleLog(nullPrices.length); 
 
-  if(matchidPrices.length > 0)
+  if(__.isNull(world.discountcode))
   {
-    global.ConsoleLog("there are matches from the selected arrary, either match with client id, or client id is null because don't select");
-    prices = matchidPrices;
-
-    for (var ndx = 0; ndx<prices.length;ndx++)
+    global.ConsoleLog("product does not have a discount code, use the traditonal way to select the price, match client id, or default, match qty, and not expired");
+    if(matchidPrices.length > 0)
     {
-      global.ConsoleLog("Loop " + ndx);
-      var p = prices[ndx];
-      if(__.isNull(p.minqty) && __.isNull(p.maxqty))
+      global.ConsoleLog("there are matches from the selected arrary, either match with client id, or client id is null because don't select");
+      prices = matchidPrices;
+
+      for (var ndx = 0; ndx<prices.length;ndx++)
       {
-        global.ConsoleLog("this entry does not have minqty and maxqty, doesn't care what qty use enters, use it and break the loop");
-        result = p;
-        break;
-      }
-      else
-      {
-        if(!__.isNull(qty))
+        global.ConsoleLog("Loop " + ndx);
+        var p = prices[ndx];
+        if(__.isNull(p.minqty) && __.isNull(p.maxqty))
         {
-          if(!__.isNull(p.minqty))
-          {
-            global.ConsoleLog("this entry has the min qty");
-            result = p;
-  
-            if(qty.lessThanOrEqualTo(p.minqty))
-            {
-              global.ConsoleLog("qty is less than entry's minimum, we use this entry's min and we're done");
-              break;
-            }
-            else if (__.isNull(p.maxqty) || qty.lessThanOrEqualTo(p.maxqty))
-            {
-              global.ConsoleLog("ebtered qty is less than entry's max or the maxqty is null,used the price, break the loop");
-              break;
-            }
-          }
-  
-          if(!__.isNull(p.maxqty))
-          {
-            global.ConsoleLog("this entry has the max qty");
-            if(qty.lessThanOrEqualTo(p.maxqty))
-            {
-              result = p;
-              break;
-            }
-          }
-        }
-        else
-        {
-          global.ConsoleLog("no enter the qty, so use the first available one");
+          global.ConsoleLog("this entry does not have minqty and maxqty, doesn't care what qty use enters, use it and break the loop");
           result = p;
           break;
         }
-      }
-      
-      
-    }
-
-  }
-  else if (nullPrices.length > 0)
-  {
-    global.ConsoleLog("there are no matches from the selected arrary based on the selected client id, so need to use the default list, where the client id is null");
-    prices = nullPrices;
-    for (var ndx = 0; ndx<prices.length;ndx++)
-    {
-      var p = prices[ndx];
-      if(__.isNull(p.minqty) && __.isNull(p.maxqty))
-      {
-        global.ConsoleLog("this entry does not have minqty and maxqty, doesn't care what qty use enters, use it and break the loop");
-        result = p;
-        break;
-      }
-      else
-      {
-        if(!__.isNull(qty))
+        else
         {
-  
-          // if(__.isNull(p.minqty) && __.isNull(p.maxqty))
-          // {
-          //   global.ConsoleLog("this entry no minqty and maxqty, use it and break the loop");
-          //   result = p;
-          //   break;
-          // }
-          //else
-          //{
+          if(!__.isNull(qty))
+          {
             if(!__.isNull(p.minqty))
             {
               global.ConsoleLog("this entry has the min qty");
@@ -118,12 +58,12 @@ function selectPrice(world, prices)
     
               if(qty.lessThanOrEqualTo(p.minqty))
               {
-                global.ConsoleLog("qty is less than or equal to entry's minimum, we use this entry's min and we're done");
+                global.ConsoleLog("qty is less than entry's minimum, we use this entry's min and we're done");
                 break;
               }
-              else if (__.isNull(p.maxqty))
+              else if (__.isNull(p.maxqty) || qty.lessThanOrEqualTo(p.maxqty))
               {
-                global.ConsoleLog("this entry does not have the maxqty, it is null, and entered qty is greater than the minqty, break the loop");
+                global.ConsoleLog("ebtered qty is less than entry's max or the maxqty is null,used the price, break the loop");
                 break;
               }
             }
@@ -133,23 +73,94 @@ function selectPrice(world, prices)
               global.ConsoleLog("this entry has the max qty");
               if(qty.lessThanOrEqualTo(p.maxqty))
               {
-                global.ConsoleLog("entered qty is less than entry's max or the maxqty is null,used the price, break the loop");
                 result = p;
                 break;
               }
             }
-         // }
+          }
+          else
+          {
+            global.ConsoleLog("no enter the qty, so use the first available one");
+            result = p;
+            break;
+          }
         }
-        else
+        
+        
+      }
+
+    }
+    else if (nullPrices.length > 0)
+    {
+      global.ConsoleLog("there are no matches from the selected arrary based on the selected client id, so need to use the default list, where the client id is null");
+      prices = nullPrices;
+      for (var ndx = 0; ndx<prices.length;ndx++)
+      {
+        var p = prices[ndx];
+        if(__.isNull(p.minqty) && __.isNull(p.maxqty))
         {
-          global.ConsoleLog("no enter the qty, so use the first available one, which is the one with the least minqty");
+          global.ConsoleLog("this entry does not have minqty and maxqty, doesn't care what qty use enters, use it and break the loop");
           result = p;
           break;
         }
+        else
+        {
+          if(!__.isNull(qty))
+          {
+    
+            // if(__.isNull(p.minqty) && __.isNull(p.maxqty))
+            // {
+            //   global.ConsoleLog("this entry no minqty and maxqty, use it and break the loop");
+            //   result = p;
+            //   break;
+            // }
+            //else
+            //{
+              if(!__.isNull(p.minqty))
+              {
+                global.ConsoleLog("this entry has the min qty");
+                result = p;
+      
+                if(qty.lessThanOrEqualTo(p.minqty))
+                {
+                  global.ConsoleLog("qty is less than or equal to entry's minimum, we use this entry's min and we're done");
+                  break;
+                }
+                else if (__.isNull(p.maxqty))
+                {
+                  global.ConsoleLog("this entry does not have the maxqty, it is null, and entered qty is greater than the minqty, break the loop");
+                  break;
+                }
+              }
+      
+              if(!__.isNull(p.maxqty))
+              {
+                global.ConsoleLog("this entry has the max qty");
+                if(qty.lessThanOrEqualTo(p.maxqty))
+                {
+                  global.ConsoleLog("entered qty is less than entry's max or the maxqty is null,used the price, break the loop");
+                  result = p;
+                  break;
+                }
+              }
+          // }
+          }
+          else
+          {
+            global.ConsoleLog("no enter the qty, so use the first available one, which is the one with the least minqty");
+            result = p;
+            break;
+          }
+        }
+        
+        
       }
-      
-      
     }
+  }
+  else
+  {
+    global.ConsoleLog("product have discount code, need to use the price level match client's, ignore the speicifc enteries")
+
   }
     // if(__.isNull(p.clientid) && !__.isNull(clientid));
     // {
@@ -4142,6 +4153,7 @@ function ListProducts(world)
           'p1.productsalias_id productaliasid,' +
           'p1.locations1_id location1id,' +
           'p1.locations2_id location2id,' +
+          'p1.discountcode_id discountcodeid,' +
           'p1.clients_id clientid,' +
           't1.name buytaxcode,' +
           't2.name selltaxcode,' +
@@ -7771,7 +7783,11 @@ function GetPrice(world)
           'p2.price10,' +
           'p2.price11,' +
           'p2.price12,' +
+          'p2.price13,' +
+          'p2.price14,' +
+          'p2.price15,' +
           'p2.uomsize,' +
+          'p2.discountcode_id,' +
           'case when (p2.uomsize=0.0) then 0.0 else (p1.price / p2.uomsize) end unitprice,' +
           'case when (p2.uomsize=0.0) then 0.0 else (p1.gst / p2.uomsize) end unitgst,' +
           'case when (p2.uomsize=0.0) then 0.0 else (p1.price1 / p2.uomsize) end unitprice1,' +
@@ -7819,6 +7835,8 @@ function GetPrice(world)
 
             if (!err)
             {
+              global.ConsoleLog(world.discountcode);
+              global.ConsoleLog(world.pricelevel);
               var price = selectPrice(world, result.rows);
               global.ConsoleLog(price);
               global.ConsoleLog("the event name is " + world.eventname);

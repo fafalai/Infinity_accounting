@@ -980,6 +980,7 @@ function ListClients(world)
           'c1.isactive,' +
           'c1.datecreated,' +
           'c1.datemodified,' +
+          // 'c1.pricelevel,' +
           'c2.id parentid,' +
           'c2.code parentcode,' +
           'c2.name parentname,' +
