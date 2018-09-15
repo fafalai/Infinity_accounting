@@ -73,7 +73,12 @@ function doDlgClientNew(parentid, clientid)
       {
         var notes = nicEditors.findEditor(editorId).getContent();
 
-        doServerDataMessage('saveclientnote', {clientnoteid: row.id, notes: notes}, {type: 'refresh'});
+       // doServerDataMessage('saveclientnote', {clientnoteid: row.id, notes: notes}, {type: 'refresh'});
+       if(isnew){
+        doServerDataMessage('saveclientnote_newClient', {clientnoteid: row.id, notes: notes}, {type: 'refresh'});
+        }else{
+          doServerDataMessage('saveclientnote', {clientnoteid: row.id, notes: notes}, {type: 'refresh'});
+        }
 
         editorPanel.removeInstance(editorId);
         originalContents = null;
@@ -142,6 +147,14 @@ function doDlgClientNew(parentid, clientid)
   }
 
   // Attachments methods
+  function doNewFolder(){
+    // doServerMessage('newfolderclientattachment', {type: 'refresh'});
+    console.log(attachmentIndex);
+    doServerDataMessage('newfolderclientattachment',{clientid: clientid, parentid: parentid}, {type: 'refresh'});
+  }
+  
+  function doUploadFile(){}
+
   function doAttachmentClear()
   {
     $('#divNewClientAttachmentsG').datagrid('clearSelections');
@@ -149,41 +162,59 @@ function doDlgClientNew(parentid, clientid)
 
   function doAttachmentEdit()
   {
-    doGridStartEdit
-    (
-      'divNewClientAttachmentsG',
-      editingIndex,
-      function(row, index)
-      {
-        attachmentIndex = index;
+    doTreeGridStartEdit
+      (
+        'divClientAttachmentsG',
+        attachmentIndex,
+        function (row, id) {
+          attachmentIndex = id;
 
-        doGridGetEditor
-        (
-          'divNewClientAttachmentsG',
-          attachmentIndex,
-          'description',
-          function(ed)
-          {
-          }
-        );
-      }
-    );
+          doTreeGridGetEditor
+            (
+              'divClientAttachmentsG',
+              attachmentIndex,
+              'name',
+              function (ed) {
+              }
+            );
+        }
+      );
+    // doGridStartEdit
+    // (
+    //   'divNewClientAttachmentsG',
+    //   editingIndex,
+    //   function(row, index)
+    //   {
+    //     attachmentIndex = index;
+
+    //     doGridGetEditor
+    //     (
+    //       'divNewClientAttachmentsG',
+    //       attachmentIndex,
+    //       'description',
+    //       function(ed)
+    //       {
+    //       }
+    //     );
+    //   }
+    // );
   }
 
   function doAttachmentCancel()
   {
-    attachmentIndex = doGridCancelEdit('divNewClientAttachmentsG', editingIndex);
+    // attachmentIndex = doGridCancelEdit('divNewClientAttachmentsG', editingIndex);
+    attachmentIndex = doTreeGridCancelEdit('divClientAttachmentsG', attachmentIndex);
   }
 
   function doAttachmentSave()
   {
     doGridEndEditGetRow
     (
-      'divNewClientAttachmentsG',
+      'divClientAttachmentsG',
       attachmentIndex,
       function(row)
       {
-        doServerDataMessage('saveclientattachment', {clientattachmentid: row.id, description: row.description, isthumbnail: row.isthumbnail}, {type: 'refresh'});
+        doServerDataMessage('saveclientattachment', {clientattachmentid: row.id, description: row.description, name: row.name}, {type: 'refresh'});
       }
     );
 
@@ -225,6 +256,12 @@ function doDlgClientNew(parentid, clientid)
     );
   }
 
+  function doClientAttachmentSaved (ev, args){
+    if (clientid == args.data.clientid)
+      doServerDataMessage('listclientattachments', {clientid: clientid}, {type: 'refresh'});
+  }
+
+  //Ian version
   function doAttachmentSaved(ev, args)
   {
     if (clientid == args.data.clientid)
@@ -233,30 +270,34 @@ function doDlgClientNew(parentid, clientid)
 
   function doAttachmentList(ev, args)
   {
-    var data = [];
+    // var data = [];
 
-    args.data.rs.forEach
-    (
-      function(a)
-      {
-        data.push
-        (
-          {
-            id: doNiceId(a.id),
-            name: doNiceString(a.name),
-            description: doNiceString(a.description),
-            mimetype: '<a href="javascript:void(0);" onClick="doThrowClientAttachment(' + a.id + ');">' + mapMimeTypeToImage(a.mimetype) + '</a>',
-            size: doNiceString(a.size),
-            isthumbnail: a.isthumbnail,
-            image: '<image src="' + a.image + '" width="35px">',
-            date: doNiceDateModifiedOrCreated(a.datemodified, a.datecreated),
-            by: doNiceModifiedBy(a.datemodified, a.usermodified, a.usercreated)
-          }
-        );
-      }
-    );
+    // args.data.rs.forEach
+    // (
+    //   function(a)
+    //   {
+    //     data.push
+    //     (
+    //       {
+    //         id: doNiceId(a.id),
+    //         name: doNiceString(a.name),
+    //         description: doNiceString(a.description),
+    //         mimetype: '<a href="javascript:void(0);" onClick="doThrowClientAttachment(' + a.id + ');">' + mapMimeTypeToImage(a.mimetype) + '</a>',
+    //         size: doNiceString(a.size),
+    //         isthumbnail: a.isthumbnail,
+    //         image: '<image src="' + a.image + '" width="35px">',
+    //         date: doNiceDateModifiedOrCreated(a.datemodified, a.datecreated),
+    //         by: doNiceModifiedBy(a.datemodified, a.usermodified, a.usercreated)
+    //       }
+    //     );
+    //   }
+    // );
 
-    $('#divNewClientAttachmentsG').datagrid('loadData', data);
+    $('#divClientAttachmentsG').treegrid('loadData', cache_clientattachments);
+  }
+
+  function doCleanClientNoteLocally(){
+    doServerMessage('cleanClientnoteLocally',{type: 'refresh'});
   }
 
   function doReset()
@@ -323,7 +364,8 @@ function doDlgClientNew(parentid, clientid)
     {
       if (!_.isEmpty(client))
       {
-        $('#fldNewClientName').textbox('initValue', client.name);
+        // $('#fldNewClientName').textbox('initValue', client.name);
+        $('#fldNewClientName').textbox('setValue', client.name);
         $('#fldNewClientCode').textbox('setValue', client.code);
         $('#fldNewClientContact1').textbox('setValue', client.contact1);
         $('#fldNewClientContact2').textbox('setValue', client.contact2);
@@ -445,8 +487,14 @@ function doDlgClientNew(parentid, clientid)
       doAttachmentRemove();
     else if (args == 'download')
       doAttachmentDownload();
+    else if (args == 'newFolder')
+      doNewFolder();
+    else if (args == 'uploadFile')
+      doUploadFile();
   }
 
+  
+  $('#divEvents').on('listnewclientnote', doEditorLoad);
   $('#divEvents').on('newclientnote', doEditorSaved);
   $('#divEvents').on('saveclientnote', doEditorSaved);
   $('#divEvents').on('clientnotecreated', doEditorSaved);
@@ -472,11 +520,17 @@ function doDlgClientNew(parentid, clientid)
   $('#divEvents').on('clientnotespopup', doEditorEventsHandler);
   $('#divEvents').on('clientattachmentspopup', doAttachmentEventsHandler);
 
+  $('#divEvents').on('newfolderclientattachment', doClientAttachmentSaved);
+  $('#divEvents').on('listclientattachments', doAttachmentList);
+  // $('#divEvents').on('saveclientattachment', doClientAttachmentSaved);
+  $('#divEvents').on('clientattachmentsaved', doClientAttachmentSaved);
+
   $('#dlgClientNew').dialog
   (
     {
       onClose: function()
       {
+        doCleanClientNoteLocally();
         $('#divEvents').off('newclientnote', doEditorSaved);
         $('#divEvents').off('saveclientnote', doEditorSaved);
         $('#divEvents').off('clientnotecreated', doEditorSaved);
@@ -501,6 +555,11 @@ function doDlgClientNew(parentid, clientid)
 
         $('#divEvents').off('clientnotespopup', doEditorEventsHandler);
         $('#divEvents').off('clientattachmentspopup', doAttachmentEventsHandler);
+
+        $('#divEvents').off('newfolderclientattachment', doClientAttachmentSaved);
+        $('#divEvents').off('listclientattachments', doAttachmentList);
+        // $('#divEvents').off('saveclientattachment', doClientAttachmentSaved);
+        $('#divEvents').off('clientattachmentsaved', doClientAttachmentSaved);
 
         // Reset to first TAB and remove notes...
         // Do this here instead of doReset() otherwise get screen "flash" as redraw occurs...
@@ -715,64 +774,110 @@ function doDlgClientNew(parentid, clientid)
           }
         );
 
-        $('#divClientAttachmentsG').datagrid
+        $('#divClientAttachmentsG').treegrid
         (
           {
             idField: 'id',
+            treeField: 'name',
             fitColumns: true,
             singleSelect: true,
             rownumbers: false,
-            striped: true,
-            toolbar: 'tbClientAttachments',
+            collapsible: true,
+            autoRowHeight: false,
+            toolbar: '#tbClientAttachments',
+            // onContextMenu: onRowContextMenu,
             loader: function(param, success, error)
             {
-              success({total: data.length, rows: data});
+              success({total: cache_clientattachments.length, rows: cache_clientattachments});
+              error({total: 0, rows: []});
             },
             columns:
             [
               [
-                {title: 'Name',        field: 'name',        width: 200, align: 'left',   resizable: true},
+                {title: 'Name',        field: 'name',        width: 250, align: 'left',   resizable: true, editor: 'text'},
                 {title: 'Description', field: 'description', width: 300, align: 'left',   resizable: true, editor: 'text'},
                 {title: 'Type',        field: 'mimetype',    width: 100, align: 'center', resizable: true},
-                {title: 'Size',        field: 'size',        width: 150, align: 'right',  resizable: true, formatter: function(value, row) {return filesize(value, {base: 10});}},
+                {title: 'Size',        field: 'size',        width: 100, align: 'right',  resizable: true, formatter: function(value, row) {return filesize(value, {base: 10});}},
                 {title: 'Modified',    field: 'date',        width: 150, align: 'right',  resizable: true},
-                {title: 'By',          field: 'by',          width: 200, align: 'left',   resizable: true}
+                {title: 'By',          field: 'by',          width: 150, align: 'left',   resizable: true}
               ]
             ],
-            onRowContextMenu: function(e, index, row)
+            onLoadSuccess: function (row) 
             {
-              doGridContextMenu('divClientAttachmentsG', 'divClientAttachmentsMenuPopup', e, index, row);
+              $(this).treegrid('enableDnd', row ? row.id : null);
             },
-            onDblClickCell: function(index, field, value)
+            onContextMenu: function(e, row)
             {
-              doGridStartEdit
+              // doGridContextMenu('divClientAttachmentsG', 'divClientAttachmentsMenuPopup', e, index, row);
+              doTreeGridContextMenu("divClientAttachmentsG", "divClientAttachmentsMenuPopup", e, row);
+            },
+            onBeforeDrag: function (row)
+            {
+              if (attachmentIndex != null)
+                return false;
+              return true;
+            },
+            onBeforeDrop: function (targetRow, sourceRow, point)
+            {
+              doServerDataMessage('changeclientattachmentparent', {clientattachmentid: sourceRow.id, parentid: targetRow.id}, {type: 'refresh'});
+              return true;
+            },
+            onDblClickCell: function(field, row)
+            {
+              doTreeGridStartEdit
               (
                 'divClientAttachmentsG',
                 attachmentIndex,
-                function(row, index)
-                {
-                  attachmentIndex = index;
+                function (row, id) {
+                  attachmentIndex = id;
+                  
+                  if (['mimetype', 'size', 'by','date'].indexOf(field) != -1)
+                    field = 'name';
 
-                  doGridGetEditor
+                  doTreeGridGetEditor
                   (
                     'divClientAttachmentsG',
                     attachmentIndex,
-                    'description',
-                    function(ed)
-                    {
-                    }
+                    field,
+                    function (ed) {}
                   );
                 }
               );
+
+              // doGridStartEdit
+              // (
+              //   'divClientAttachmentsG',
+              //   attachmentIndex,
+              //   function(row, index)
+              //   {
+              //     attachmentIndex = index;
+
+              //     doGridGetEditor
+              //     (
+              //       'divClientAttachmentsG',
+              //       attachmentIndex,
+              //       'description',
+              //       function(ed)
+              //       {
+              //       }
+              //     );
+              //   }
+              // );
             }
           }
         );
 
         if (isnew)
+        {
           $('#btnClientNewAdd').linkbutton({text: 'Add'});
+          $('#newclienttabs').tabs('disableTab','Attachments');
+        }
         else
+        {
           $('#btnClientNewAdd').linkbutton({text: 'Save'});
-
+          $('#newclienttabs').tabs('enableTab','Attachments');
+        }
+         
         if (!_.isUndefined(clientid) && !_.isNull(clientid))
         {
           doServerDataMessage('loadclient', {clientid: clientid}, {type: 'refresh'});

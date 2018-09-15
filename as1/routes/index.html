@@ -579,9 +579,11 @@
   </div>
 
   <div id="divClientAttachmentsMenuPopup" class="easyui-menu" style="width: 120px; display: none;">
+    <div onclick="doContextMenu('clientattachmentspopup', 'newFolder')" data-options="iconCls: 'icon-add'">New Folder</div>
+    <div onclick="doContextMenu('clientattachmentspopup', 'uploadFile')" data-options="iconCls: 'icon-attachment'">Upload File</div>
     <div onclick="doContextMenu('clientattachmentspopup', 'edit')" data-options="iconCls: 'icon-edit'">Edit</div>
     <div onclick="doContextMenu('clientattachmentspopup', 'remove')" data-options="iconCls: 'icon-remove'">Remove</div>
-    <div onclick="doContextMenu('clientattachmentspopup', 'download')" data-options="iconCls: 'icon-download'">Download</div>
+    <!-- <div onclick="doContextMenu('clientattachmentspopup', 'download')" data-options="iconCls: 'icon-download'">Download</div> -->
   </div>
 
   <div id="divSuppliersMenuPopup" class="easyui-menu" style="width: 120px; display: none;">
@@ -1620,15 +1622,15 @@
         </div>
 
         <div title="Attachments" data-options="iconCls: 'icon-attachment'">
-          <table>
-            <tr>
+          <table id="divClientAttachmentsG" style="width: 100%; height: 85%;">
+            <!-- <tr>
               <td>Description:</td>
               <td><div id="fldNewClientAttachmentDescription" class="easyui-textbox" data-options="iconCls: 'icon-comments', iconAlign: 'right'" style="width: 250px;"></div></td>
             </tr>
             <tr>
               <td>Dropzone:</td>
               <td><div class="dropzone" id="divNewClientAttachmentFile"></div></td>
-            </tr>
+            </tr> -->
           </table>
         </div>
       </div>
@@ -1905,6 +1907,7 @@
             <tr>
               <td>Address 1:</td>
               <td><input type="text" id="fldNewOrderAddress1" class="easyui-textbox" style="width: 300px;"></td>
+              <td><input type="checkbox" name="" id="check_SametoShip"> Same as Shipping Address</td>
             </tr>
             <tr>
               <td>Address 2:</td>
@@ -1950,6 +1953,7 @@
             <tr>
               <td>Address 1:</td>
               <td><input type="text" id="fldNewOrderShiptoAddress1" class="easyui-textbox" style="width: 300px;"></td>
+              <td><input type="checkbox" name="" id="check_SametoInvoice"> Same as Invoice Address</td>
             </tr>
             <tr>
               <td>Address 2:</td>
@@ -3477,7 +3481,7 @@
     </div>
   </div>
 
-  <div id="tbClientAttachments" style="height: auto; display: none">
+  <!-- <div id="tbClientAttachments" style="height: auto; display: none">
     <div style="margin-bottom: 5px">
       <a href="javascript:void(0)" onClick="doContextMenu('clientattachmentspopup', 'clear')" class="easyui-linkbutton" iconCls="icon-clear">Clear</a>
       <a href="javascript:void(0)" onClick="doContextMenu('clientattachmentspopup', 'edit')" class="easyui-linkbutton" iconCls="icon-edit">Edit</a>
@@ -3486,7 +3490,7 @@
       <a href="javascript:void(0)" onClick="doContextMenu('clientattachmentspopup', 'remove')" class="easyui-linkbutton" iconCls="icon-remove">Remove</a>
       <a href="javascript:void(0)" onClick="doContextMenu('clientattachmentspopup', 'download')" class="easyui-linkbutton" iconCls="icon-download">Download</a>
     </div>
-  </div>
+  </div> -->
 
   <div id="tbClientNotes" style="height: auto; display: none">
     <div style="margin-bottom: 5px">
@@ -3496,6 +3500,18 @@
       <a href="javascript:void(0)" onClick="doContextMenu('clientnotespopup', 'cancel')" class="easyui-linkbutton" iconCls="icon-cancel">Cancel</a>
       <a href="javascript:void(0)" onClick="doContextMenu('clientnotespopup', 'save')" class="easyui-linkbutton" iconCls="icon-save">Save</a>
       <a href="javascript:void(0)" onClick="doContextMenu('clientnotespopup', 'search')" class="easyui-linkbutton" iconCls="icon-search">Search</a>
+    </div>
+  </div>
+
+  <div id="tbClientAttachments" style="height: auto; display: none">
+    <div style="margin-bottom: 5px">
+      <a href="javascript:void(0)" onClick="doContextMenu('clientattachmentspopup', 'newFolder')" class="easyui-linkbutton" iconCls="icon-add">New Folder</a>
+      <a href="javascript:void(0)" onClick="doContextMenu('clientattachmentspopup', 'uploadFile')" class="easyui-linkbutton" iconCls="icon-attachment">Upload File</a>
+      <!-- <a href="javascript:void(0)" onClick="doContextMenu('clientattachmentspopup', 'clear')" class="easyui-linkbutton" iconCls="icon-clear">Clear</a> -->
+      <a href="javascript:void(0)" onClick="doContextMenu('clientattachmentspopup', 'edit')" class="easyui-linkbutton" iconCls="icon-edit">Edit</a>
+      <a href="javascript:void(0)" onClick="doContextMenu('clientattachmentspopup', 'cancel')" class="easyui-linkbutton" iconCls="icon-cancel">Cancel</a>
+      <a href="javascript:void(0)" onClick="doContextMenu('clientattachmentspopup', 'save')" class="easyui-linkbutton" iconCls="icon-save">Save</a>
+      <!-- <a href="javascript:void(0)" onClick="doContextMenu('clientattachmentspopup', 'search')" class="easyui-linkbutton" iconCls="icon-search">Search</a> -->
     </div>
   </div>
 

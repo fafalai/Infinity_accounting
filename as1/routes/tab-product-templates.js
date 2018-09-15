@@ -169,6 +169,8 @@ function doProductTemplatesTabWidgets()
   function doSaved(ev, args)
   {
     doServerMessage('listproducttemplates', {type: 'refresh', producttemplateid: args.data.producttemplateid});
+    doServerDataMessage('syncbuildtemplatefromproducttemplate', {producttemplateid: args.data.producttemplateid}, {type: 'refresh'});
+
   }
 
   // Refresh when these events occur...

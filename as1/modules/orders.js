@@ -728,6 +728,24 @@ function doNewOrderClient(tx, world)
             global.ConsoleLog("order id");
             global.ConsoleLog(orderid);
 
+            if(newOrderNote_List.length !=0)
+            {
+              newOrderNote_List.forEach((note) => {
+                tx.query('insert into ordernotes (customers_id,orders_id,userscreated_id,notes,datecreated) values ($1,$2,$3,$4,$5)',
+                [
+                  note.custid,
+                  __.sanitiseAsBigInt(orderid),
+                  note.userid,
+                  note.notes,
+                  note.datecreated
+                ],
+                function (err,result) {
+                  if(err)
+                    reject(err);
+                });
+              });
+            }
+
             tx.query
             (
               'select o1.datecreated,u1.name usercreated from orders o1 left join users u1 on (o1.userscreated_id=u1.id) where o1.customers_id=$1 and o1.id=$2',
@@ -1238,6 +1256,48 @@ function doNewOrderDetail(tx, custid, userid, orderid, version, productid, qty, 
     }
   );
   return promise;
+}
+
+var newOrderNote_List = [];
+var ordernote_id = 0;
+function NewOrderNote_NoOrderID(world){
+    newOrderNote_List.push({
+      id: ++ordernote_id,
+      custid:world.cn.custid,
+      notes :"",
+      datecreated:global.moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      userid:world.cn.userid,
+      usercreated:world.cn.uname
+    });
+    
+    world.spark.emit
+    (
+      'listordernotes',
+      {
+        rc: global.errcode_none,
+        msg: global.text_success,
+        rs: newOrderNote_List,
+        pdata: world.pdata
+      }
+    );
+}
+ function CleanOrderNoteLocally(){
+  newOrderNote_List = [];
+  ordernote_id=0;
+}
+ function SaveOrderNote_NewOrder(world){
+  newOrderNote_List[world.ordernoteid-1].notes = world.notes;
+  
+  world.spark.emit
+    (
+      'listordernotes',
+      {
+        rc: global.errcode_none,
+        msg: global.text_success,
+        rs: newOrderNote_List,
+        pdata: world.pdata
+      }
+    );
 }
 
 function doNewOrderNote(tx, world)
@@ -3261,78 +3321,99 @@ function ExpireOrderDetail(world)
 
 function ListOrderNotes(world)
 {
-  var msg = '[' + world.eventname + '] ';
-  //
-  global.pg.connect
-  (
-    global.cs,
-    function(err, client, done)
-    {
-      if (!err)
+  if(world.orderid == null) {
+    world.spark.emit
+    (
+      'listordernote_newOrder',
       {
-        client.query
-        (
-          'select ' +
-          'on1.id,' +
-          'on1.notes,' +
-          'on1.datecreated,' +
-          'on1.datemodified,' +
-          'u1.name usercreated,' +
-          'u2.name usermodified ' +
-          'from ' +
-          'ordernotes on1 left join users u1 on (on1.userscreated_id=u1.id) ' +
-          '               left join users u2 on (on1.usersmodified_id=u2.id) ' +
-          'where ' +
-          'on1.customers_id=$1 ' +
-          'and ' +
-          'on1.orders_id=$2 ' +
-          'and ' +
-          'on1.dateexpired is null ' +
-          'order by ' +
-          'on1.datecreated desc',
-          [
-            world.cn.custid,
-            __.sanitiseAsBigInt(world.orderid)
-          ],
-          function(err, result)
-          {
-            done();
-
-            if (!err)
-            {
-              // JS returns date with TZ info/format, need in ISO format...
-              result.rows.forEach
-              (
-                function(p)
-                {
-                  if (!__.isUN(p.notes))
-                    p.notes = __.unescapeHTML(p.notes);
-
-                  if (!__.isUN(p.datemodified))
-                    p.datemodified = global.moment(p.datemodified).format('YYYY-MM-DD HH:mm:ss');
-
-                  p.datecreated = global.moment(p.datecreated).format('YYYY-MM-DD HH:mm:ss');
-                }
-              );
-
-               world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, fguid: world.fguid, rs: result.rows, pdata: world.pdata});
-            }
-            else
-            {
-              msg += global.text_generalexception + ' ' + err.message;
-              global.log.error({listordernotes: true}, msg);
-              world.spark.emit(global.eventerror, {rc: global.errcode_fatal, msg: msg, pdata: world.pdata});
-            }
-          }
-        );
+        rc: global.errcode_none,
+        msg: global.text_success,
+        rs: newOrderNote_List,
+        pdata: world.pdata
       }
-      else
-      {
-        global.log.error({listordernotes: true}, global.text_nodbconnection);
-        world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
-      }
+    );
+  }
+  else
+  {
+    var msg = '[' + world.eventname + '] ';
+    //
+    if(world.orderid == null) {
+      ListOrderNote_NewOrder(world);
     }
-  );
+    else
+    {
+      global.pg.connect
+      (
+        global.cs,
+        function(err, client, done)
+        {
+          if (!err)
+          {
+            client.query
+            (
+              'select ' +
+              'on1.id,' +
+              'on1.notes,' +
+              'on1.datecreated,' +
+              'on1.datemodified,' +
+              'u1.name usercreated,' +
+              'u2.name usermodified ' +
+              'from ' +
+              'ordernotes on1 left join users u1 on (on1.userscreated_id=u1.id) ' +
+              '               left join users u2 on (on1.usersmodified_id=u2.id) ' +
+              'where ' +
+              'on1.customers_id=$1 ' +
+              'and ' +
+              'on1.orders_id=$2 ' +
+              'and ' +
+              'on1.dateexpired is null ' +
+              'order by ' +
+              'on1.datecreated desc',
+              [
+                world.cn.custid,
+                __.sanitiseAsBigInt(world.orderid)
+              ],
+              function(err, result)
+              {
+                done();
+
+                if (!err)
+                {
+                  // JS returns date with TZ info/format, need in ISO format...
+                  result.rows.forEach
+                  (
+                    function(p)
+                    {
+                      if (!__.isUN(p.notes))
+                        p.notes = __.unescapeHTML(p.notes);
+
+                      if (!__.isUN(p.datemodified))
+                        p.datemodified = global.moment(p.datemodified).format('YYYY-MM-DD HH:mm:ss');
+
+                      p.datecreated = global.moment(p.datecreated).format('YYYY-MM-DD HH:mm:ss');
+                    }
+                  );
+
+                  world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, fguid: world.fguid, rs: result.rows, pdata: world.pdata});
+                }
+                else
+                {
+                  msg += global.text_generalexception + ' ' + err.message;
+                  global.log.error({listordernotes: true}, msg);
+                  world.spark.emit(global.eventerror, {rc: global.errcode_fatal, msg: msg, pdata: world.pdata});
+                }
+              }
+            );
+          }
+          else
+          {
+            global.log.error({listordernotes: true}, global.text_nodbconnection);
+            world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
+          }
+        }
+      );
+    }
+  }
 }
 
 function ListOrderStatuses(world)
@@ -4421,6 +4502,10 @@ module.exports.SearchOrders = SearchOrders;
 module.exports.CreateInvoice = CreateInvoice;
 module.exports.OrderPay = OrderPay;
 module.exports.CheckPONo = CheckPONo;
+
+module.exports.SaveOrderNote_NewOrder = SaveOrderNote_NewOrder;
+module.exports.CleanOrderNoteLocally = CleanOrderNoteLocally;
+module.exports.NewOrderNote_NoOrderID = NewOrderNote_NoOrderID;
 
 module.exports.ListOrderNotes = ListOrderNotes;
 module.exports.NewOrderNote = NewOrderNote;

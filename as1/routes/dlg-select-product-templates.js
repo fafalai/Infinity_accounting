@@ -56,6 +56,8 @@ function doSelectTemplatesTabWidgets()
   function doSaved(ev, args)
   {
     $('#dlgSelectProductTemplates').dialog('close');
+    // console.log("Here dlg build");
+    doServerDataMessage('listbuildtemplate_ByparentID', {buildtemplateid : args.data.buildtemplateid}, {type: 'refresh'});
   }
 
   $('#divEvents').on('newbuildtemplate', doSaved);

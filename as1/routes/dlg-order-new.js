@@ -76,7 +76,11 @@ function doDlgOrderNew(orderid)
       {
         var notes = nicEditors.findEditor(editorId).getContent();
 
-        doServerDataMessage('saveordernote', {ordernoteid: row.id, notes: notes}, {type: 'refresh'});
+        if(orderid == null){
+          doServerDataMessage('saveordernote_neworder', {ordernoteid: row.id, notes: notes}, {type: 'refresh'});
+        }
+        else
+          doServerDataMessage('saveordernote', {ordernoteid: row.id, notes: notes}, {type: 'refresh'});
 
         editorPanel.removeInstance(editorId);
         originalContents = null;
@@ -105,6 +109,25 @@ function doDlgOrderNew(orderid)
   {
     if (orderid == args.data.orderid)
       doServerDataMessage('listordernotes', {orderid: orderid}, {ordernoteid: args.data.ordernoteid, type: 'refresh'});
+  }
+
+  function doCleanOrderNoteLocally(){
+    doServerMessage('cleanOrdernoteLocally',{type: 'refresh'});
+  }
+   function doEditorList_newOrder(ev, args){
+    var data = [];
+    args.data.note_List.forEach((n) => {
+      data.push(
+        {
+          id: n.note_id,
+          notes: doNiceString(n.ordernote),
+          date: doNiceDateModifiedOrCreated(n.datecreated),
+          by: n.usercreated
+        }
+      );
+    });
+    
+    $('#divNewOrderNotesG').datagrid('loadData', data);
   }
 
   function doEditorList(ev, args)
@@ -679,6 +702,25 @@ function doDlgOrderNew(orderid)
         $('#fldNewOrderOrderName').textbox('setValue', args.data.client.name);
         $('#btnOrderNewAdd').linkbutton('enable');
         // Fall through...
+         //Trigger shipping address combotree
+         let shiptree = $('#cbNewOrderShiptoAddress').combotree('tree');
+         let shipnode = shiptree.tree('find',args.data.client.id);
+         if(shipnode){
+           shiptree.tree('select',shipnode.target);
+           $(shipnode.target).trigger('click');
+         }
+ 
+         //Trigger invoice address combotree
+         let invoicetree = $('#cbNewOrderInvoiceAddress').combotree('tree');
+         let invoicenode = invoicetree.tree('find',args.data.client.id);
+         if(invoicenode){
+           invoicetree.tree('select',invoicenode.target);
+           $(invoicenode.target).trigger('click');
+         }
+         
+         // Fall through...
+         break;
+        
       }
       case 'invoiceto':
       {
@@ -691,6 +733,7 @@ function doDlgOrderNew(orderid)
         $('#fldNewOrderPostcode').textbox('setValue', args.data.client.postcode);
         $('#cbNewOrderCountry').combobox('setValue', args.data.client.country);
         $('#cbNewOrderState').combobox('setValue', args.data.client.state);
+        break;
         // Fall through...
       }
       default:
@@ -903,6 +946,7 @@ function doDlgOrderNew(orderid)
       doStatusClear();
   }
 
+  $('#divEvents').on('listordernote_newOrder', doEditorList);
   $('#divEvents').on('newordernote', doEditorSaved);
   $('#divEvents').on('saveordernote', doEditorSaved);
   $('#divEvents').on('ordernotecreated', doEditorSaved);
@@ -938,7 +982,22 @@ function doDlgOrderNew(orderid)
   $('#divEvents').on('orderstatuspopup', doStatusEventsHandler);
 
 
-
+  $('#check_SametoShip').change(()=>{
+      if($("#check_SametoShip").prop('checked')){
+        $('#fldNewOrderAddress1').textbox('setText',$('#fldNewOrderShiptoAddress1').textbox('getText'));
+        $('#fldNewOrderAddress2').textbox('setText',$('#fldNewOrderShiptoAddress2').textbox('getText'));
+        $('#fldNewOrderAddress3').textbox('setText',$('#fldNewOrderShiptoAddress3').textbox('getText'));
+        $('#fldNewOrderAddress4').textbox('setText',$('#fldNewOrderShiptoAddress4').textbox('getText'));
+      }
+    });
+  $('#check_SametoInvoice').change(()=>{
+    if($("#check_SametoInvoice").prop('checked')){
+      $('#fldNewOrderShiptoAddress1').textbox('setText',$('#fldNewOrderAddress1').textbox('getText'));
+      $('#fldNewOrderShiptoAddress2').textbox('setText',$('#fldNewOrderAddress2').textbox('getText'));
+      $('#fldNewOrderShiptoAddress3').textbox('setText',$('#fldNewOrderAddress3').textbox('getText'));
+      $('#fldNewOrderShiptoAddress4').textbox('setText',$('#fldNewOrderAddress4').textbox('getText'));
+    }
+  });
  
 
   $('#dlgOrderNew').dialog
@@ -1378,10 +1437,20 @@ function doDlgOrderNew(orderid)
           }
         );        
 
-        if (isnew)
+        // if (isnew)
+        //   $('#btnOrderNewAdd').linkbutton({text: 'Add'});
+        // else
+        //   $('#btnOrderNewAdd').linkbutton({text: 'Save'});
+        if (isnew){
           $('#btnOrderNewAdd').linkbutton({text: 'Add'});
-        else
+          $('#newordertabs').tabs('disableTab','Attachments');
+          $('#newVersion_button').linkbutton('disable');
+        }
+        else{
+          $('#newVersion_button').linkbutton('enable');
           $('#btnOrderNewAdd').linkbutton({text: 'Save'});
+          $('#newordertabs').tabs('enableTab','Attachments');
+        }
 
         if (!_.isNull(orderid))
         {
@@ -1523,6 +1592,7 @@ function doDlgOrderNew(orderid)
           }
         },
         {
+          id: 'newVersion_button',
           text: 'New Version',
           handler: function()
           {

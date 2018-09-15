@@ -193,7 +193,8 @@ function doDlgBuildTemplateDetails(template)
     if (template.id)
     {
       primus.emit('listproductsbybuildtemplate', {fguid: fguid, uuid: uuid, session: session, buildtemplateid: template.id, pdata: {type: 'refresh', buildtemplatedetailid: args.data.buildtemplatedetailid}});
-      primus.emit('listbuildtemplates', {fguid: fguid, uuid: uuid, session: session, pdata: {type: 'refresh'}});
+      // primus.emit('listbuildtemplates', {fguid: fguid, uuid: uuid, session: session, pdata: {type: 'refresh'}});
+      primus.emit('listbuildtemplates_search', {fguid: fguid, uuid: uuid, session: session, pdata: {type: 'refresh'}});
     }
   }
 
