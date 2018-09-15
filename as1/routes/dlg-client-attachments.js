@@ -129,30 +129,30 @@ function doDlgClientAttachments(client)
 
   function doLoad(ev, args)
   {
-    data = [];
+    //data = [];
 
-    args.data.rs.forEach
-    (
-      function(a)
-      {
-        data.push
-        (
-          {
-            id: doNiceId(a.id),
-            name: doNiceString(a.name),
-            description: doNiceString(a.description),
-            mimetype: '<a href="javascript:void(0);" onClick="doThrowClientAttachment(' + a.id + ');">' + mapMimeTypeToImage(a.mimetype) + '</a>',
-            size: doNiceString(a.size),
-            //image: doNiceString(a.image),
-            image: '<image src="' + a.image + '" width="35px">',
-            date: doNiceDateModifiedOrCreated(a.datemodified, a.datecreated),
-            by: doNiceModifiedBy(a.datemodified, a.usermodified, a.usercreated)
-          }
-        );
-      }
-    );
+    // args.data.rs.forEach
+    // (
+    //   function(a)
+    //   {
+    //     data.push
+    //     (
+    //       {
+    //         id: doNiceId(a.id),
+    //         name: doNiceString(a.name),
+    //         description: doNiceString(a.description),
+    //         mimetype: '<a href="javascript:void(0);" onClick="doThrowClientAttachment(' + a.id + ');">' + mapMimeTypeToImage(a.mimetype) + '</a>',
+    //         size: doNiceString(a.size),
+    //         //image: doNiceString(a.image),
+    //         image: '<image src="' + a.image + '" width="35px">',
+    //         date: doNiceDateModifiedOrCreated(a.datemodified, a.datecreated),
+    //         by: doNiceModifiedBy(a.datemodified, a.usermodified, a.usercreated)
+    //       }
+    //     );
+    //   }
+    // );
 
-    $('#divClientAttachmentsG').datagrid('loadData', data);
+    $('#divClientAttachmentsG').datagrid('loadData', cache_buildtemplates);
   }
 
   function doEventsHandler(ev, args)
@@ -163,6 +163,10 @@ function doDlgClientAttachments(client)
       doRemove();
     else if (args == 'download')
       doDownload();
+    else if (args == 'newFolder')
+      doNewFolder();
+    else if (args == 'uploadFile')
+      doUploadFile();
   }
 
   $('#divEvents').on('saveclientattachment', doList);

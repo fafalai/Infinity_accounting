@@ -2,8 +2,10 @@
 // Internal functions
 function selectPrice(world, prices)
 {
-  //global.ConsoleLog("selectPrice");
+  global.ConsoleLog("selectPrice");
   //global.ConsoleLog(prices);
+  global.ConsoleLog("the product discount code is: " + world.discountcode);
+  global.ConsoleLog("the client price level is " + world.pricelevel);
   var result =
   {
     price: 0.0,
@@ -27,90 +29,28 @@ function selectPrice(world, prices)
   });
   global.ConsoleLog(nullPrices.length); 
 
-  if(matchidPrices.length > 0)
+  if(__.isNull(world.discountcode))
   {
-    global.ConsoleLog("there are matches from the selected arrary, either match with client id, or client id is null because don't select");
-    prices = matchidPrices;
-
-    for (var ndx = 0; ndx<prices.length;ndx++)
+    global.ConsoleLog("product does not have a discount code, use the traditonal way to select the price, match client id, or default, match qty, and not expired");
+    if(matchidPrices.length > 0)
     {
-      global.ConsoleLog("Loop " + ndx);
-      var p = prices[ndx];
-      if(__.isNull(p.minqty) && __.isNull(p.maxqty))
+      global.ConsoleLog("there are matches from the selected arrary, either match with client id, or client id is null because don't select");
+      prices = matchidPrices;
+
+      for (var ndx = 0; ndx<prices.length;ndx++)
       {
-        global.ConsoleLog("this entry does not have minqty and maxqty, doesn't care what qty use enters, use it and break the loop");
-        result = p;
-        break;
-      }
-      else
-      {
-        if(!__.isNull(qty))
+        global.ConsoleLog("Loop " + ndx);
+        var p = prices[ndx];
+        if(__.isNull(p.minqty) && __.isNull(p.maxqty))
         {
-          if(!__.isNull(p.minqty))
-          {
-            global.ConsoleLog("this entry has the min qty");
-            result = p;
-  
-            if(qty.lessThanOrEqualTo(p.minqty))
-            {
-              global.ConsoleLog("qty is less than entry's minimum, we use this entry's min and we're done");
-              break;
-            }
-            else if (__.isNull(p.maxqty) || qty.lessThanOrEqualTo(p.maxqty))
-            {
-              global.ConsoleLog("ebtered qty is less than entry's max or the maxqty is null,used the price, break the loop");
-              break;
-            }
-          }
-  
-          if(!__.isNull(p.maxqty))
-          {
-            global.ConsoleLog("this entry has the max qty");
-            if(qty.lessThanOrEqualTo(p.maxqty))
-            {
-              result = p;
-              break;
-            }
-          }
-        }
-        else
-        {
-          global.ConsoleLog("no enter the qty, so use the first available one");
+          global.ConsoleLog("this entry does not have minqty and maxqty, doesn't care what qty use enters, use it and break the loop");
           result = p;
           break;
         }
-      }
-      
-      
-    }
-
-  }
-  else if (nullPrices.length > 0)
-  {
-    global.ConsoleLog("there are no matches from the selected arrary based on the selected client id, so need to use the default list, where the client id is null");
-    prices = nullPrices;
-    for (var ndx = 0; ndx<prices.length;ndx++)
-    {
-      var p = prices[ndx];
-      if(__.isNull(p.minqty) && __.isNull(p.maxqty))
-      {
-        global.ConsoleLog("this entry does not have minqty and maxqty, doesn't care what qty use enters, use it and break the loop");
-        result = p;
-        break;
-      }
-      else
-      {
-        if(!__.isNull(qty))
+        else
         {
-  
-          // if(__.isNull(p.minqty) && __.isNull(p.maxqty))
-          // {
-          //   global.ConsoleLog("this entry no minqty and maxqty, use it and break the loop");
-          //   result = p;
-          //   break;
-          // }
-          //else
-          //{
+          if(!__.isNull(qty))
+          {
             if(!__.isNull(p.minqty))
             {
               global.ConsoleLog("this entry has the min qty");
@@ -118,12 +58,12 @@ function selectPrice(world, prices)
     
               if(qty.lessThanOrEqualTo(p.minqty))
               {
-                global.ConsoleLog("qty is less than or equal to entry's minimum, we use this entry's min and we're done");
+                global.ConsoleLog("qty is less than entry's minimum, we use this entry's min and we're done");
                 break;
               }
-              else if (__.isNull(p.maxqty))
+              else if (__.isNull(p.maxqty) || qty.lessThanOrEqualTo(p.maxqty))
               {
-                global.ConsoleLog("this entry does not have the maxqty, it is null, and entered qty is greater than the minqty, break the loop");
+                global.ConsoleLog("ebtered qty is less than entry's max or the maxqty is null,used the price, break the loop");
                 break;
               }
             }
@@ -133,23 +73,94 @@ function selectPrice(world, prices)
               global.ConsoleLog("this entry has the max qty");
               if(qty.lessThanOrEqualTo(p.maxqty))
               {
-                global.ConsoleLog("entered qty is less than entry's max or the maxqty is null,used the price, break the loop");
                 result = p;
                 break;
               }
             }
-         // }
+          }
+          else
+          {
+            global.ConsoleLog("no enter the qty, so use the first available one");
+            result = p;
+            break;
+          }
         }
-        else
+        
+        
+      }
+
+    }
+    else if (nullPrices.length > 0)
+    {
+      global.ConsoleLog("there are no matches from the selected arrary based on the selected client id, so need to use the default list, where the client id is null");
+      prices = nullPrices;
+      for (var ndx = 0; ndx<prices.length;ndx++)
+      {
+        var p = prices[ndx];
+        if(__.isNull(p.minqty) && __.isNull(p.maxqty))
         {
-          global.ConsoleLog("no enter the qty, so use the first available one, which is the one with the least minqty");
+          global.ConsoleLog("this entry does not have minqty and maxqty, doesn't care what qty use enters, use it and break the loop");
           result = p;
           break;
         }
+        else
+        {
+          if(!__.isNull(qty))
+          {
+    
+            // if(__.isNull(p.minqty) && __.isNull(p.maxqty))
+            // {
+            //   global.ConsoleLog("this entry no minqty and maxqty, use it and break the loop");
+            //   result = p;
+            //   break;
+            // }
+            //else
+            //{
+              if(!__.isNull(p.minqty))
+              {
+                global.ConsoleLog("this entry has the min qty");
+                result = p;
+      
+                if(qty.lessThanOrEqualTo(p.minqty))
+                {
+                  global.ConsoleLog("qty is less than or equal to entry's minimum, we use this entry's min and we're done");
+                  break;
+                }
+                else if (__.isNull(p.maxqty))
+                {
+                  global.ConsoleLog("this entry does not have the maxqty, it is null, and entered qty is greater than the minqty, break the loop");
+                  break;
+                }
+              }
+      
+              if(!__.isNull(p.maxqty))
+              {
+                global.ConsoleLog("this entry has the max qty");
+                if(qty.lessThanOrEqualTo(p.maxqty))
+                {
+                  global.ConsoleLog("entered qty is less than entry's max or the maxqty is null,used the price, break the loop");
+                  result = p;
+                  break;
+                }
+              }
+          // }
+          }
+          else
+          {
+            global.ConsoleLog("no enter the qty, so use the first available one, which is the one with the least minqty");
+            result = p;
+            break;
+          }
+        }
+        
+        
       }
-      
-      
     }
+  }
+  else
+  {
+    global.ConsoleLog("product have discount code, need to use the price level match client's, ignore the speicifc enteries")
+
   }
     // if(__.isNull(p.clientid) && !__.isNull(clientid));
     // {
@@ -1145,6 +1156,54 @@ function doSyncBuildTemplatesToMasters(tx, world)
   return promise;
 }
 
+function doSyncBuildTemplatesFromProductTemplates(tx, world) {
+  return new global.rsvp.Promise(
+    (resolve, reject) => {
+      tx.query(
+      'SELECT p1.code, p1.name, p1.taxcodes_id, p1.price, p1.gst, p1.qty ' +
+      'FROM producttemplateheaders p1 ' +
+      'WHERE p1.customers_id = $1 ' +
+      'AND p1.id = $2 ' +
+      'AND p1.dateexpired is null',
+        [
+          world.cn.custid,
+          world.producttemplateid
+        ],
+        (err, result) => {
+          let rowResult = result.rows[0];
+          if (!err) {
+            tx.query(
+              'UPDATE buildtemplateheaders SET ' +
+              'name=$1, code=$2, taxcodes_id=$3, gst=$4, price=$5, qty=$6, datemodified=now(), usersmodified_id=$7 '+ 
+              'WHERE customers_id=$8 AND producttemplateheaders_id=$9 AND dateexpired is null',
+              [
+                __.sanitiseAsTrimString(rowResult.name, 50),
+                __.sanitiseAsTrimString(rowResult.code, 50),
+                __.sanitiseAsBigInt(rowResult.taxcodes_id),
+                __.formatnumber(rowResult.gst,4),
+                __.formatnumber(rowResult.price,4),
+                __.formatnumber(rowResult.qty,4),
+                world.cn.userid,
+                world.cn.custid,
+                world.producttemplateid
+              ],
+              (err, result) => {
+                if (!err) {
+                  resolve(result);
+                } else {
+                  reject(err);
+                }
+              }
+            );
+          } else {
+            reject(err);
+          }
+        });
+    }
+  );
+}
+
+
 function doChangeProductCategory(tx, world)
 {
   var promise = new global.rsvp.Promise
@@ -1656,7 +1715,7 @@ function doNewBuildTemplateStep1(tx, custid, userid, code, clientid)
                         if (!err)
                         {
                           var id = result.rows[0].id;
-    
+
                           tx.query
                           (
                             'select bth1.datecreated,u1.name usesrcreated from buildtemplateheaders bth1 left join users u1 on (bth1.userscreated_id=u1.id) where bth1.customers_id=$1 and bth1.id=$2',
@@ -2897,8 +2956,7 @@ function doProductTemplateUpdateInventory(tx, products, custid, userid)
                     __.formatnumber(p.costgst),
                     itype_inventory_stock,
                     userid
-                  ]
-                  ,
+                  ],
                   function(err, result)
                   {
                     if (!err && (result.rows.length == 1))
@@ -3484,6 +3542,7 @@ function doExpireProductCode(tx, world)
   );
   return promise;
 }
+
 
 // *******************************************************************************************************************************************************************************************
 // Public functions
@@ -4142,6 +4201,7 @@ function ListProducts(world)
           'p1.productsalias_id productaliasid,' +
           'p1.locations1_id location1id,' +
           'p1.locations2_id location2id,' +
+          'p1.discountcode_id discountcodeid,' +
           'p1.clients_id clientid,' +
           't1.name buytaxcode,' +
           't2.name selltaxcode,' +
@@ -5062,7 +5122,7 @@ function SearchProducts(world)
         var maxhistory = __.isUndefined(world.maxhistory) || __.isNull(world.maxhistory) ? 200 : world.maxhistory;
         var bindno = 2;
         var clauses = '';
-        var value = world.value
+        var value = world.value;
         var binds =
         [
           world.cn.custid
@@ -5936,7 +5996,7 @@ function ChangeBuildTemplateParent(world)
                       if (!err)
                       {
                         done();
-                        world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, buildtemplateid: world.buildtemplateid, parentid: world.parentid, datemodified: result.datemodified, usermodified: result.usermodified, pdata: world.pdata});
+                        world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, buildtemplateid: world.buildtemplateid, parentid: world.parentid, datemodified: result.datemodified, usermodified: result.usermodified, pageNumber : world.pageNumber, pdata: world.pdata});
                         global.pr.sendToRoomExcept(global.custchannelprefix + world.cn.custid, 'buildtemplateparentchanged', {buildtemplateid: world.buildtemplateid, parentid: world.parentid, datemodified: result.datemodified, usermodified: result.usermodified}, world.spark.id);
                       }
                       else
@@ -6637,86 +6697,86 @@ function SyncBuildTemplatesToMaster(world)
 
 function SearchBuildTemplates(world)
 {
-  var msg = '[' + world.eventname + '] ';
-  //
-  global.pg.connect
-  (
-    global.cs,
-    function(err, client, done)
-    {
-      if (!err)
-      {
-        var maxhistory = __.isUndefined(world.maxhistory) || __.isNull(world.maxhistory) ? 200 : world.maxhistory;
-        var bindno = 2;
-        var clauses = '';
-        var value = world.value
-        var binds =
-        [
-          world.cn.custid
-        ];
+  // var msg = '[' + world.eventname + '] ';
+  // //
+  // global.pg.connect
+  // (
+  //   global.cs,
+  //   function(err, client, done)
+  //   {
+  //     if (!err)
+  //     {
+  //       var maxhistory = __.isUndefined(world.maxhistory) || __.isNull(world.maxhistory) ? 200 : world.maxhistory;
+  //       var bindno = 2;
+  //       var clauses = '';
+  //       var value = world.value;
+  //       var binds =
+  //       [
+  //         world.cn.custid
+  //       ];
 
-        if (!__.isUndefined(world.value) && !__.isNull(world.value) && !__.isBlank(world.value))
-        {
-          clauses += '((upper(bth1.name) like upper($' + bindno++ + ')) or (upper(bth1.code) like upper($' + bindno++ + '))) and ';
-          binds.push('%' + world.value + '%');
-          binds.push('%' + world.value + '%');
-        }
+  //       if (!__.isUndefined(world.value) && !__.isNull(world.value) && !__.isBlank(world.value))
+  //       {
+  //         clauses += '((upper(bth1.name) like upper($' + bindno++ + ')) or (upper(bth1.code) like upper($' + bindno++ + '))) and ';
+  //         binds.push('%' + world.value + '%');
+  //         binds.push('%' + world.value + '%');
+  //       }
 
-        // Any search criteria?
-        if (bindno > 2)
-        {
-          // Lastly, make sure we don't end up with too many rows...
-          binds.push(maxhistory);
+  //       // Any search criteria?
+  //       if (bindno > 2)
+  //       {
+  //         // Lastly, make sure we don't end up with too many rows...
+  //         binds.push(maxhistory);
 
-          client.query
-          (
-            'select ' +
-            'bth1.id,' +
-            'bth1.code,' +
-            'bth1.name ' +
-            'from ' +
-            'buildtemplateheaders bth1 ' +
-            'where ' +
-            'bth1.customers_id=$1 ' +
-            'and ' +
-            clauses +
-            'bth1.dateexpired is null ' +
-            'and ' +
-            'bth1.buildtemplateheaders_id is null ' +
-            'order by ' +
-            'bth1.code,' +
-            'bth1.name ' +
-            'limit $' + bindno,
-            binds,
-            function(err, result)
-            {
-              done();
+  //         client.query
+  //         (
+  //           'select ' +
+  //           'bth1.id,' +
+  //           'bth1.code,' +
+  //           'bth1.name ' +
+  //           'from ' +
+  //           'buildtemplateheaders bth1 ' +
+  //           'where ' +
+  //           'bth1.customers_id=$1 ' +
+  //           'and ' +
+  //           clauses +
+  //           'bth1.dateexpired is null ' +
+  //           'and ' +
+  //           'bth1.buildtemplateheaders_id is null ' +
+  //           'order by ' +
+  //           'bth1.code,' +
+  //           'bth1.name ' +
+  //           'limit $' + bindno,
+  //           binds,
+  //           function(err, result)
+  //           {
+  //             done();
 
-              if (!err)
-                world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, fguid: world.fguid, rs: result.rows, pdata: world.pdata});
-              else
-              {
-                msg += global.text_generalexception + ' ' + err.message;
-                global.log.error({searchproducts: true}, msg);
-                world.spark.emit(global.eventerror, {rc: global.errcode_fatal, msg: msg, pdata: world.pdata});
-              }
-            }
-          );
-        }
-        else
-        {
-          msg += global.text_nodata;
-          global.log.error({searchproducts: true}, msg);
-          world.spark.emit(global.eventerror, {rc: global.errcode_nodata, msg: msg, pdata: world.pdata});
-        }
-      }
-      else
-      {
-        global.log.error({searchproducts: true}, global.text_nodbconnection);
-        world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
-      }
-    }
-  );
+  //             if (!err)
+  //               world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, fguid: world.fguid, rs: result.rows, pdata: world.pdata});
+  //             else
+  //             {
+  //               msg += global.text_generalexception + ' ' + err.message;
+  //               global.log.error({searchproducts: true}, msg);
+  //               world.spark.emit(global.eventerror, {rc: global.errcode_fatal, msg: msg, pdata: world.pdata});
+  //             }
+  //           }
+  //         );
+  //       }
+  //       else
+  //       {
+  //         msg += global.text_nodata;
+  //         global.log.error({searchproducts: true}, msg);
+  //         world.spark.emit(global.eventerror, {rc: global.errcode_nodata, msg: msg, pdata: world.pdata});
+  //       }
+  //     }
+  //     else
+  //     {
+  //       global.log.error({searchproducts: true}, global.text_nodbconnection);
+  //       world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
+  //     }
+  //   }
+  // );
 }
 
 function BuildProductTemplate(world)
@@ -7771,7 +7831,11 @@ function GetPrice(world)
           'p2.price10,' +
           'p2.price11,' +
           'p2.price12,' +
+          'p2.price13,' +
+          'p2.price14,' +
+          'p2.price15,' +
           'p2.uomsize,' +
+          'p2.discountcode_id,' +
           'case when (p2.uomsize=0.0) then 0.0 else (p1.price / p2.uomsize) end unitprice,' +
           'case when (p2.uomsize=0.0) then 0.0 else (p1.gst / p2.uomsize) end unitgst,' +
           'case when (p2.uomsize=0.0) then 0.0 else (p1.price1 / p2.uomsize) end unitprice1,' +
@@ -7819,6 +7883,8 @@ function GetPrice(world)
 
             if (!err)
             {
+              global.ConsoleLog(world.discountcode);
+              global.ConsoleLog(world.pricelevel);
               var price = selectPrice(world, result.rows);
               global.ConsoleLog(price);
               global.ConsoleLog("the event name is " + world.eventname);
@@ -7839,6 +7905,72 @@ function GetPrice(world)
       else
       {
         global.log.error({getprice: true}, global.text_nodbconnection);
+        world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
+      }
+    }
+  );
+}
+
+
+function SyncBuildTemplateFromProductTemplate(world) {
+  var msg = '[' + world.eventname + '] ';
+
+  global.pg.connect(
+    global.cs,
+    function (err, client, done) {
+      if(!err)
+      {
+        var tx = new global.pgtx(client);
+        tx.begin(
+          (err) => {
+            if (!err) {
+              doSyncBuildTemplatesFromProductTemplates(tx, world).then(
+                (result) => {
+                  tx.commit(
+                    (err) => {
+                      if (!err) {
+
+                        done();
+                        world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, pdata: world.pdata});
+                        global.pr.sendToRoomExcept(global.custchannelprefix + world.cn.custid, 'syncbuildtemplatefromproducttemplate',{}, world.spark.id);
+
+                      } else {
+                        tx.rollback( () => {
+                          done();
+                          msg += global.text_generalexception + ' ' + err.message;
+                          global.log.error({syncbuildtemplatefromproducttemplate: true}, msg);
+                          world.spark.emit(global.eventerror, {rc: global.errcode_fatal, msg: msg, pdata: world.pdata});
+                        });
+                        
+                      }
+                    }
+                  );
+                }
+              ).catch(
+                (err) => {
+                  tx.rollback(
+                    () => {
+                      done();
+                      msg += global.text_generalexception + ' ' + err.message;
+                      global.log.error({syncbuildtemplatefromproducttemplate: true}, msg);
+                      world.spark.emit(global.eventerror, {rc: global.errcode_fatal, msg: msg, pdata: world.pdata});
+                    }
+                  );
+                }
+              );
+            } else {
+              done();
+              msg += global.text_generalexception + ' ' + err.message;
+              global.log.error({syncbuildtemplatefromproducttemplate: true}, msg);
+              world.spark.emit(global.eventerror, {rc: global.errcode_fatal, msg: msg, pdata: world.pdata});
+            }
+          }
+        );
+      }
+      else
+      {
+        done();
+        global.log.error({syncbuildtemplatefromproducttemplate: true}, global.text_nodbconnection);
         world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
       }
     }
@@ -7913,7 +8045,7 @@ function ListBuildTemplateRoots(world)
                 }
               );
 
-              world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, fguid: world.fguid, rs: result.rows, pdata: world.pdata});
+              world.spark.emit('listbuildtemplates_search', {rc: global.errcode_none, msg: global.text_success, fguid: world.fguid, rs: result.rows, pdata: world.pdata});
             }
             else
             {
@@ -7926,26 +8058,21 @@ function ListBuildTemplateRoots(world)
       }
       else
       {
-        global.log.error({listbuildtemplateroots: true}, global.text_nodbconnection);
+        global.log.error({syncbuildtemplatefromproducttemplate: true}, global.text_nodbconnection);
         world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
       }
     }
   );
 }
 
-function ListBuildTemplates(world)
-{
+function SearchRootBuildTemplates_ByCodeAndName(world) {
   var msg = '[' + world.eventname + '] ';
   //
-  global.pg.connect
-  (
+  global.pg.connect(
     global.cs,
-    function(err, client, done)
-    {
-      if (!err)
-      {
-        client.query
-        (
+    function (err, client, done) {
+      if (!err) {
+        client.query(
           'select ' +
           'p1.id,' +
           'p1.code,' +
@@ -7975,51 +8102,510 @@ function ListBuildTemplates(world)
           'p1.customers_id=$3 ' +
           'and ' +
           'p1.dateexpired is null ' +
+          'and (upper(p1.code) ~ upper($4) ' +
+          'or upper(p1.name) ~ upper($4)) ' +
+          'and p1.buildtemplateheaders_id is null ' +
           'order by ' +
           'p1.path,' +
           'p2.id desc,' +
-          'p1.code',
+          'p1.code', 
           [
             world.cn.custid,
             world.cn.custid,
-            world.cn.custid
+            world.cn.custid,
+            __.sanitiseAsString(world.inputValue, 50)
           ],
-          function(err, result)
-          {
-            done();
+          function (err, result) {
+            if (!err) {
+              result.rows.forEach(p => {
+                if (!__.isUndefined(p.datemodified) && !__.isNull(p.datemodified))
+                  p.datemodified = global.moment(p.datemodified).format('YYYY-MM-DD HH:mm:ss');
 
-            if (!err)
-            {
-              // JS returns date with TZ info/format, need in ISO format...
-              result.rows.forEach
-              (
-                function(p)
-                {
-                  if (!__.isUndefined(p.datemodified) && !__.isNull(p.datemodified))
-                    p.datemodified = global.moment(p.datemodified).format('YYYY-MM-DD HH:mm:ss');
+                p.datecreated = global.moment(p.datecreated).format('YYYY-MM-DD HH:mm:ss');
+              });
 
-                  p.datecreated = global.moment(p.datecreated).format('YYYY-MM-DD HH:mm:ss');
-                }
-              );
-
-              world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, fguid: world.fguid, rs: result.rows, pdata: world.pdata});
+              world.spark.emit('listbuildtemplates_search', {
+                rc: global.errcode_none,
+                msg: global.text_success,
+                fguid: world.fguid,
+                // rs: resultRows,
+                rs: result.rows,
+                pdata: world.pdata
+              });
             }
             else
             {
               msg += global.text_generalexception + ' ' + err.message;
-              global.log.error({listbuildtemplates: true}, msg);
-              world.spark.emit(global.eventerror, {rc: global.errcode_fatal, msg: msg, pdata: world.pdata});
+              global.log.error({
+                searchrootbuildtemplates_bycodeandname: true
+              }, msg);
+              world.spark.emit(global.eventerror, {
+                rc: global.errcode_fatal,
+                msg: msg,
+                pdata: world.pdata
+              });
             }
+            done();
           }
         );
-      }
-      else
-      {
-        global.log.error({listbuildtemplates: true}, global.text_nodbconnection);
-        world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
+      } else {
+        global.log.error({
+          searchrootbuildtemplates_bycodeandname: true
+        }, global.text_nodbconnection);
+        world.spark.emit(global.eventerror, {
+          rc: global.errcode_dbunavail,
+          msg: global.text_nodbconnection,
+          pdata: world.pdata
+        });
       }
     }
   );
+}
+
+function SearchBuildTemplates_ByCodeAndName(world) {
+  var msg = '[' + world.eventname + '] ';
+
+  global.pg.connect(
+    global.cs,
+    function (err, client, done) {
+      if (!err) {
+        client.query(
+          'select DISTINCT ON (p1.id) ' +
+          'p1.id,' +
+          'p1.code,' +
+          'p1.name,' +
+          'p1.price,' +
+          'p1.gst,' +
+          'p1.qty,' +
+          'p1.taxcodes_id taxcodeid,' +
+          'p1.producttemplateheaders_id producttemplateheaderid,' +
+          'p1.buildtemplateheaders_id parentid,' +
+          't1.name taxcode,' +
+          'c1.id clientid,' +
+          'p1.datecreated,' +
+          'p1.datemodified,' +
+          'u1.name usercreated,' +
+          'u2.name usermodified,' +
+          'getnumproductsinbuildtemplate($1,p1.id) numproducts,' +
+          'gettotalcostpricefrombuildtemplate($1,p1.id) totalprice,' +
+          'p1.totalgst ' +
+          'from ' +
+          'getbuildtemplaterelatenodes($1, $2, $3, $4) p0 ' +
+          '                        left join buildtemplateheaders p1 on (p0.id=p1.id) ' +
+          '                        left join taxcodes t1 on (p1.taxcodes_id=t1.id) ' +
+          '                        left join clients c1 on (p1.clients_id=c1.id) ' +
+          '                        left join users u1 on (p1.userscreated_id=u1.id) ' +
+          '                        left join users u2 on (p1.usersmodified_id=u2.id) ' +
+          'order by ' +
+          'p1.id,' +
+          'p1.path,' +
+          'p1.code',
+          [
+            world.cn.custid,
+            __.sanitiseAsString(world.inputValue, 50),
+            __.sanitiseAsBigInt(world.pageSize),
+            __.sanitiseAsBigInt(world.offset)
+          ],
+          (err, result) => {
+            if (!err) {
+              result.rows.forEach(p => {
+
+                if (!__.isUndefined(p.datemodified) && !__.isNull(p.datemodified))
+                  p.datemodified = global.moment(p.datemodified).format('YYYY-MM-DD HH:mm:ss');
+
+                p.datecreated = global.moment(p.datecreated).format('YYYY-MM-DD HH:mm:ss');
+
+              });
+
+              client.query('SELECT COUNT(DISTINCT p0.id) FROM getrootsearchbuildtemplates($1, $2) p0',
+                [
+                  world.cn.custid,
+                  __.sanitiseAsString(world.inputValue, 50)
+                ],
+                (err, result2) => {
+                  done();
+                  if (!err) {
+                    world.spark.emit(world.eventname, {
+                      rc: global.errcode_none,
+                      msg: global.text_success,
+                      fguid: world.fguid,
+                      rs: result.rows,
+                      totalCount: result2.rows[0].count,
+                      inputValue:world.inputValue,
+                      pdata: world.pdata
+                    });
+                  } else {
+                    done();
+                    global.log.error({
+                      searchbuildtemplates_bycodeandname: true
+                    }, global.text_nodbconnection);
+                    world.spark.emit(global.eventerror, {
+                      rc: global.errcode_dbunavail,
+                      msg: global.text_nodbconnection,
+                      pdata: world.pdata
+                    });
+                  }
+                });
+            } else {
+              done();
+              global.log.error({
+                searchbuildtemplates_bycodeandname: true
+              }, global.text_nodbconnection);
+              world.spark.emit(global.eventerror, {
+                rc: global.errcode_dbunavail,
+                msg: global.text_nodbconnection,
+                pdata: world.pdata
+              });
+            }
+          });
+      } else {
+        dong();
+        global.log.error({
+          searchbuildtemplates_bycodeandname: true
+        }, global.text_nodbconnection);
+        world.spark.emit(global.eventerror, {
+          rc: global.errcode_dbunavail,
+          msg: global.text_nodbconnection,
+          pdata: world.pdata
+        });
+      }
+    });
+}
+
+function ListBuildTemplates_ByParentID(world) {
+  var msg = '[' + world.eventname + '] ';
+  //
+  global.pg.connect(
+    global.cs,
+    function (err, client, done) {
+      if (!err) {
+        client.query(
+          'select ' +
+          'p1.id,' +
+          'p1.code,' +
+          'p1.name,' +
+          'p1.price,' +
+          'p1.gst,' +
+          'p1.qty,' +
+          'p1.taxcodes_id taxcodeid,' +
+          'p1.producttemplateheaders_id producttemplateheaderid,' +
+          't1.name taxcode,' +
+          'p2.id parentid,' +
+          'c1.id clientid,' +
+          'p1.datecreated,' +
+          'p1.datemodified,' +
+          'u1.name usercreated,' +
+          'u2.name usermodified,' +
+          'getnumproductsinbuildtemplate($1,p1.id) numproducts,' +
+          'gettotalcostpricefrombuildtemplate($1,p1.id) totalprice,' +
+          'p1.totalgst ' +
+          'from ' +
+          'buildtemplateheaders p1 left join buildtemplateheaders p2 on (p1.buildtemplateheaders_id=p2.id) ' +
+          '                        left join taxcodes t1 on (p1.taxcodes_id=t1.id) ' +
+          '                        left join clients c1 on (p1.clients_id=c1.id) ' +
+          '                        left join users u1 on (p1.userscreated_id=u1.id) ' +
+          '                        left join users u2 on (p1.usersmodified_id=u2.id) ' +
+          'where ' +
+          'p1.customers_id=$1 ' +
+          'and ' +
+          'p1.dateexpired is null ' +
+          'and p1.id = $2' +
+          'and p1.buildtemplateheaders_id is null ' +
+          'order by ' +
+          'p1.path,' +
+          'p2.id desc,' +
+          'p1.code', 
+          [
+            world.cn.custid,
+            __.sanitiseAsBigInt(world.buildtemplateid)
+          ],
+          function (err, result) {
+            if (!err) {
+              result.rows.forEach(p => {
+                if (!__.isUndefined(p.datemodified) && !__.isNull(p.datemodified))
+                  p.datemodified = global.moment(p.datemodified).format('YYYY-MM-DD HH:mm:ss');
+
+                p.datecreated = global.moment(p.datecreated).format('YYYY-MM-DD HH:mm:ss');
+              });
+
+              world.spark.emit('listbuildtemplates_search', {
+                rc: global.errcode_none,
+                msg: global.text_success,
+                fguid: world.fguid,
+                // rs: resultRows,
+                rs: result.rows,
+                pdata: world.pdata
+              });
+            } else {
+              msg += global.text_generalexception + ' ' + err.message;
+              global.log.error({
+                listbuildtemplates_byparentid: true
+              }, msg);
+              world.spark.emit(global.eventerror, {
+                rc: global.errcode_fatal,
+                msg: msg,
+                pdata: world.pdata
+              });
+            }
+            done();
+          }
+        );
+      } else {
+        global.log.error({
+          listbuildtemplates_byparentid: true
+        }, global.text_nodbconnection);
+        world.spark.emit(global.eventerror, {
+          rc: global.errcode_dbunavail,
+          msg: global.text_nodbconnection,
+          pdata: world.pdata
+        });
+      }
+    }
+  );
+}
+
+function ListBuildTemplates_Pagination(world) {
+  var msg = '[' + world.eventname + '] ';
+  //
+  global.pg.connect(
+    global.cs,
+    function (err, client, done) {
+      if (!err) {
+        client.query(
+          'SELECT ' +
+          'p1.id,' +
+          'p1.code,' +
+          'p1.name,' +
+          'p1.price,' +
+          'p1.gst,' +
+          'p1.qty,' +
+          'p1.taxcodes_id taxcodeid,' +
+          'p1.producttemplateheaders_id producttemplateheaderid,' +
+          't1.name taxcode,' +
+          'p2.id parentid,' +
+          'c1.id clientid,' +
+          'p1.datecreated,' +
+          'p1.datemodified,' +
+          'u1.name usercreated,' +
+          'u2.name usermodified,' +
+          'getnumproductsinbuildtemplate($1,p1.id) numproducts,' +
+          'gettotalcostpricefrombuildtemplate($1,p1.id) totalprice,' +
+          'p1.totalgst ' +
+          'FROM ' +
+          'buildtemplateheaders p1 left join buildtemplateheaders p2 on (p1.buildtemplateheaders_id=p2.id) ' +
+          '                        left join taxcodes t1 on (p1.taxcodes_id=t1.id) ' +
+          '                        left join clients c1 on (p1.clients_id=c1.id) ' +
+          '                        left join users u1 on (p1.userscreated_id=u1.id) ' +
+          '                        left join users u2 on (p1.usersmodified_id=u2.id) ' +
+          'WHERE ' +
+          'p1.customers_id=$1 ' +
+          'AND ' +
+          'p1.dateexpired IS NULL ' +
+          'AND p1.buildtemplateheaders_id IS NULL ' +
+          'ORDER BY ' +
+          'p1.path,' +
+          'p2.id desc,' +
+          'p1.code ' +
+          'LIMIT $2 OFFSET $3',
+          [
+            world.cn.custid,
+            __.sanitiseAsBigInt(world.pageSize),
+            __.sanitiseAsBigInt(world.offset)
+          ],
+          function (err, result) {
+            if (!err) {
+
+              result.rows.forEach(p => {
+                if (!__.isUndefined(p.datemodified) && !__.isNull(p.datemodified))
+                  p.datemodified = global.moment(p.datemodified).format('YYYY-MM-DD HH:mm:ss');
+
+                p.datecreated = global.moment(p.datecreated).format('YYYY-MM-DD HH:mm:ss');
+              });
+
+              client.query('SELECT COUNT(p1.id) FROM buildtemplateheaders p1 WHERE p1.customers_id=$1 AND p1.buildtemplateheaders_id IS NULL AND p1.dateexpired IS NULL ',
+              [
+                world.cn.custid
+              ], 
+              function (err, result2) {
+                done();
+                if(!err){
+                  world.spark.emit(world.eventname, 
+                    {
+                      rc: global.errcode_none,
+                      msg: global.text_success,
+                      fguid: world.fguid,
+                      rs: result.rows,
+                      totalCount: parseInt(result2.rows[0].count),
+                      pageNumber: world.pageNumber,
+                      pdata: world.pdata
+                    });
+                } else {
+                  msg += global.text_generalexception + ' ' + err.message;
+                  global.log.error({
+                    listbuildtemplates_pagination: true
+                  }, msg);
+
+                  world.spark.emit(global.eventerror, {
+                    rc: global.errcode_fatal,
+                    msg: msg,
+                    pdata: world.pdata
+                  });
+                }
+              });
+            }
+            else
+            {
+              msg += global.text_generalexception + ' ' + err.message;
+              global.log.error({
+                listbuildtemplates_pagination: true
+              }, msg);
+
+              world.spark.emit(global.eventerror, {
+                rc: global.errcode_fatal,
+                msg: msg,
+                pdata: world.pdata
+              });
+            }
+          }
+        );
+      } else {
+        global.log.error({
+          listbuildtemplates_pagination: true
+        }, global.text_nodbconnection);
+
+        world.spark.emit(global.eventerror, {
+          rc: global.errcode_dbunavail,
+          msg: global.text_nodbconnection,
+          pdata: world.pdata
+        });
+      }
+    }
+  );
+}
+
+
+// function ListBuildTemplateRoots(world)
+function SearchBuildTemplates(world)
+{
+  // var msg = '[' + world.eventname + '] ';
+  // //
+  // global.pg.connect
+  // (
+  //   global.cs,
+  //   function(err, client, done)
+  //   {
+  //     if (!err)
+  //     {
+  //       client.query
+  //       (
+  //         'select ' +
+  //         'p1.id,' +
+  //         'p1.code,' +
+  //         'p1.name,' +
+  //         'p1.price,' +
+  //         'p1.gst,' +
+  //         'p1.qty,' +
+  //         'p1.taxcodes_id taxcodeid,' +
+  //         'p1.producttemplateheaders_id producttemplateheaderid,' +
+  //         't1.name taxcode,' +
+  //         'c1.id clientid,' +
+  //         'p1.datecreated,' +
+  //         'p1.datemodified,' +
+  //         'u1.name usercreated,' +
+  //         'u2.name usermodified,' +
+  //         'getnumproductsinbuildtemplate($1,p1.id) numproducts,' +
+  //         'gettotalcostpricefrombuildtemplate($2,p1.id) totalprice,' +
+  //         'p1.totalgst ' +
+  //         'from ' +
+  //         'buildtemplateheaders p1 left join taxcodes t1 on (p1.taxcodes_id=t1.id) ' +
+  //         '                        left join clients c1 on (p1.clients_id=c1.id) ' +
+  //         '                        left join users u1 on (p1.userscreated_id=u1.id) ' +
+  //         '                        left join users u2 on (p1.usersmodified_id=u2.id) ' +
+  //         'where ' +
+  //         'p1.customers_id=$3 ' +
+  //         'and ' +
+  //         'p1.buildtemplateheaders_id is null ' +
+  //         'and ' +
+  //         'p1.dateexpired is null ' +
+  //         'and upper(p1.code) ~ upper($4) ' +
+  //         'and p1.path = $5 ' +
+  //         'order by ' +
+  //         'p1.path,' +
+  //         'p2.id desc,' +
+  //         'p1.code',
+  //         [
+  //           world.cn.custid,
+  //           world.cn.custid,
+  //           world.cn.custid,
+  //           world.inputValue,
+  //           '/'
+  //         ],
+  //         function(err, result)
+  //         {
+  //           done();
+
+  //           if (!err)
+  //           {
+  //             // JS returns date with TZ info/format, need in ISO format...
+  //             result.rows.forEach
+  //             (
+  //               function(p)
+  //               {
+  //                 // if (!__.isUndefined(p.datemodified) && !__.isNull(p.datemodified))
+  //                 //   p.datemodified = global.moment(p.datemodified).format('YYYY-MM-DD HH:mm:ss');
+
+  //                 // p.datecreated = global.moment(p.datecreated).format('YYYY-MM-DD HH:mm:ss');
+  //                 // let nodes = doFindChildren(world, client, p.id);
+  //                 // console.log("NOOOOOOdes::::: " + nodes.length);
+  //                 try {
+  //                   let nodes = doFindChildren(world, client, p.id);
+  //                   console.log("NOOOOOOdes::::: " + nodes.length);
+  //                   // .then(res => {
+  //                    let id = setInterval(() => {
+  //                     if(nodes.length !==0 ){
+  //                       resultRows = resultRows.concat(nodes);
+  //                       clearInterval(id);
+  //                     }
+  //                   }, 500);
+  //                    world.spark.emit(world.eventname, {
+  //                     rc: global.errcode_none,
+  //                     msg: global.text_success,
+  //                     fguid: world.fguid,
+  //                     rs: resultRows,
+  //                     pdata: world.pdata
+  //                   });
+  //                  } catch (err) {
+  //                   msg += global.text_generalexception + ' ' + err.message;
+  //                     global.log.error({
+  //                       listbuildtemplates_search: true
+  //                     }, msg);
+  //                     world.spark.emit(global.eventerror, {
+  //                       rc: global.errcode_fatal,
+  //                       msg: msg,
+  //                       pdata: world.pdata
+  //                     });
+  //                 }
+  //               }
+  //             );
+
+  //             world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, fguid: world.fguid, rs: result.rows, pdata: world.pdata});
+  //           }
+  //           else
+  //           {
+  //             msg += global.text_generalexception + ' ' + err.message;
+  //             global.log.error({listbuildtemplateroots: true}, msg);
+  //             world.spark.emit(global.eventerror, {rc: global.errcode_fatal, msg: msg, pdata: world.pdata});
+  //           }
+  //         }
+  //       );
+  //     }
+  //     else
+  //     {
+  //       global.log.error({listbuildtemplateroots: true}, global.text_nodbconnection);
+  //       world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
+  //     }
+  //   }
+  // );
 }
 
 function BuildTemplateGetChildren(world)
@@ -8673,7 +9259,10 @@ module.exports.NewProductPricing = NewProductPricing;
 module.exports.SaveProductPricing = SaveProductPricing;
 module.exports.ExpireProductPricing = ExpireProductPricing;
 
-module.exports.ListBuildTemplates = ListBuildTemplates;
+// module.exports.ListBuildTemplates = ListBuildTemplates;
+module.exports.SearchBuildTemplates_ByCodeAndName = SearchBuildTemplates_ByCodeAndName;
+module.exports.SearchRootBuildTemplates_ByCodeAndName = SearchRootBuildTemplates_ByCodeAndName;
+module.exports.ListBuildTemplates_ByParentID = ListBuildTemplates_ByParentID;
 module.exports.ListBuildTemplateRoots = ListBuildTemplateRoots;
 module.exports.BuildTemplateGetChildren = BuildTemplateGetChildren;
 module.exports.NewBuildTemplate = NewBuildTemplate;
@@ -8697,6 +9286,8 @@ module.exports.SaveBuildTemplateDetail = SaveBuildTemplateDetail;
 module.exports.ExpireBuildTemplateDetail = ExpireBuildTemplateDetail;
 
 //
+module.exports.SyncBuildTemplateFromProductTemplate = SyncBuildTemplateFromProductTemplate;
+module.exports.ListBuildTemplates_Pagination = ListBuildTemplates_Pagination;
 module.exports.ListProductTemplates = ListProductTemplates;
 module.exports.NewProductTemplate = NewProductTemplate;
 module.exports.SaveProductTemplate = SaveProductTemplate;

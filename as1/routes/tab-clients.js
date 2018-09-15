@@ -227,7 +227,7 @@ function doClientsTabWidgets()
       },
       onLoadSuccess: function(row)
       {
-        $(this).treegrid('enableDnd');
+        // $('#divClientsTG').treegrid('enableDnd', row ? row.id : null);
       },
       onBeforeDrag: function(source)
       {

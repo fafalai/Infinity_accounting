@@ -2,7 +2,45 @@ var buildtemplatesTabWidgetsLoaded = false;
 
 function doBuildTemplatesTabSearch(value, name)
 {
-  doSearchCodeNameInTree('divBuildTemplatesTG', value);
+  doShowGridLoading('divBuildTemplatesTG');
+
+  if(doNiceString(value) == "")
+  {
+    doServerDataMessage('listbuildtemplates_pagination', {pageSize: pageSize, offset: 0}, {type: 'refresh'});
+
+    $('#divBuildTemplatesTG').treegrid('getPager').pagination({
+      pageSize: pageSize,
+      showPageList : false,
+      showRefresh: false,
+      pageNumber: 1,
+      
+      onSelectPage:function(pageNumber, pageSize){
+        doShowGridLoading('divBuildTemplatesTG');
+        let offset = (parseInt(pageNumber)-1) * parseInt(pageSize);
+        doServerDataMessage('listbuildtemplates_pagination',{pageSize: pageSize, offset: offset}, {type:'refresh'});
+      }
+    });
+  }
+  else
+  {
+    doServerDataMessage('searchbuilttemplates_bycodeandname', {inputValue: value, pageSize : pageSize, offset : 0}, {type: 'refresh'});
+    
+    $('#divBuildTemplatesTG').treegrid('getPager').pagination({
+      pageSize: pageSize,
+      showPageList : false,
+      showRefresh: false,
+      pageNumber: 1,
+  
+      onSelectPage:function(pageNumber, pageSize){
+        doShowGridLoading('divBuildTemplatesTG');
+        let offset = (parseInt(pageNumber)-1) * parseInt(pageSize);
+        doServerDataMessage('searchbuilttemplates_bycodeandname', {inputValue: value, pageSize : pageSize, offset : offset}, {type: 'refresh'});
+      }
+    });
+
+  // doServerDataMessage('searchrootbuildtemplates_bycodeandname', {inputValue:value}, {type: 'refresh'});
+  }
+  // doSearchCodeNameInTree('divBuildTemplatesTG', value);
 }
 
 function doBuildTemplatesTabWidgets()
@@ -216,7 +254,17 @@ function doBuildTemplatesTabWidgets()
 
   function doSaved(ev, args)
   {
-    doServerMessage('listbuildtemplateroots', {type: 'refresh', buildtemplateid: args.data.buildtemplateid});
+    let pageNumber = 1;
+    if (args.data.pageNumber > 1) {
+      pageNumber = args.data.pageNumber;
+      $('#divBuildTemplatesTG').treegrid('gotoPage',args.data.pageNumber);
+    }
+
+    let offset = (parseInt(pageNumber)-1) * parseInt(pageSize);
+    doServerDataMessage('listbuildtemplates_pagination',{pageSize: pageSize, offset: offset}, {type:'refresh'});
+
+    // doServerDataMessage('listbuildtemplate_ByparentID', {buildtemplateid : args.data.buildtemplateid}, {type: 'refresh'});
+    // doServerMessage('listbuildtemplateroots', {type: 'refresh', buildtemplateid: args.data.buildtemplateid});
   }
 
   function doFooter()
@@ -231,16 +279,19 @@ function doBuildTemplatesTabWidgets()
   $('#divEvents').on('expirebuildtemplate', doSaved);
   $('#divEvents').on('syncbuildtemplatestomaster', doSaved);
   $('#divEvents').on('productupdated', doSaved);
-
+  $('#divEvents').on('syncbuildtemplatesaved', doSaved);
+  
   $('#divEvents').on
   (
-    'listbuildtemplates',
+    'listbuildtemplates_search',
     function(ev, args)
     {
       $('#divBuildTemplatesTG').treegrid('loadData', cache_buildtemplates);
       doFooter();
 
       doExpandTreeToId('divBuildTemplatesTG', args.pdata.buildtemplateid);
+
+      doShowGridLoaded('divBuildTemplatesTG');
     }
   );
 
@@ -293,9 +344,37 @@ function doBuildTemplatesTabWidgets()
     }
   );
 
+  $('#divEvents').on('searchbuilttemplates_bycodeandname', (ev, args) => {
+    let totalCount = parseInt(args.data.totalCount);
+    $('#divBuildTemplatesTG').treegrid('loadData', {total: totalCount, rows: cache_buildtemplates});
+    doFooter();
+
+    // treePaganiation.pagination('select',1);
+    doShowGridLoaded('divBuildTemplatesTG');
+
+  });
+
+
+  $('#divEvents').on('listbuildtemplates_pagination', (ev, args) => {
+
+    let totalCount = parseInt(args.data.totalCount);
+    // let pageNumber = 1;
+    if (args.data.pageNumber > 1) {
+      $('#divBuildTemplatesTG').treegrid('gotoPage',args.data.pageNumber);
+    }
+    // if(args.data.pageNumber)
+    $('#divBuildTemplatesTG').treegrid('loadData', {total: totalCount, rows: cache_buildtemplates});
+    
+    doFooter();
+
+    doShowGridLoaded('divBuildTemplatesTG');
+    
+  });
+
   $('#divBuildTemplatesTG').treegrid
   (
     {
+      pagination: true,
       idField: 'id',
       treeField: 'code',
       lines: true,
@@ -306,12 +385,11 @@ function doBuildTemplatesTabWidgets()
       striped: true,
       toolbar: '#tbBuildTemplates',
       showFooter: true,
-      pagination: true,
-      // loader: function(param, success, error)
-      // {
-      //   success({total: cache_buildtemplates.length, rows: cache_buildtemplates});
-      //   doFooter();
-      // },
+      loader: function(param, success, error)
+      {
+        success({total: cache_buildtemplates.length, rows: cache_buildtemplates});
+        doFooter();
+      },
       frozenColumns:
       [
         [
@@ -333,21 +411,24 @@ function doBuildTemplatesTabWidgets()
           {title: 'By',         field: 'by',                      width: 200, align: 'left',  resizable: true}
         ]
       ],
+      onBeforeLoad: function (row, param) {
+        // if (!row) { // load top level rows
+        //   param.id = 0; // set id=0, indicate to load new page rows
+        // }
+      },
       onContextMenu: function(e, row)
       {
-        doTreeGridContextMenu('divBuildTemplatesTG', 'divBuildTemplatesMenuPopup', e, row);
+        doTreeGridContextMenu("divBuildTemplatesTG", "divBuildTemplatesMenuPopup", e, row);
       },
       onLoadSuccess: function(row)
       {
-        $(this).treegrid('enableDnd');
-      },
-      onDblClickCell: function(field, row)
-      {
+        $(this).treegrid("enableDnd", row ? row.id : null);
       },
       onBeforeDrag: function(source)
       {
         if (editingId)
           return false;
+        
         return true;
       },
       onDragOver: function(target, source)
@@ -356,11 +437,14 @@ function doBuildTemplatesTabWidgets()
       },
       onBeforeDrop: function(target, source, point)
       {
-        return true;
+        let pageNumber = $('#divBuildTemplatesTG').treegrid('getPager').data('pagination').options.pageNumber;
+        doServerDataMessage('changebuildtemplateparent', {buildtemplateid: source.id, parentid: target.id, pageNumber: pageNumber}, {type: 'refresh'});
+        // return true;
       },
       onDrop: function(target, source, point)
       {
-        doServerDataMessage('changebuildtemplateparent', {buildtemplateid: source.id, parentid: target.id}, {type: 'refresh'});
+        // let pageNumber = $('#divBuildTemplatesTG').treegrid('getPager').data('pagination').options.pageNumber;
+        // doServerDataMessage('changebuildtemplateparent', {buildtemplateid: source.id, parentid: target.id, pageNumber: pageNumber}, {type: 'refresh'});
       },
       onClickRow: function(row)
       {
@@ -379,33 +463,30 @@ function doBuildTemplatesTabWidgets()
       },
       onDblClickCell: function(field, row)
       {
-        doTreeGridStartEdit
-        (
-          'divBuildTemplatesTG',
-          editingId,
-          function(row, id)
-          {
-            editingId = id;
+        // doTreeGridStartEdit
+        // (
+        //   'divBuildTemplatesTG',
+        //   editingId,
+        //   function(row, id)
+        //   {
+        //     editingId = id;
 
-            if (['numproducts', 'modified', 'by'].indexOf(field) != -1)
-              field = 'name';
+        //     if (['numproducts', 'modified', 'by'].indexOf(field) != -1)
+        //       field = 'name';
 
-            doTreeGridGetEditor
-            (
-              'divBuildTemplatesTG',
-              editingId,
-              field,
-              function(ed)
-              {
-              }
-            );
-          }
-        );
+        //     doTreeGridGetEditor
+        //     (
+        //       'divBuildTemplatesTG',
+        //       editingId,
+        //       field,
+        //       function(ed)
+        //       {
+        //       }
+        //     );
+        //   }
+        // );
       }
     }
   );
-
-
-
 }
 

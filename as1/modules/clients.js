@@ -287,6 +287,20 @@ function doNewClient(tx, world)
           {
             var clientid = result.rows[0].id;
 
+            new_clientNote_list.forEach((e) => {
+              tx.query('insert into clientnotes (customers_id,clients_id,userscreated_id,notes) values ($1,$2,$3,$4)',
+              [
+                e.custid,
+                __.sanitiseAsBigInt(clientid),
+                e.userid,
+                __.escapeHTML(e.notes)
+              ], 
+              (err,result) => {
+                if(err)
+                  reject(err);
+              });
+            });
+
             tx.query
             (
               'select c1.datecreated,u1.name usercreated from clients c1 left join users u1 on (c1.userscreated_id=u1.id) where c1.customers_id=$1 and c1.id=$2',
@@ -718,12 +732,13 @@ function doSaveClientAttachment(tx, world)
     {
       tx.query
       (
-        'update clientattachments set description=$1,datemodified=now(),usersmodified_id=$2 where customers_id=$3 and id=$4 and dateexpired is null',
+        'update clientattachments set name=$5,description=$1,datemodified=now(),usersmodified_id=$2 where customers_id=$3 and id=$4 and dateexpired is null',
         [
           __.sanitiseAsString(world.description),
           world.cn.userid,
           world.cn.custid,
-          __.sanitiseAsBigInt(world.clientattachmentid)
+          __.sanitiseAsBigInt(world.clientattachmentid),
+          __.sanitiseAsString(world.name)
         ],
         function(err, result)
         {
@@ -796,6 +811,84 @@ function doExpireClientAttachment(tx, world)
   );
   return promise;
 }
+
+function doNewFolderClientAttachment(tx, world) {
+  return new global.rsvp.Promise(
+    (resolve, reject) => {
+      tx.query(
+        'INSERT INTO clientattachments (customers_id, name, clients_id, datecreated, userscreated_id, parent_id, mimetype) VALUES ($1, $2, $3, now(), $4, $5, $6) returning id',
+        [
+          world.cn.custid,
+          'New Folder',
+          __.sanitiseAsBigInt(world.clientid),
+          world.cn.userid,
+          __.sanitiseAsBigInt(world.parentid),
+          'Folder'
+        ],
+        (err, result) => {
+          if (!err) {
+            tx.query
+            (
+              'select a1.clients_id clientid,a1.dateexpired,u1.name, a1.datemodified, u1.name from clientattachments a1 left join users u1 on (a1.usersmodified_id=u1.id) where a1.customers_id=$1 and a1.id=$2',
+              [
+                world.cn.custid,
+                __.sanitiseAsBigInt(result.id)
+              ],
+              function(err, result)
+              {
+                if (!err)
+                  resolve({datemodified: global.moment(result.rows[0].datemodified).format('YYYY-MM-DD HH:mm:ss'), usermodified: result.rows[0].name});
+                else
+                  reject(err);
+              }
+            );
+            
+          } else {
+            reject(err);
+          }
+        }
+      );
+    }
+  );
+}
+
+function doChangeClientAttachmentParent(tx, world) {
+  return new global.rsvp.Promise(
+    (resolve, reject) => {
+      tx.query(
+        'update clientattachments set parent_id=$1, datemodified=now(),usersmodified_id=$2 where customers_id=$3 and id=$4',
+        [
+          __.sanitiseAsBigInt(world.parentid),
+          world.cn.userid,
+          world.cn.custid,
+          __.sanitiseAsBigInt(world.clientattachmentid)
+        ],
+        (err, result) => {
+          if (!err) {
+            tx.query
+            (
+              'select a1.clients_id clientid,a1.dateexpired,u1.name, a1.datemodified from clientattachments a1 left join users u1 on (a1.usersmodified_id=u1.id) where a1.customers_id=$1 and a1.id=$2',
+              [
+                world.cn.custid,
+                __.sanitiseAsBigInt(world.clientattachmentid)
+              ],
+              function(err, result)
+              {
+                if (!err)
+                  resolve({clientid: result.rows[0].clientid, datemodified: global.moment(result.rows[0].datemodified).format('YYYY-MM-DD HH:mm:ss'), usermodified: result.rows[0].name});
+                else
+                  reject(err);
+              }
+            );
+          } else {
+            reject(err);
+          }
+        }
+      );
+    }
+  );
+}
+
 
 // *******************************************************************************************************************************************************************************************
 // Public functions
@@ -980,6 +1073,7 @@ function ListClients(world)
           'c1.isactive,' +
           'c1.datecreated,' +
           'c1.datemodified,' +
+          // 'c1.pricelevel,' +
           'c2.id parentid,' +
           'c2.code parentcode,' +
           'c2.name parentname,' +
@@ -1551,80 +1645,106 @@ function ListEmails(world)
   );
 }
 
+let new_clientNote_list = [];
+let clientnote_id = 0;
+function NewClientNote_noclientid(world) {
+  new_clientNote_list.push({
+    id: ++clientnote_id,
+    custid: world.cn.custid,
+    userid: world.cn.userid,
+    usercreated: world.cn.uname,
+    notes: "",
+    datecreated: global.moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+  });
+   world.spark.emit('listnewclientnote', {
+    rc: global.errcode_none,
+    msg: global.text_success,
+    rs: new_clientNote_list,
+    pdata: world.pdata
+  });
+}
+
+function CleanNewClientNode() {
+  new_clientNote_list = [];
+  clientnote_id = 0;
+}
+
 function ListClientNotes(world)
 {
-  var msg = '[' + world.eventname + '] ';
-  //
-  global.pg.connect
-  (
-    global.cs,
-    function(err, client, done)
-    {
-      if (!err)
-      {
-        client.query
-        (
-          'select ' +
-          'cn1.id,' +
-          'cn1.notes,' +
-          'cn1.datecreated,' +
-          'cn1.datemodified,' +
-          'u1.name usercreated,' +
-          'u2.name usermodified ' +
-          'from ' +
-          'clientnotes cn1 left join users u1 on (cn1.userscreated_id=u1.id) ' +
-          '                left join users u2 on (cn1.usersmodified_id=u2.id) ' +
-          'where ' +
-          'cn1.customers_id=$1 ' +
-          'and ' +
-          'cn1.clients_id=$2 ' +
-          'and ' +
-          'cn1.dateexpired is null ' +
-          'order by ' +
-          'cn1.datecreated desc',
-          [
-            world.cn.custid,
-            __.sanitiseAsBigInt(world.clientid)
-          ],
-          function(err, result)
-          {
-            done();
+  if (world.clientid == null) {
+    world.spark.emit('listnewclientnote', {
+      rc: global.errcode_none,
+      msg: global.text_success,
+      fguid: world.fguid,
+      rs: new_clientNote_list,
+      pdata: world.pdata
+    });
+  } else {
+    var msg = '[' + world.eventname + '] ';
+    //
+    global.pg.connect(
+      global.cs,
+      function (err, client, done) {
+        if (!err) {
+          client.query(
+            'select ' +
+            'cn1.id,' +
+            'cn1.notes,' +
+            'cn1.datecreated,' +
+            'cn1.datemodified,' +
+            'u1.name usercreated,' +
+            'u2.name usermodified ' +
+            'from ' +
+            'clientnotes cn1 left join users u1 on (cn1.userscreated_id=u1.id) ' +
+            '                left join users u2 on (cn1.usersmodified_id=u2.id) ' +
+            'where ' +
+            'cn1.customers_id=$1 ' +
+            'and ' +
+            'cn1.clients_id=$2 ' +
+            'and ' +
+            'cn1.dateexpired is null ' +
+            'order by ' +
+            'cn1.datecreated desc',
+            [
+              world.cn.custid,
+              __.sanitiseAsBigInt(world.clientid)
+            ],
+            function (err, result) {
+              done();
 
-            if (!err)
-            {
-              // JS returns date with TZ info/format, need in ISO format...
-              result.rows.forEach
-              (
-                function(p)
-                {
-                  if (!__.isUN(p.notes))
-                    p.notes = __.unescapeHTML(p.notes);
+              if (!err) {
+                // JS returns date with TZ info/format, need in ISO format...
+                result.rows.forEach(
+                  function (p) {
+                    if (!__.isUN(p.notes))
+                      p.notes = __.unescapeHTML(p.notes);
 
-                  if (!__.isUN(p.datemodified))
-                    p.datemodified = global.moment(p.datemodified).format('YYYY-MM-DD HH:mm:ss');
+                    if (!__.isUN(p.datemodified))
+                      p.datemodified = global.moment(p.datemodified).format('YYYY-MM-DD HH:mm:ss');
 
-                  p.datecreated = global.moment(p.datecreated).format('YYYY-MM-DD HH:mm:ss');
-                }
-              );
+                    p.datecreated = global.moment(p.datecreated).format('YYYY-MM-DD HH:mm:ss');
+                  }
+                );
 
-              world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, fguid: world.fguid, rs: result.rows, pdata: world.pdata});
+                world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, fguid: world.fguid, rs: result.rows, pdata: world.pdata});
+              }
+              else
+              {
+                msg += global.text_generalexception + ' ' + err.message;
+                global.log.error({listordernotes: true}, msg);
+                world.spark.emit(global.eventerror, {rc: global.errcode_fatal, msg: msg, pdata: world.pdata});
+              }
             }
-            else
-            {
-              msg += global.text_generalexception + ' ' + err.message;
-              global.log.error({listordernotes: true}, msg);
-              world.spark.emit(global.eventerror, {rc: global.errcode_fatal, msg: msg, pdata: world.pdata});
-            }
-          }
-        );
+          );
+        }
+        else
+        {
+          global.log.error({listordernotes: true}, global.text_nodbconnection);
+          world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
+        }
       }
-      else
-      {
-        global.log.error({listordernotes: true}, global.text_nodbconnection);
-        world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
-      }
-    }
-  );
+    );
+  }
 }
 
 function NewClientNote(world)
@@ -1736,6 +1856,19 @@ function NewClientNote(world)
   );
 }
 
+function SaveClientNote_newClient(world)
+{
+    new_clientNote_list[world.clientnoteid-1].notes = world.notes;
+
+    world.spark.emit('listnewclientnote',
+    {
+      rc: global.errcode_none,
+      msg: global.text_success,
+      rs:new_clientNote_list,
+      pdata: world.pdata
+    });
+}
+
 function SaveClientNote(world)
 {
   var msg = '[' + world.eventname + '] ';
@@ -1843,6 +1976,7 @@ function ListClientAttachments(world)
           'ca1.size,' +
           'ca1.datecreated,' +
           'ca1.datemodified,' +
+          'ca1.parent_id parentid,' +
           'u1.name usercreated,' +
           'u2.name usermodified ' +
           'from ' +
@@ -1855,7 +1989,10 @@ function ListClientAttachments(world)
           'and ' +
           'ca1.dateexpired is null ' +
           'order by ' +
-          'ca1.datecreated desc',
+          'ca1.path, ' + 
+          'ca1.id desc,'+
+          'ca1.name',
+          // 'ca1.datecreated desc',
           [
             world.cn.custid,
             __.sanitiseAsBigInt(world.clientid)
@@ -1881,7 +2018,25 @@ function ListClientAttachments(world)
                 }
               );
 
-              world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, fguid: world.fguid, rs: result.rows, pdata: world.pdata});
+              world.spark.emit(world.eventname, {
+                rc: global.errcode_none,
+                msg: global.text_success,
+                fguid: world.fguid,
+                rs: result.rows,
+                clientid: world.clientid,
+                pdata: world.pdata
+              });
+
+              // world.spark.emit(world.eventname, {
+              //   rc: global.errcode_none,
+              //   msg: global.text_success,
+              //   clientid: result.clientid,
+              //   clientattachmentid: world.clientattachmentid,
+              //   dateexpired: result.dateexpired,
+              //   userexpired: result.userexpired,
+              //   pdata: world.pdata
+              // });
+
             }
             else
             {
@@ -1981,6 +2136,83 @@ function SaveClientAttachment(world)
       else
       {
         global.log.error({saveclientattachment: true}, global.text_nodbconnection);
+        world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
+      }
+    }
+  );
+}
+
+function ChangeClientAttachmentParent(world) {
+  var msg = '[' + world.eventname + '] ';
+  
+  global.pg.connect(
+    global.cs,
+    (err, client, done) => {
+      if (!err) {
+        let tx = new global.pgtx(client);
+        tx.begin(
+          (err) => {
+            if (!err) {
+              doChangeClientAttachmentParent(tx, world).then(
+                (result) => {
+                  tx.commit(
+                    (err) => {
+                      if(!err){
+                        done();
+                        world.spark.emit(world.eventname, {
+                          rc: global.errcode_none,
+                          msg: global.text_success,
+                          clientid: result.clientid,
+                          clientattachmentid: world.clientattachmentid,
+                          usermodified: result.usermodified,
+                          datemodified: result.datemodified,
+                          dateexpired: result.dateexpired,
+                          userexpired: result.userexpired,
+                          pdata: world.pdata
+                        });
+
+                        global.pr.sendToRoomExcept(global.custchannelprefix + world.cn.custid, 'clientattachmentsaved', {
+                          clientid: result.clientid,
+                          clientattachmentid: world.clientattachmentid,
+                          usermodified: result.usermodified,
+                          datemodified: result.datemodified,
+                          dateexpired: result.dateexpired,
+                          userexpired: result.userexpired
+                        }, world.spark.id);
+                        
+
+                      } else {
+                        done();
+                        tx.rollback(() => {
+                          msg += global.text_notxstart + ' ' + err.message;
+                          global.log.error({changeclientattachmentparent: true}, msg);
+                          world.spark.emit(global.eventerror, {rc: global.errcode_dberr, msg: msg, pdata: world.pdata});
+                        });
+                      }
+                    }
+                  );
+                }
+              ).catch(
+                (err) => {
+                  done();
+                  tx.rollback(() => {
+                      msg += global.text_notxstart + ' ' + err.message;
+                      global.log.error({changeclientattachmentparent: true}, msg);
+                      world.spark.emit(global.eventerror, {rc: global.errcode_dberr, msg: msg, pdata: world.pdata});
+                  });
+                }
+              );
+            } else {
+              done();
+              msg += global.text_notxstart + ' ' + err.message;
+              global.log.error({changeclientattachmentparent: true}, msg);
+              world.spark.emit(global.eventerror, {rc: global.errcode_dberr, msg: msg, pdata: world.pdata});
+            }
+          }
+        );
+      } else {
+        done();
+        global.log.error({changeclientattachmentparent: true}, global.text_nodbconnection);
         world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
       }
     }
@@ -2212,6 +2444,65 @@ function SearchClientNote(world)
   );
 }
 
+function NewFolderClientAttachment(world){
+  var msg = '[' + world.eventname + '] ';
+  global.pg.connect(
+    global.cs,
+    (err, client, done) => {
+      if(!err){
+        let tx = new global.pgtx(client);
+        tx.begin(
+          (err) => {
+            if(!err){
+              doNewFolderClientAttachment(tx, world).then(
+                  (result) => {
+                    tx.commit(
+                      (err) => {
+                        if (!err) {
+                          world.spark.emit(world.eventname, {rc: global.errcode_none, msg: global.text_success, clientid: world.clientid, pdata: world.pdata});
+                          global.pr.sendToRoomExcept(global.custchannelprefix + world.cn.custid, 'listclientattachments', {clientid: world.clientid}, world.spark.id);
+                        } else {
+                          done();
+                          tx.rollback(
+                            () => {
+                              msg += global.text_notxstart + ' ' + err.message;
+                              global.log.error({newfolderclientattachment: true}, msg);
+                              world.spark.emit(global.eventerror, {rc: global.errcode_dberr, msg: msg, pdata: world.pdata});
+                            }
+                          );
+                        }
+                      }
+                    );
+                  }
+                ).catch(
+                (err) => {
+                  done();
+                  tx.rollback(
+                    () => {
+                      msg += global.text_notxstart + ' ' + err.message;
+                      global.log.error({newfolderclientattachment: true}, msg);
+                      world.spark.emit(global.eventerror, {rc: global.errcode_dberr, msg: msg, pdata: world.pdata});
+                    }
+                  );
+                }
+              );
+            } else {
+              done();
+              msg += global.text_notxstart + ' ' + err.message;
+              global.log.error({newfolderclientattachment: true}, msg);
+              world.spark.emit(global.eventerror, {rc: global.errcode_dberr, msg: msg, pdata: world.pdata});
+            }
+          }
+        );
+      } else {
+        done();
+        global.log.error({newfolderclientattachment: true}, global.text_nodbconnection);
+        world.spark.emit(global.eventerror, {rc: global.errcode_dbunavail, msg: global.text_nodbconnection, pdata: world.pdata});
+      }
+    }
+  );
+}
+
 // *******************************************************************************************************************************************************************************************
 // Internal functions
 module.exports.doNewClient = doNewClient;
@@ -2230,6 +2521,11 @@ module.exports.ListAllEmails = ListAllEmails;
 module.exports.ListEmails = ListEmails;
 module.exports.CheckClientCode = CheckClientCode;
 
+module.exports.CleanNewClientNode = CleanNewClientNode;
+module.exports.NewClientNote_noclientid = NewClientNote_noclientid;
+module.exports.SaveClientNote_newClient = SaveClientNote_newClient;
+module.exports.ListClientNotes = ListClientNotes;
+
 module.exports.ListClientNotes = ListClientNotes;
 module.exports.NewClientNote = NewClientNote;
 module.exports.SaveClientNote = SaveClientNote;
@@ -2238,4 +2534,5 @@ module.exports.SearchClientNote = SearchClientNote;
 module.exports.ListClientAttachments = ListClientAttachments;
 module.exports.SaveClientAttachment = SaveClientAttachment;
 module.exports.ExpireClientAttachment = ExpireClientAttachment;
-
+module.exports.NewFolderClientAttachment = NewFolderClientAttachment;
+module.exports.ChangeClientAttachmentParent = ChangeClientAttachmentParent;

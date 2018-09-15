@@ -723,7 +723,7 @@ __.mixin
           if (next > 9)
           {
             next = 0;
-            carry = true
+            carry = true;
           }
 
           if (carry && (i === 0))
@@ -828,7 +828,8 @@ __.mixin
 
       if (hours > 0)
       {
-        var txt = '';
+        // var txt = '';
+        txt = '';
 
         if (hours == 1)
           txt = '1 hour';
@@ -1719,7 +1720,7 @@ function makeWorld(spark, eventname, data)
     }
   );
   return promise;
-};
+}
 
 // *******************************************************************************************************************************************************************************************
 // Begin code execution...
@@ -3659,6 +3660,33 @@ function main()
 
       spark.on
       (
+        'cleanClientnoteLocally',
+        (data) => {
+          try
+          {
+            makeWorld(spark, 'cleanOrdernoteLocally', data).then
+            (
+              function(world)
+              {
+                global.modclients.CleanNewClientNode();
+              }
+            ).then
+            (
+              null,
+              function(err)
+              {
+              }
+            );
+          }
+          catch (err) 
+          {
+            global.log.error({as1: true}, '[cleanClientnoteLocally] ' + global.text_generalexception + ' ' + err.message);
+          }
+        }
+      );
+
+      spark.on
+      (
         'newclientnote',
         function(data)
         {
@@ -3669,6 +3697,14 @@ function main()
               function(world)
               {
                 global.modclients.NewClientNote(world);
+                if(world.clientid == null)
+                {
+                  global.modclients.NewClientNote_noclientid(world);
+                }
+                else
+                { 
+                  global.modclients.NewClientNote(world);
+                }
               }
             ).then
             (
@@ -3717,6 +3753,34 @@ function main()
 
       spark.on
       (
+        'saveclientnote_newClient',
+        function(data)
+        {
+          try
+          {
+            makeWorld(spark, 'saveclientnote_newClient', data, '*clientnoteid', 'notes').then
+            (
+              function(world)
+              {
+                global.modclients.SaveClientNote_newClient(world);
+              }
+            ).then
+            (
+              null,
+              function(err)
+              {
+              }
+            );
+          }
+           catch (err)
+          {
+            global.log.error({as1: true}, '[saveclientnote_newClient] ' + global.text_generalexception + ' ' + err.message);
+          }
+        }
+      );
+
+      spark.on
+      (
         'searchclientnote',
         function(data)
         {
@@ -3745,6 +3809,36 @@ function main()
       );
 
       // Client attachment requests
+
+      spark.on
+      (
+        'newfolderclientattachment',
+        function(data)
+        {
+          try
+          {
+            makeWorld(spark, 'newfolderclientattachment', data, '*clientid','parentid').then
+            (
+              function(world)
+              {
+                global.modclients.NewFolderClientAttachment(world);
+              }
+            ).then
+            (
+              null,
+              function(err)
+              {
+              }
+            );
+          }
+
+          catch (err)
+          {
+            global.log.error({as1: true}, '[newfolderclientattachment] ' + global.text_generalexception + ' ' + err.message);
+          }
+        }
+      );
+
       spark.on
       (
         'listclientattachments',
@@ -3781,7 +3875,7 @@ function main()
         {
           try
           {
-            makeWorld(spark, 'saveclientattachment', data, '*clientattachmentid', '*description').then
+            makeWorld(spark, 'saveclientattachment', data, '*name','*clientattachmentid', '*description').then
             (
               function(world)
               {
@@ -3799,6 +3893,35 @@ function main()
           catch (err)
           {
             global.log.error({as1: true}, '[saveclientattachment] ' + global.text_generalexception + ' ' + err.message);
+          }
+        }
+      );
+
+      spark.on
+      (
+        'changeclientattachmentparent',
+        function(data)
+        {
+          try
+          {
+            makeWorld(spark, 'changeclientattachmentparent', data, '*clientattachmentid','*parentid').then
+            (
+              function(world)
+              {
+                global.modclients.ChangeClientAttachmentParent(world);
+              }
+            ).then
+            (
+              null,
+              function(err)
+              {
+              }
+            );
+          }
+
+          catch (err)
+          {
+            global.log.error({as1: true}, '[changeclientattachmentparent] ' + global.text_generalexception + ' ' + err.message);
           }
         }
       );
@@ -5760,16 +5883,16 @@ function main()
       // Build template requests
       spark.on
       (
-        'listbuildtemplates',
+        'searchrootbuildtemplates_bycodeandname',
         function(data)
         {
           try
           {
-            makeWorld(spark, 'listbuildtemplates', data).then
+            makeWorld(spark, 'searchrootbuildtemplates_bycodeandname', data, '*inputValue').then
             (
               function(world)
               {
-                global.modproducts.ListBuildTemplates(world);
+                global.modproducts.SearchRootBuildTemplates_ByCodeAndName(world);
               }
             ).then
             (
@@ -5782,10 +5905,103 @@ function main()
 
           catch (err)
           {
-            global.log.error({as1: true}, '[listbuildtemplates] ' + global.text_generalexception + ' ' + err.message);
+            global.log.error({as1: true}, '[searchrootbuildtemplates_bycodeandname] ' + global.text_generalexception + ' ' + err.message);
           }
         }
       );
+
+
+      spark.on
+      (
+        'searchbuilttemplates_bycodeandname',
+        function(data)
+        {
+          try
+          {
+            makeWorld(spark, 'searchbuilttemplates_bycodeandname', data, '*inputValue','*pageSize','*offset').then
+            (
+              function(world)
+              {
+                global.modproducts.SearchBuildTemplates_ByCodeAndName(world);
+              }
+            ).then
+            (
+              null,
+              function(err)
+              {
+              }
+            );
+          }
+
+          catch (err)
+          {
+            global.log.error({as1: true}, '[searchbuilttemplates_bycodeandname] ' + global.text_generalexception + ' ' + err.message);
+          }
+        }
+      );
+
+
+
+
+      spark.on
+      (
+        'listbuildtemplate_ByparentID',
+        function(data)
+        {
+          try
+          {
+            makeWorld(spark, 'listbuildtemplate_ByparentID', data, '*buildtemplateid').then
+            (
+              function(world)
+              {
+                global.modproducts.ListBuildTemplates_ByParentID(world);
+              }
+            ).then
+            (
+              null,
+              function(err)
+              {
+              }
+            );
+          }
+
+          catch (err)
+          {
+            global.log.error({as1: true}, '[listbuildtemplate_ByparentID] ' + global.text_generalexception + ' ' + err.message);
+          }
+        }
+      );
+
+      spark.on
+      (
+        'listbuildtemplates_pagination',
+        function(data)
+        {
+          try
+          {
+            makeWorld(spark, 'listbuildtemplates_pagination', data, '*pageSize','*offset','pageNumber').then
+            (
+              function(world)
+              {
+                global.modproducts.ListBuildTemplates_Pagination(world);
+              }
+            ).then
+            (
+              null,
+              function(err)
+              {
+              }
+            );
+          }
+
+          catch (err)
+          {
+            global.log.error({as1: true}, '[listbuildtemplates_pagination] ' + global.text_generalexception + ' ' + err.message);
+          }
+        }
+      );
+
+
 
       spark.on
       (
@@ -5816,6 +6032,7 @@ function main()
         }
       );
 
+
       spark.on
       (
         'newbuildtemplate',
@@ -5823,6 +6040,7 @@ function main()
         {
           try
           {
+            console.log(data);
             makeWorld(spark, 'newbuildtemplate', data, '*code', '*templates', 'clientid').then
             (
               function(world)
@@ -5844,6 +6062,36 @@ function main()
           }
         }
       );
+
+      spark.on
+      (
+        'syncbuildtemplatefromproducttemplate',
+        function(data)
+        {
+          try
+          {
+            makeWorld(spark, 'syncbuildtemplatefromproducttemplate', data, '*producttemplateid').then
+            (
+              function(world)
+              {
+                global.modproducts.SyncBuildTemplateFromProductTemplate(world);
+              }
+            ).then
+            (
+              null,
+              function(ignore)
+              {
+              }
+            );
+          }
+
+          catch (err)
+          {
+            global.log.error({as1: true}, '[syncbuildtemplatefromproducttemplate] ' + global.text_generalexception + ' ' + err.message);
+          }
+        }
+      );
+
 
       spark.on
       (
@@ -5881,7 +6129,7 @@ function main()
         {
           try
           {
-            makeWorld(spark, 'changebuildtemplateparent', data, '*buildtemplateid', '*parentid').then
+            makeWorld(spark, 'changebuildtemplateparent', data, '*buildtemplateid', '*parentid','pageNumber').then
             (
               function(world)
               {
@@ -5902,6 +6150,7 @@ function main()
           }
         }
       );
+
 
       spark.on
       (
@@ -5931,6 +6180,7 @@ function main()
           }
         }
       );
+
 
       spark.on
       (
@@ -6077,6 +6327,37 @@ function main()
         }
       );
 
+
+      spark.on
+      (
+        'listbuildtemplateroots',
+        function(data)
+        {
+          try
+          {
+            makeWorld(spark, 'buildtemplatesearch', data, '*value').then
+            (
+              function(world)
+              {
+                global.modproducts.SearchBuildTemplates(world);
+              }
+            ).then
+            (
+              null,
+              function(err)
+              {
+              }
+            );
+          }
+
+          catch (err)
+          {
+            global.log.error({as1: true}, '[buildtemplatesearch] ' + global.text_generalexception + ' ' + err.message);
+          }
+        }
+      );
+
+
       // Build template detail requests
       spark.on
       (
@@ -6136,6 +6417,7 @@ function main()
         }
       );
 
+
       spark.on
       (
         'newbuildtemplatedetail',
@@ -6165,6 +6447,7 @@ function main()
         }
       );
 
+
       spark.on
       (
         'savebuildtemplatedetail',
@@ -6193,6 +6476,7 @@ function main()
           }
         }
       );
+
 
       spark.on
       (
@@ -6282,6 +6566,7 @@ function main()
         }
       );
 
+
       spark.on
       (
         'newproducttemplate',
@@ -6310,6 +6595,7 @@ function main()
           }
         }
       );
+
 
       spark.on
       (
@@ -6368,6 +6654,7 @@ function main()
           }
         }
       );
+
 
       spark.on
       (
@@ -6485,6 +6772,7 @@ function main()
         }
       );
 
+
       // Product template detail requests
       spark.on
       (
@@ -6543,6 +6831,7 @@ function main()
           }
         }
       );
+
 
       spark.on
       (
@@ -6631,6 +6920,7 @@ function main()
         }
       );
 
+
       // Product pricing requests
 
       spark.on
@@ -6669,7 +6959,7 @@ function main()
         {
           try
           {
-            makeWorld(spark, 'getprice', data, '*productid', 'clientid', 'qty').then
+            makeWorld(spark, 'getprice', data, '*productid', 'clientid', 'qty','pricelevel','discountcode').then
             (
               function(world)
               {
@@ -7456,6 +7746,33 @@ function main()
 
       spark.on
       (
+        'cleanOrdernoteLocally',
+        (data) => {
+          try
+          {
+            makeWorld(spark, 'cleanOrdernoteLocally', data).then
+            (
+              function(world)
+              {
+                global.modorders.CleanOrderNoteLocally();
+              }
+            ).then
+            (
+              null,
+              function(err)
+              {
+              }
+            );
+          }
+          catch (err) 
+          {
+            global.log.error({as1: true}, '[cleanOrdernoteLocally] ' + global.text_generalexception + ' ' + err.message);
+          }
+        }
+      );
+
+      spark.on
+      (
         'newordernote',
         function(data)
         {
@@ -7465,7 +7782,12 @@ function main()
             (
               function(world)
               {
-                global.modorders.NewOrderNote(world);
+                //global.modorders.NewOrderNote(world);
+                if(world.orderid == null){
+                  global.modorders.NewOrderNote_NoOrderID(world);
+                }
+                else
+                  global.modorders.NewOrderNote(world);
               }
             ).then
             (
@@ -7479,6 +7801,34 @@ function main()
           catch (err)
           {
             global.log.error({as1: true}, '[newordernote] ' + global.text_generalexception + ' ' + err.message);
+          }
+        }
+      );
+
+      spark.on
+      (
+        'saveordernote_neworder',
+        function(data)
+        {
+          try
+          {
+            makeWorld(spark, 'saveordernote_neworder', data, '*ordernoteid', 'notes').then
+            (
+              function(world)
+              {
+                global.modorders.SaveOrderNote_NewOrder(world);
+              }
+            ).then
+            (
+              null,
+              function(err)
+              {
+              }
+            );
+          }
+           catch (err)
+          {
+            global.log.error({as1: true}, '[saveordernote] ' + global.text_generalexception + ' ' + err.message);
           }
         }
       );

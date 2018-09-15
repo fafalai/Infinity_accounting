@@ -1,7 +1,8 @@
-function doDlgProductSelect(clientid, enableprice, usecostprice, callback)
+function doDlgProductSelect(clientid,pricelevel, enableprice, usecostprice, callback)
 {
   console.log(clientid);
   console.log(usecostprice);
+  console.log(pricelevel);
   // console.log($('#divEvents'));
   // Filtered products (by client)
   var fp = [];
@@ -126,6 +127,7 @@ function doDlgProductSelect(clientid, enableprice, usecostprice, callback)
           {
             id: p.id,
             code: p.code,
+            discount:p.discountcodeid,
             productcategoryname: p.productcategoryname
           }
         );
@@ -134,6 +136,7 @@ function doDlgProductSelect(clientid, enableprice, usecostprice, callback)
   );
 
   console.log(fp.length);
+  //console.log(fp[0].discount);
 
   $('#dlgProductSelect').dialog
   (
@@ -161,7 +164,8 @@ function doDlgProductSelect(clientid, enableprice, usecostprice, callback)
             {
               var qty = $('#fldProductSelectQty').numberbox('getValue');
               console.log("product select box fire getprice event");
-              primus.emit('getprice', {fguid: fguid, uuid: uuid, session: session, clientid: clientid, productid: record.id, qty: qty, pdata: {type: 'refresh'}});
+              console.log(record.discount);
+              primus.emit('getprice', {fguid: fguid, uuid: uuid, session: session, clientid: clientid, productid: record.id, qty: qty, pricelevel:pricelevel,discountcode:record.discount, pdata: {type: 'refresh'}});
 
               doTextboxFocus('fldProductSelectQty');
             }

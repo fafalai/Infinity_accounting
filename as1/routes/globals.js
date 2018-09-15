@@ -28,8 +28,8 @@ var myperms =
   cancreateclients: 0,
   canviewcodes: 0,
   cancreatecodes: 0,
-  canviewclients: 0,
-  cancreateclients: 0,
+  // canviewclients: 0,
+  // cancreateclients: 0,
   canviewusers: 0,
   cancreateusers: 0,
 
@@ -341,6 +341,7 @@ var cache_employees = [];
 var cache_taxcodes = [];
 var cache_superfunds = [];
 var cache_clients = [];
+var cache_clientattachments = [];
 var cache_suppliers = [];
 var cache_locations = [];
 var cache_productcategories = [];
@@ -1703,9 +1704,10 @@ function doSearchCodeNameInTree(treename, txt)
 
 function doExpandTreeToId(treename, nodeid, alsoExpandNode)
 {
+  let tree = '#' + treename;
   if (!_.isUndefined(nodeid) && !_.isNull(nodeid))
   {
-    var tree = '#' + treename;
+    // var tree = '#' + treename;
 
     if (!_.isNull($(tree).treegrid('find', nodeid)))
     {
